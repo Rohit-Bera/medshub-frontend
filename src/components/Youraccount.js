@@ -1,7 +1,7 @@
 import React from 'react';
 import "../style/youraccount.css";
-import Accountdetails from "./Accountdetails";
-import {Link, Route, Switch} from "react-router-dom";
+// import Accountdetails from "./Accountdetails";
+// import {Link, Route, Switch} from "react-router-dom";
 
 
 const Youraccount = () =>{

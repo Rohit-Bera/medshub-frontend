@@ -1,0 +1,308 @@
+@import url("https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&family=Ubuntu+Condensed&display=swap");
+/* fontss */
+/* for label */
+.font1 {
+  font-family: "Fjalla One", sans-serif;
+  color: black;
+  font-size: 85px;
+}
+.font2 {
+  font-family: "Rajdhani", sans-serif;
+  color: initial;
+
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-color: black;
+  -webkit-text-stroke-width: 2px;
+
+  font-size: 120px;
+}
+
+/* main styles - home*/
+a {
+  text-decoration: none;
+}
+.nav,
+.footer {
+  background-color: rgb(56, 182, 255);
+  /* width: ; */
+  height: 15vh;
+}
+
+/* home-top-brands */
+.home-parent {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.home {
+  background: linear-gradient(
+    to right bottom,
+    rgba(56, 182, 255, 0.7),
+    rgba(56, 182, 255, 0.3)
+  );
+
+  width: 95vw;
+  height: 78vh;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  border-radius: 10px;
+
+  /* scroll */
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.home label {
+  margin-left: 4.5%;
+  font-size: 35px;
+  margin-bottom: 1%;
+
+  /* background-color: aliceblue; */
+  width: 40vw;
+}
+
+.home .home-top-brands {
+  /* margin-bottom: 3%; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: aqua; */
+  height: 78vh;
+}
+
+.home .home-top-brands .slider {
+  /* background-color: crimson; */
+  height: 34vh;
+  width: 58vw;
+}
+
+.home .home-top-brands .slider .BrainhubCarousel__arrows {
+  background-color: rgb(56, 182, 255);
+
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+.home .home-top-brands .brand {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: white;
+  width: 16vw;
+  height: 32vh;
+
+  border-bottom-right-radius: 100px;
+  border-top-right-radius: 100px;
+
+  margin: 2% 2% 2% 2%;
+
+  box-shadow: 0px 0px 10px grey;
+}
+
+.home .home-top-brands .brand img {
+  height: 17vh;
+  width: 10vw;
+}
+
+.home .home-top-brands .brand p {
+  font-size: 25px;
+
+  font-family: "Ubuntu Condensed", sans-serif;
+  color: rgb(56, 182, 255);
+}
+
+/* categories */
+
+.home .home-categories {
+  height: 78vh;
+  /* background-color: aqua; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 3%;
+}
+
+.home .home-categories .categories1 {
+  background-color: rgb(56, 182, 255);
+  width: 20vw;
+  height: 65vh;
+  border-bottom-left-radius: 300px;
+  box-shadow: 0px 0px 10px grey;
+}
+
+.home .home-categories .categories1 .category p {
+  font-size: 35px;
+  position: relative;
+  bottom: 450px;
+  text-transform: capitalize;
+  font-weight: bold;
+
+  font-family: "Fjalla One", sans-serif;
+  color: white;
+}
+
+.home .home-categories .categories1 img {
+  height: 65vh;
+  width: 40vw;
+  /* background-color: aqua; */
+}
+
+.home .home-categories .categories2 {
+  background-color: rgb(56, 182, 255);
+  width: 55vw;
+  height: 70vh;
+  text-align: center;
+
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px grey;
+
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+}
+
+.home .home-categories .categories2 .categories {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.home .home-categories .categories2 .categories .category {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: white;
+  width: 15vw;
+  height: 37vh;
+
+  border-radius: 8px;
+  margin: 1%;
+
+  box-shadow: 0px 0px 10px grey;
+  font-size: 25px;
+
+  font-family: "Ubuntu Condensed", sans-serif;
+  color: rgb(56, 182, 255);
+}
+
+.home .home-categories .categories2 .categories .category img {
+  height: 19vh;
+  width: 12vw;
+}
+
+/* beauty - products */
+
+.home .home-beauty {
+  height: 78vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.home .home-beauty label {
+  /* background-color: aqua; */
+  width: 30vw;
+}
+
+.home .home-beauty .beauty-products {
+  height: 70vh;
+  background-color: rgb(56, 182, 255);
+
+  width: 50vw;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+
+  flex-wrap: wrap;
+  border-radius: 10px;
+}
+
+.home .home-beauty .beauty-products .beauty {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+
+  /* flex-wrap: wrap; */
+
+  background-color: white;
+  width: 18vw;
+  height: 32vh;
+
+  border-radius: 8px;
+  margin: 1%;
+
+  box-shadow: 0px 0px 10px grey;
+  font-size: 25px;
+
+  font-family: "Ubuntu Condensed", sans-serif;
+  color: rgb(56, 182, 255);
+}
+
+.home .home-beauty .beauty-products .beauty img {
+  height: 19vh;
+  width: 12vw;
+}
+
+/* mens-grooming */
+.home .home-men {
+  /* margin-bottom: 3%; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: aqua; */
+  height: 78vh;
+}
+
+.home .home-men .slider {
+  /* background-color: crimson; */
+  height: 34vh;
+  width: 58vw;
+}
+
+.home .home-men .slider .BrainhubCarousel__arrows {
+  background-color: rgb(56, 182, 255);
+
+  margin-left: 1%;
+  margin-right: 1%;
+}
+
+.home .home-men .men-card {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: white;
+  width: 16vw;
+  height: 32vh;
+
+  /* border-radius: 8px; */
+  border-bottom-left-radius: 100px;
+  border-top-left-radius: 100px;
+
+  margin: 2% 2% 2% 2%;
+
+  box-shadow: 0px 0px 10px grey;
+}
+
+.home .home-men .men-card img {
+  height: 17vh;
+  width: 10vw;
+}
+
+.home .home-men .men-card p {
+  font-size: 25px;
+
+  font-family: "Ubuntu Condensed", sans-serif;
+  color: rgb(56, 182, 255);
+}
