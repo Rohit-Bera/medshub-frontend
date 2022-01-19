@@ -1,0 +1,188 @@
+.nav,
+.footer {
+  background-color: rgb(56, 182, 255);
+  /* width: ; */
+  height: 15vh;
+}
+
+/* category styles */
+.category-home {
+  display: flex;
+}
+/* category - nav */
+.cat-nav {
+  background-color: rgb(56, 182, 255);
+  border: 2px solid aqua;
+  width: 23vw;
+  height: 80vh;
+  margin-top: 1%;
+  margin-left: 1%;
+  margin-bottom: 1%;
+  border-radius: 8px;
+}
+
+.cat-nav ul {
+  font-size: 27px;
+  color: white;
+}
+
+.cat-nav ul li {
+  font-size: 27px;
+  color: white;
+}
+
+.cat-nav a {
+  text-decoration: none;
+  color: white;
+}
+/* our brands */
+.our-brands {
+  display: flex;
+}
+.our-brands .brand-body {
+  /* background-color: aqua; */
+  width: 74vw;
+  margin-left: 1%;
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+}
+
+.our-brands .brand-body .brand-child {
+  background: linear-gradient(
+    to right bottom,
+    rgba(56, 182, 255, 0.7),
+    rgba(56, 182, 255, 0.3)
+  );
+
+  width: 93vw;
+  /* height: 75vh; */
+  margin-top: 2%;
+  margin-bottom: 2%;
+  border-radius: 10px;
+
+  /* scroll */
+  /* overflow: hidden;
+  overflow-y: scroll; */
+  /* margin-bottom: 3%; */
+  display: flex;
+  justify-content: space-between;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+
+  /* align-items: center; */
+  /* background-color: aqua; */
+  /* height: 78vh; */
+}
+
+.our-brands .brand-body .brand-child .brand {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: white;
+  width: 16vw;
+  height: 32vh;
+
+  /* border-bottom-right-radius: 100px;
+  border-top-right-radius: 100px; */
+  border-radius: 8px;
+
+  margin: 1%;
+
+  box-shadow: 0px 0px 10px grey;
+}
+
+.our-brands .brand-body .brand-child .brand img {
+  height: 17vh;
+  width: 10vw;
+}
+
+.our-brands .brand-body .brand-child .brand p {
+  font-size: 25px;
+
+  font-family: "Ubuntu Condensed", sans-serif;
+  color: rgb(56, 182, 255);
+}
+
+/* brand-products */
+.our-brands .brand-prod-body {
+  /* background-color: aqua; */
+  width: 74vw;
+  margin-left: 1%;
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+}
+.our-brands .brand-prod-body .brand-prod-child {
+  background: linear-gradient(
+    to right bottom,
+    rgba(56, 182, 255, 0.7),
+    rgba(56, 182, 255, 0.3)
+  );
+
+  width: 93vw;
+  /* height: 75vh; */
+  margin-top: 2%;
+  margin-bottom: 2%;
+  border-radius: 10px;
+
+  /* scroll */
+  /* overflow: hidden;
+    overflow-y: scroll; */
+  /* margin-bottom: 3%; */
+  display: flex;
+  justify-content: space-between;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+
+  /* align-items: center; */
+  /* background-color: aqua; */
+  /* height: 78vh; */
+}
+
+.our-brands .brand-prod-body .brand-prod-child .brand {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: white;
+  width: 16vw;
+  height: 32vh;
+
+  /* border-bottom-right-radius: 100px;
+    border-top-right-radius: 100px; */
+  border-radius: 8px;
+
+  margin: 2%;
+
+  box-shadow: 0px 0px 10px grey;
+}
+
+.our-brands .brand-prod-body .brand-prod-child .brand img {
+  height: 17vh;
+  width: 10vw;
+}
+
+.our-brands .brand-prod-body .brand-prod-child .brand p {
+  font-size: 25px;
+
+  font-family: "Ubuntu Condensed", sans-serif;
+  color: rgb(56, 182, 255);
+}
+
+.our-brands .brand-prod-body .brand-prod-child .dabur,
+.our-brands .brand-prod-body .brand-prod-child .dettol,
+.our-brands .brand-prod-body .brand-prod-child .garnier,
+.our-brands .brand-prod-body .brand-prod-child .himalya,
+.our-brands .brand-prod-body .brand-prod-child .mamaearth,
+.our-brands .brand-prod-body .brand-prod-child .muscleblaze,
+.our-brands .brand-prod-body .brand-prod-child .zandu {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* dabur home */
+.dabur-home {
+  display: flex;
+}
