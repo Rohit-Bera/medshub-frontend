@@ -19,7 +19,7 @@ import beardoil from "../images/beardoil.jpg";
 import beardwash from "../images/beardwash.jfif";
 import hairgel from "../images/hairgel.jpg";
 import mendeo from "../images/mendeodrant.jfif";
-import Navbar from "../components/Navbar"
+import Navbar from "./Navbar"
 
 //requirements
 import { Link } from "react-router-dom";
