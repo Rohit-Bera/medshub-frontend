@@ -17,9 +17,13 @@ const Navbar = () => {
               </div>
         </div>
       <div className='right-nav'>
-     <div className='flex margin'> <i class="fas fa-notes-medical margin-left-nav"></i>
-      <i class="fas fa-shopping-cart margin-left-nav"></i>
-     <Link to="/yourAccount/AccountDetails"> <i class="fas fa-user margin-left-nav"></i></Link></div></div>
+        <div className='flex margin'> 
+          <i class="fas fa-notes-medical margin-left-nav"></i>
+          <i class="fas fa-shopping-cart margin-left-nav"></i>
+        <Link to="/yourAccount/AccountDetails"> 
+        <i class="fas fa-user margin-left-nav"></i>
+        </Link></div>
+     
       <div className='flex'>
           <span >
               Prescription
@@ -30,8 +34,7 @@ const Navbar = () => {
           <span>
               Account
           </span>
-
-       
+          </div>
       </div>
       </div>
       
