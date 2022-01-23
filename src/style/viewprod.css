@@ -1,0 +1,204 @@
+.view {
+  /* width: 80vw;
+  height: 70vh; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 2%;
+
+  /* background-color: crimson; */
+}
+
+.view .view-prod {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: linear-gradient(
+    to right bottom,
+    rgba(56, 182, 255, 0.7),
+    rgba(56, 182, 255, 0.3)
+  );
+  width: 90vw;
+  height: 80vh;
+  border-radius: 8px;
+
+  margin-bottom: 2%;
+}
+
+.view .view-prod .view-prod-slide {
+  /* background-color: brown; */
+  height: 58vh;
+  width: 35vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.view .view-prod .view-prod-slide .prod-img {
+  display: flex;
+  justify-content: space-around;
+  /* background-color: red;  */
+  width: 30vw;
+}
+
+.view .view-prod .view-prod-slide .prod-img img {
+  height: 10vh;
+  width: 5vw;
+  margin: 1%;
+  border-radius: 5px;
+}
+
+.view .view-prod .view-prod-slide .slider {
+  /* background-color: palegreen; */
+  height: 45vh;
+}
+
+.view .view-prod .view-prod-slide .slider .brand {
+  background-color: white;
+  width: 26vw;
+  height: 42vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 8px;
+}
+
+.view .view-prod .view-prod-slide .slider .brand img {
+  height: 37vh;
+  width: 23vw;
+}
+
+.view .view-prod .prod-detail {
+  height: 55vh;
+  width: 43vw;
+  background-color: rgb(56, 182, 255);
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  font-size: 25px;
+
+  border-radius: 8px;
+  color: white;
+}
+
+.view .view-prod .prod-detail .btn {
+  /* background-color: white; */
+  width: 27vw;
+  height: 8vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.view .view-prod .prod-detail .btn button {
+  height: 5vh;
+  width: 12vw;
+  outline: none;
+  border: none;
+  background-color: white;
+  color: rgb(56, 182, 255);
+  font-weight: bold;
+
+  border-radius: 5px;
+}
+
+.view .view-prod .prod-detail .btn button:active {
+  transform: scale(0.9);
+}
+
+.view .view-prod .prod-detail .btn button:focus {
+  outline: 0;
+}
+
+.view .view-prod-feedback {
+  background-color: rgb(56, 182, 255);
+  height: 30vh;
+  width: 90vw;
+  margin-top: 1%;
+  margin-bottom: 1.5%;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.view .view-prod-feedback textarea {
+  border: none;
+  outline: none;
+  font-size: 15px;
+  border: 2px soli white;
+  color: rgb(56, 182, 255);
+}
+
+/* modal - popup*/
+.modalbackground {
+  /* background-color: aqua; */
+  width: 20vw;
+  height: 30vh;
+}
+
+.modalbackground .modalcontainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+.modalbackground .modalcontainer .closebutton {
+  /* background-color: red; */
+  width: 20vw;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modalbackground .modalcontainer .closebutton .cancel {
+  border: none;
+  outline: none;
+  width: 25px;
+  height: 25px;
+  background-color: black;
+  color: white;
+}
+
+.modalbackground .modalcontainer .body {
+  /* background-color: chocolate; */
+  width: 16vw;
+  height: 15vh;
+  margin-top: 7%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 20px;
+}
+
+.modalbackground .modalcontainer .modalbutton {
+  /* background-color: chartreuse; */
+  width: 15vw;
+  display: flex;
+  justify-content: space-around;
+}
+
+.modalbackground .modalcontainer .modalbutton .no {
+  border: none;
+  outline: none;
+  background-color: red;
+  color: white;
+  width: 5vw;
+  height: 4vh;
+  font-weight: bold;
+}
+
+.modalbackground .modalcontainer .modalbutton .yes {
+  border: none;
+  outline: none;
+  background-color: rgb(56, 182, 255);
+  color: white;
+  width: 5vw;
+  height: 4vh;
+  font-weight: bold;
+}
