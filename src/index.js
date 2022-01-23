@@ -1,18 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+import Medshub24by7 from "./Medshub24by7";
 // import Accountdetails from "./components/Accountdetails";
 // import Youraccount from "./components/Youraccount";
 // import Navbar from "./components/Navbar";
 
-
-
 ReactDOM.render(
   <>
-    
-    <App />
-    
+    <Medshub24by7 />
   </>,
   document.getElementById("root")
 );
