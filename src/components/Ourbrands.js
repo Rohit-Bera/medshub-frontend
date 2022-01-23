@@ -6,73 +6,61 @@ import himalya from "../images/himalya.jpg";
 import mamaearth from "../images/mamaearth.jpg";
 import muscleblaze from "../images/muscleblaze.jpg";
 import zandu from "../images/zandu.jpg";
-// import sanitizer from "../images/sanitizer.png";
-// import babies from "../images/babies.png";
-// import fitness from "../images/fitness.jpg";
-// import devices from "../images/devies.jpg";
-// import facialkit from "../images/facial-kit.png";
-// import haircare from "../images/haircare.jfif";
-// import lipcare from "../images/lipcare.jpg";
-// import bodycare from "../images/bodycare.jpg";
-// import beardoil from "../images/beardoil.jpg";
-// import beardwash from "../images/beardwash.jfif";
-// import hairgel from "../images/hairgel.jpg";
-// import mendeo from "../images/mendeodrant.jfif";
-// componenst
+
 import CategoryNav from "./Category.nav";
 import "../style/category.css";
 import { Link } from "react-router-dom";
+import Navbar from "./Navbar";
 
 const Ourbrands = () => {
   return (
     <>
-      <div className="nav">sample nav</div>
+      <Navbar />
       <div className="our-brands">
         <CategoryNav />
         <div className="brand-body">
           <div className="brand-child">
             <label>
-              <span className="font1">Our</span>
-              <span className="font2">Brands</span>
+              <span className="font2">OurBrands</span>
             </label>
             <div className="brand">
-              <Link to="/productCategories/Brandproducts">
+              <Link to="/productCategories/Brandproducts/dabur">
                 <img src={dabur} alt="Dabur_img" />
                 <p>Dabur</p>
               </Link>
             </div>
             <div className="brand">
-              <Link to="/productCategories/Brandproducts">
+              <Link to="/productCategories/Brandproducts/dettol">
                 <img src={dettol} alt="Dettol_img" />
                 <p>Dettol</p>
               </Link>
             </div>
             <div className="brand">
-              <Link to="/productCategories/Brandproducts">
+              <Link to="/productCategories/Brandproducts/garnier">
                 <img src={garnier} alt="Garnier_img" />
                 <p>Garnier</p>
               </Link>
             </div>
             <div className="brand">
-              <Link to="/productCategories/Brandproducts">
+              <Link to="/productCategories/Brandproducts/himalya">
                 <img src={himalya} alt="Himalya_img" />
                 <p>Himalya</p>
               </Link>
             </div>
             <div className="brand">
-              <Link to="/productCategories/Brandproducts">
+              <Link to="/productCategories/Brandproducts/mamaearth">
                 <img src={mamaearth} alt="Mamaearth_img" />
                 <p>Mamaearth</p>
               </Link>
             </div>
             <div className="brand">
-              <Link to="/productCategories/Brandproducts">
+              <Link to="/productCategories/Brandproducts/muscleblaze">
                 <img src={muscleblaze} alt="Muscleblaze_img" />
                 <p>Muscleblaze</p>
               </Link>
             </div>
             <div className="brand">
-              <Link to="/productCategories/Brandproducts">
+              <Link to="/productCategories/Brandproducts/zandu">
                 <img src={zandu} alt="Zandu_img" />
                 <p>Zandu</p>
               </Link>

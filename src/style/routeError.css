@@ -1,0 +1,14 @@
+.error-parent {
+  /* background-color: aqua; */
+}
+.error-parent .error-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+}
+.error-parent .error-child img {
+  height: 80vh;
+  width: 50vw;
+  border-radius: 10px;
+}

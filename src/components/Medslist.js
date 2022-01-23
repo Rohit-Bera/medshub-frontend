@@ -1,11 +1,11 @@
 import { React, useState } from "react";
-import CategoryNav from "./Category.nav";
-import "../style/viewmeds.css";
-import { Link, NavLink } from "react-router-dom";
-import Navbar from "./Navbar";
+import { Link } from "react-router-dom";
 import Modal from "react-modal/lib/components/Modal";
+import "../style/viewmeds.css";
+import Navbar from "./Navbar";
+import CategoryNav from "./Category.nav";
 
-const Medicine = () => {
+const Medslist = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const customStyles = {
@@ -19,7 +19,6 @@ const Medicine = () => {
       border: "1px solid black",
     },
   };
-
   return (
     <>
       <Navbar />
@@ -43,79 +42,79 @@ const Medicine = () => {
               <Link to="/medicines/medicinelist">
                 <li>A</li>
               </Link>
-              <Link to="/medicines/medicinelist">
+              <Link to="">
                 <li>B</li>
               </Link>
-              <Link to="/medicines/medicinelist">
+              <Link to="">
                 <li>C</li>
               </Link>
-              <Link to="/medicines/medicinelist">
+              <Link to="">
                 <li>D</li>
               </Link>
-              <Link to="/medicines/medicinelist">
+              <Link to="">
                 <li>E</li>
               </Link>
-              <Link to="/medicines/medicinelist">
+              <Link to="">
                 <li>F</li>
               </Link>
-              <Link to="/medicines/medicinelist">
+              <Link to="">
                 <li>G</li>
               </Link>
-              <Link to="/medicines/medicinelist">
+              <Link to="">
                 <li>H</li>
               </Link>
-              <Link to="/medicines/medicinelist">
+              <Link to="">
                 <li>I</li>
               </Link>
-              <Link to="/medicines/medicinelist">
+              <Link to="">
                 <li>J</li>
               </Link>
-              <Link to="/medicines/medicinelist">
+              <Link to="">
                 <li>K</li>
               </Link>
-              <Link to="/medicines/medicinelist">
+              <Link to="">
                 <li>L</li>
               </Link>
-              <Link to="/medicines/medicinelist">
+              <Link to="">
                 <li>M</li>
               </Link>
-              <Link to="/medicines/medicinelist">
+              <Link to="">
                 <li>N</li>
               </Link>
-              <Link to="/medicines/medicinelist">
+              <Link to="">
                 <li>O</li>
               </Link>
-              <Link to="/medicines/medicinelist">
+              <Link to="">
                 <li>P</li>
               </Link>
-              <Link to="/medicines/medicinelist">
+              <Link to="">
                 <li>Q</li>
               </Link>
-              <Link to="/medicines/medicinelist">
+              <Link to="">
                 <li>R</li>
               </Link>
-              <Link to="/medicines/medicinelist">
+              <Link to="">
                 <li>S</li>
               </Link>
-              <Link to="/medicines/medicinelist">
+              <Link to="">
                 <li>T</li>
               </Link>
-              <Link to="/medicines/medicinelist">
+              <Link to="">
                 <li>U</li>
               </Link>
-              <Link to="/medicines/medicinelist">
+              <Link to="">
                 <li>V</li>
               </Link>
-              <Link to="/medicines/medicinelist">
+              <Link to="">
                 <li>W</li>
               </Link>
-              <Link to="/medicines/medicinelist">
+              <Link to="">
                 <li>X</li>
               </Link>
-              <Link to="/medicines/medicinelist">
+              <Link to="">
                 <li>Y</li>
               </Link>
-              <Link to="/medicines/medicinelist">
+              <Link to="">
                 <li>Z</li>
               </Link>
             </ul>
@@ -129,7 +128,7 @@ const Medicine = () => {
                   <div className="product">
                     <img src="" alt="_img" />
                     <div className="prod-details">
-                      <p>product name - All med</p>
+                      <p>product name - name "a-z" med</p>
                       <p>price</p>
                       <p>
                         <button onClick={() => setModalIsOpen(true)}>
@@ -182,4 +181,4 @@ const Medicine = () => {
   );
 };
 
-export default Medicine;
+export default Medslist;
