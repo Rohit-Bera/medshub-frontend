@@ -1,4 +1,4 @@
-input{
+.input{
     border: none;
     padding: 4px;
     margin-top: 4px;
@@ -14,8 +14,7 @@ button{
 .main{
     display: flex;
     background-color: rgb(56,182,255);
-    height: 50px;
-    height: 75px;
+    height: 90px;
 }
 .left-nav{
 flex: 30%;
@@ -30,10 +29,11 @@ text-align: center;
     width: 345px;
     background-color: white;
     padding: 5px;
-    margin-top: 15px;
+    margin-top: 25px;
     height: 30px;
     border: none;
     border-radius: 20px;
+    margin-left:55px
 }
 .right-nav{
 flex: 40%;
@@ -52,11 +52,13 @@ justify-content: end;
 color: rgb(255,255,200);
 }
 .margin{
-    margin-top: 10px;
+    margin-top: 20px;
 }
-.margin-left{
+.margin-left-nav{
     margin-right:80px;
+    text-decoration: none;
+    color: white;
 }
 span{
-    margin-right: 55px;
+    margin-right: 60px;
 }

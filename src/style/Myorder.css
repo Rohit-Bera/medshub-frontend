@@ -1,0 +1,25 @@
+.main-order{
+    flex:70%;
+    background-color: #f5f5f0;
+    padding: 10px;
+    font-family: "Trirong", serif;
+    font-size: 20px;
+}
+.size{
+    width: 10vw;
+  height: 20vh;
+  padding: 10px;
+
+}
+.order-bg{
+  
+    border-radius: 7px;
+    /* flex: 30%; */
+}
+.order-text{
+    background-color:rgb(56,182,255);
+    width: 100%;
+    padding: 10px;
+    margin-left: 25px;
+    border-radius: 25px;
+}
