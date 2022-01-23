@@ -1,36 +1,37 @@
-import React from 'react';
+import React from "react";
 import "../style/Navbar.css";
-import Logo from "../images/logo.png"
+import Logo from "../images/logo.png";
+import { Link } from "react-router-dom";
 
-
-const Navbar = () =>{
-    return <div className='main'>
-      <div className='left-nav'>
+const Navbar = () => {
+  return (
+    <div className="main">
+      <div className="left-nav">
+        <Link to="/">
           <img src={Logo} alt="crashed"></img>
-       </div>
-      <div className='center-nav'>
-          <div className='width'>
-              <input type="text" placeholder='Search'></input>&nbsp;<i class="fas fa-search"></i>
-              </div>
+        </Link>
+      </div>
+      <div className="center-nav">
+        <div className="width">
+          <input type="text" placeholder="Search"></input>&nbsp;
+          <i class="fas fa-search"></i>
         </div>
-      <div className='right-nav'>
-     <div className='flex margin'> <i class="fas fa-notes-medical margin-left"></i>
-      <i class="fas fa-shopping-cart margin-left"></i>
-      <i class="fas fa-user margin-left"></i></div>
-      <div className='flex'>
-          <span >
-              Prescription
-          </span>
-          <span>
-              Cart
-          </span>
-          <span>
-              Account
-          </span>
       </div>
+      <div className="right-nav">
+        <div className="flex margin">
+          {" "}
+          <i class="fas fa-notes-medical margin-left"></i>
+          <i class="fas fa-shopping-cart margin-left"></i>
+          <i class="fas fa-user margin-left"></i>
+        </div>
+        <div className="flex">
+          <span>Prescription</span>
+          <span>Cart</span>
+          <span>Account</span>
+        </div>
       </div>
-
-    </div>;
+    </div>
+  );
 };
 
 export default Navbar;

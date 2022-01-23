@@ -7,7 +7,7 @@
 .font1 {
   font-family: "Fjalla One", sans-serif;
   color: black;
-  font-size: 85px;
+  font-size: 83px;
 }
 .font2 {
   font-family: "Rajdhani", sans-serif;
@@ -17,7 +17,7 @@
   -webkit-text-stroke-color: black;
   -webkit-text-stroke-width: 2px;
 
-  font-size: 120px;
+  font-size: 113px;
 }
 
 /* main styles - home*/
@@ -55,13 +55,14 @@ a {
   overflow-y: scroll;
 }
 
-.home label {
+.home .home-top-brands label {
   margin-left: 4.5%;
   font-size: 35px;
   margin-bottom: 1%;
 
   /* background-color: aliceblue; */
   width: 40vw;
+  /* display: flex; */
 }
 
 .home .home-top-brands {
@@ -95,12 +96,10 @@ a {
   width: 16vw;
   height: 32vh;
 
-  border-bottom-right-radius: 100px;
-  border-top-right-radius: 100px;
-
+  border-radius: 8px;
   margin: 2% 2% 2% 2%;
 
-  box-shadow: 0px 0px 10px grey;
+  /* box-shadow: 0px 0px 10px grey; */
 }
 
 .home .home-top-brands .brand img {
@@ -132,7 +131,7 @@ a {
   width: 20vw;
   height: 65vh;
   border-bottom-left-radius: 300px;
-  box-shadow: 0px 0px 10px grey;
+  /* box-shadow: 0px 0px 10px grey; */
 }
 
 .home .home-categories .categories1 .category p {
@@ -159,7 +158,7 @@ a {
   text-align: center;
 
   border-radius: 10px;
-  box-shadow: 0px 0px 10px grey;
+  /* box-shadow: 0px 0px 10px grey; */
 
   display: flex;
   flex-direction: column;
@@ -185,7 +184,7 @@ a {
   border-radius: 8px;
   margin: 1%;
 
-  box-shadow: 0px 0px 10px grey;
+  /* box-shadow: 0px 0px 10px grey; */
   font-size: 25px;
 
   font-family: "Ubuntu Condensed", sans-serif;
@@ -209,7 +208,9 @@ a {
 
 .home .home-beauty label {
   /* background-color: aqua; */
-  width: 30vw;
+  width: 40vw;
+  display: flex;
+  align-items: center;
 }
 
 .home .home-beauty .beauty-products {
@@ -242,7 +243,7 @@ a {
   border-radius: 8px;
   margin: 1%;
 
-  box-shadow: 0px 0px 10px grey;
+  /* box-shadow: 0px 0px 10px grey; */
   font-size: 25px;
 
   font-family: "Ubuntu Condensed", sans-serif;
@@ -286,13 +287,11 @@ a {
   width: 16vw;
   height: 32vh;
 
-  /* border-radius: 8px; */
-  border-bottom-left-radius: 100px;
-  border-top-left-radius: 100px;
+  border-radius: 8px;
 
   margin: 2% 2% 2% 2%;
 
-  box-shadow: 0px 0px 10px grey;
+  /* box-shadow: 0px 0px 10px grey; */
 }
 
 .home .home-men .men-card img {
@@ -305,4 +304,123 @@ a {
 
   font-family: "Ubuntu Condensed", sans-serif;
   color: rgb(56, 182, 255);
+}
+
+/* button color */
+.nurse {
+  float: right;
+  position: fixed;
+  bottom: 10vh;
+  right: 12vh;
+
+  background-color: rgb(56, 182, 255);
+  border: 2px solid white;
+  border-radius: 50%;
+  height: 10vh;
+  width: 5vw;
+  font-size: 35px;
+  color: white;
+}
+/* chat-bot-ui */
+.bot-body {
+  width: 69vw;
+  height: 83vh;
+  display: flex;
+}
+
+.bot-body .bot-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+.bot-body .bot-container .bot-close {
+  /* background-color: red; */
+  width: 66vw;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1%;
+}
+
+.bot-body .bot-container .bot-close .cancel {
+  border: none;
+  outline: none;
+  width: 2.5vw;
+  height: 4vh;
+  background-color: white;
+  color: rgb(56, 182, 255);
+  font-weight: bold;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bot-body .bot-container .bot-body {
+  background-color: white;
+}
+
+.bot-body .bot-container .bot-body .chat {
+  background-color: aqua;
+  width: 69vw;
+}
+
+.bot-body .bot-container .bot-body .chat .sender {
+  width: 33vw;
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 1%;
+}
+
+.bot-body .bot-container .bot-body .chat .sender p {
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.bot-body .bot-container .bot-body .chat .receiver {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  /* margin-right: 1%; */
+  /* background-color: blue; */
+
+  width: 33vw;
+  margin-left: 51%;
+}
+
+.bot-body .bot-container .bot-body .chat .receiver p {
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.bot-body .bot-container .bot-button form {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* background-color: blueviolet; */
+  width: 65vw;
+  height: 9vh;
+}
+
+.bot-body .bot-container .bot-button .textbox {
+  outline: none;
+  border: 1px solid rgb(56, 182, 255);
+  font-size: 20px;
+  height: 5vh;
+  width: 55vw;
+  border-radius: 2px;
+}
+
+.bot-body .bot-container .bot-button .send {
+  width: 6vw;
+  height: 6vh;
+  font-size: 20px;
+
+  outline: none;
+  border: 2px solid white;
+  background-color: rgb(56, 182, 255);
+  color: white;
 }
