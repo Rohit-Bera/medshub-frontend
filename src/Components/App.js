@@ -1,45 +1,43 @@
 import React from "react";
-import Home from "./components/Home";
-import "./App.css";
+import Home from "./Home";
+import "../style/App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Ourbrands from "./components/Ourbrands";
-
 // import Brandprod from "./components/Brandprod";
-import Accountdetails from "./components/Accountdetails";
+import Accountdetails from "./Accountdetails";
 // import yourAccount from "./components/Youraccount";
-import Help from "./components/Help";
-import About from "./components/About";
-import Myorders from "./components/Myorder";
-import mywishlist from "./components/Mywishlist";
-import notification from "./components/Mynotification";
-import Signin  from "./components/Signin";
-import Signup from "./components/Signup";
-import Dabur from "./components/Dabur";
-import Dettol from "./components/Dettol";
-import Garnier from "./components/Garnier";
-import Himalya from "./components/Himalya";
-import Mamaearth from "./components/Mamaearth";
-import Muscleblaze from "./components/Muscleblaze";
-import Zandu from "./components/Zandu";
-import Beautyprod from "./components/Beautyprod";
-import Facialcare from "./components/Facialcare";
-import Haircare from "./components/Haircare";
-import Lipcare from "./components/Lipcare";
-import Bodycare from "./components/Bodycare";
-import Mensgroom from "./components/Mensgroom";
-import Beardoil from "./components/Beardoil";
-import Beardwash from "./components/Beardwash";
-import Hairgel from "./components/Hairgel";
-import Mendeo from "./components/Mendeo";
-import Error404 from "./components/Error404";
-import Covid from "./components/Covid";
-import Device from "./components/Device";
-import Momandbaby from "./components/Momandbaby";
-import Viewprod from "./components/Viewprod";
-import Medicine from "./components/Medicine";
-import Viewmed from "./components/Viewmed";
-import Medslist from "./components/Medslist";
-
+import Help from "./Help";
+import About from "./About";
+import Myorders from "./Myorder";
+import mywishlist from "./Mywishlist";
+import notification from "./Mynotification";
+import Signin from "./Signin";
+import Signup from "./Signup";
+import Dabur from "./Dabur";
+import Dettol from "./Dettol";
+import Garnier from "./Garnier";
+import Himalya from "./Himalya";
+import Mamaearth from "./Mamaearth";
+import Muscleblaze from "./Muscleblaze";
+import Zandu from "./Zandu";
+import Beautyprod from "./Beautyprod";
+import Facialcare from "./Facialcare";
+import Haircare from "./Haircare";
+import Lipcare from "./Lipcare";
+import Bodycare from "./Bodycare";
+import Mensgroom from "./Mensgroom";
+import Beardoil from "./Beardoil";
+import Beardwash from "./Beardwash";
+import Hairgel from "./Hairgel";
+import Mendeo from "./Mendeo";
+import Error404 from "./Error404";
+import Covid from "./Covid";
+import Device from "./Device";
+import Momandbaby from "./Momandbaby";
+import Viewprod from "./Viewprod";
+import Medicine from "./Medicine";
+import Viewmed from "./Viewmed";
+import Medslist from "./Medslist";
+import Ourbrands from "./Ourbrands";
 
 const App = () => {
   return (
@@ -141,42 +139,26 @@ const App = () => {
             component={Mendeo}
           />
 
-          <Route 
-          path="/yourAccount/AccountDetails" 
-          exact
-          component={Accountdetails}/>
+          <Route
+            path="/yourAccount/AccountDetails"
+            exact
+            component={Accountdetails}
+          />
           {/* <Route 
           path="/yourAccount" 
           exact
           component={yourAccount}/> */}
-          <Route 
-          path="/yourAccount/Help" 
-          exact
-          component={Help}/>
-          <Route 
-          path="/yourAccount/About" 
-          exact
-          component={About}/>
+          <Route path="/yourAccount/Help" exact component={Help} />
+          <Route path="/yourAccount/About" exact component={About} />
+          <Route path="/yourAccount/myOrders" exact component={Myorders} />
+          <Route path="/yourAccount/MyWishlist" exact component={mywishlist} />
           <Route
-          path="/yourAccount/myOrders"
-          exact
-          component={Myorders}/>
-          <Route 
-          path="/yourAccount/MyWishlist" 
-          exact
-          component={mywishlist}/>
-          <Route 
-          path="/yourAccount/notification" 
-          exact
-          component={notification}/>
-          <Route 
-          path="/signIn" 
-          exact
-          component={Signin}/>
-          <Route 
-          path="/Signup" 
-          exact
-          component={Signup}/>
+            path="/yourAccount/notification"
+            exact
+            component={notification}
+          />
+          <Route path="/signIn" exact component={Signin} />
+          <Route path="/Signup" exact component={Signup} />
 
           <Route
             path="/productCategories/covid-essentials"
@@ -202,7 +184,6 @@ const App = () => {
 
           {/* error route */}
           <Route exact component={Error404} />
-
         </Switch>
       </Router>
     </>
