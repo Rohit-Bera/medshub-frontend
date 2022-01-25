@@ -11,10 +11,9 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
-<<<<<<< HEAD
+
     "node": "^17.3.0",
-=======
->>>>>>> 18f1a175d20237d03a7392709472c0fd71f9b1a7
+
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
