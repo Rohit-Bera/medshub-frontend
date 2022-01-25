@@ -1,26 +1,31 @@
-.signin-title{
-    text-align: center;
-    color:rgb(56,182,255);
-    font-family: "Trirong", serif;
-    font-size: 30px;
+.signin-title {
+  text-align: center;
+  color: rgb(56, 182, 255);
+  font-family: "Trirong", serif;
+  font-size: 30px;
 }
-.input-signin{
-    height: 30px;
-    width: 250px;
-    border-radius: 7px;
+.input-signin {
+  height: 30px;
+  width: 250px;
+  border-radius: 7px;
 }
-.button{
-    width: 150px;
-    height: 35px;
-    border-radius: 7px;
-    background-color: rgb(56,182,255);
-    color:white;
-    border: none;
+.button {
+  width: 150px;
+  height: 35px;
+  border-radius: 7px;
+  background-color: rgb(56, 182, 255);
+  color: white;
+  border: none;
 }
-.p-signin{
-    color : rgb(56,182,255);
+.p-signin {
+  color: rgb(56, 182, 255);
 }
 
-.hr-signin{
-    border: black solid 1px;   
+.hr-signin {
+  border: black solid 1px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
 }
