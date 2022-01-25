@@ -115,7 +115,7 @@ const Youraccount = () => {
             </div>
             <div className="body">
               Are You Sure <br />
-              You Want to Place Order ?
+              You Want to Log out ?
             </div>
             <div className="modalbutton">
               <button className="no" onClick={() => setModalIsOpen(false)}>
