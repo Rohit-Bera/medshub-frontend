@@ -19,7 +19,8 @@ import beardoil from "../images/beardoil.jpg";
 import beardwash from "../images/beardwash.jfif";
 import hairgel from "../images/hairgel.jpg";
 import mendeo from "../images/mendeodrant.jfif";
-import Navbar from "./Navbar"
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 //requirements
 import { Link } from "react-router-dom";
@@ -193,7 +194,9 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="footer">footer</div>
+      
+        <Footer/>
+      
     </>
   );
 };
