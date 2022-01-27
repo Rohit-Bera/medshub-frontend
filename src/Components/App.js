@@ -43,7 +43,6 @@ import ManageProduct from "../Admin/Products";
 import ManageOrder from "../Admin/Order";
 import ManagePrescription from  "../Admin/Prescription";
 import ManageMedicine from "../Admin/Medicine";
-
 import CheckUser from "./CheckUser";
 
 
