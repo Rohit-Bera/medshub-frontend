@@ -1,0 +1,30 @@
+.main-admin-product{
+    margin-top: 25px;
+    margin-left: 550px;
+    font-family: "Trirong", serif;
+    font-size: 20px;
+}
+.input-product-admin{
+    width: 225px;
+    height: 25px;
+    border-radius: 5px;
+  
+}
+.h2-product-admin{
+    font-family: "Trirong", serif;
+    font-size: 30px;
+    margin-left: 205px;
+}
+.button-admin-product{
+    padding: 10px;
+    border: none;
+    background-color: rgb(56,182,255);
+    border-radius: 5px;
+}
+.table-product{
+    text-align: center ;
+    padding: 10px;
+   margin-left: auto;
+   margin-right: auto ;
+   font-size: 20px;
+}
