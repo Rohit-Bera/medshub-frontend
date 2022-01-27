@@ -1,13 +1,30 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import CategoryNav from "./Category.nav";
 import "../style/category.css";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import Modal from "react-modal/lib/components/Modal";
+import { searchProductbyBrand } from "../Data/Services/Oneforall";
 
 Modal.setAppElement("#root");
 
 const Dabur = () => {
+  useEffect(() => {
+    getProductDabur();
+  }, []);
+
+  const [daburProd, setDaburprod] = useState([]);
+
+  const getProductDabur = async () => {
+    try {
+      const response = await searchProductbyBrand();
+      console.log("response: ", response);
+      setDaburprod(response.data);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const customStyles = {
@@ -29,26 +46,33 @@ const Dabur = () => {
         <div className="brand-body">
           <div className="brand-child">
             {/* array of prod */}
-            <div className="product">
-              <img src="" alt="_img" />
-              <div className="prod-details">
-                <p>product name -hbfcjdcdcdszbncvsu</p>
-                <p>price</p>
-                <p>
-                  <button onClick={() => setModalIsOpen(true)}>
-                    <i class="fas fa-shopping-cart"></i>
-                  </button>
-                </p>
-                <p>
-                  <button>
-                    <i class="fas fa-heart"></i>
-                  </button>
-                </p>
-              </div>
-              <Link to="/viewproduct">
-                <button className="view">view</button>
-              </Link>
-            </div>
+            {console.log("dabur : ", daburProd)}
+            {daburProd.map((item) => {
+              console.log("item: ", item);
+              return (
+                <div className="product">
+                  <img src={item.productImage[0]} alt="_img" />
+                  <div className="prod-details">
+                    <p>{item.productName}</p>
+
+                    <p>{item.productPrice}</p>
+                    <p>
+                      <button onClick={() => setModalIsOpen(true)}>
+                        <i class="fas fa-shopping-cart"></i>
+                      </button>
+                    </p>
+                    <p>
+                      <button>
+                        <i class="fas fa-heart"></i>
+                      </button>
+                    </p>
+                  </div>
+                  <Link to="/viewproduct">
+                    <button className="view">view</button>
+                  </Link>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

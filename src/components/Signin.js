@@ -1,28 +1,118 @@
-import React from "react";
+import React, { useState } from "react";
 // import himalaya from "../images/himalya.jpg";
 import "../style/signin.css";
 import signin from "../images/signin.png";
-import {Link} from "react-router-dom";
 
-const Signin = ()=>{
-    return <div style={{display:"flex"}}>
-        <div style={{flex:"50%"}}>
+import { Link, useHistory } from "react-router-dom";
+import Navbar from "./Navbar";
+
+import { loginUserService } from "../Data/Services/Oneforall";
+import { useDispatch } from "react-redux";
+import { userData } from "../Data/Reducers/userData.reducer";
+
+const Signin = () => {
+  // ---------------states
+
+  const [logUser, setLoguser] = useState({
+    email: "",
+    password: null,
+  });
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  // ---------------functions
+
+  const referesh = (e) => {
+    e.preventDefault();
+  };
+
+  const formInput = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setLoguser({ ...logUser, [name]: value });
+  };
+
+  const LoginUser = async () => {
+    console.log("logUser: ", logUser);
+    try {
+      const response = await loginUserService(logUser);
+      console.log("response: ", response.receive.data);
+
+      const { user, token } = response.receive.data.loguser;
+
+      const { name, email, password, phoneNumber } = user;
+      const signupUser = { name, email, password, phoneNumber };
+      const theUser = { signupUser, token };
+
+      dispatch(userData({ theUser }));
+
+      if (response.receive.data.loguser) {
+        return history.push("/yourAccount/AccountDetails");
+      }
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
+
+  return (
+    <>
+      <Navbar />
+      <form onSubmit={(e) => referesh(e)}>
+        <div style={{ display: "flex", marginTop: "1%" }}>
+          <div style={{ flex: "50%" }}>
             <h2 className="signin-title">Please Enter Your Login Details</h2>
             <hr className="hr-signin"></hr>
-            <div style={{textAlign:"center"}}>
-                <br></br>
-            <p style={{marginRight:"170px",marginBottom:"-1px"}}>Phone No.</p>    
-            <input type="text" placeholder="Enter Moblie No.." className="input-signin"></input><br></br><br></br>
-            <p style={{marginRight:"180px",marginBottom:"-1px"}}>Password</p>    
-            <input type="text" placeholder="Enter Your Password" className="input-signin"></input><br></br><br></br><br></br>
-            <button className="button">Log In</button><br></br><br></br>
-            <p className="p-signin">You Have No Account? <Link to="/Signup" className="p-signin">Signup</Link></p>
+            <div style={{ textAlign: "center" }}>
+              <br></br>
+              <p style={{ marginRight: "190px", marginBottom: "-1px" }}>
+                Email.
+              </p>
+              <input
+                type="text"
+                placeholder="Enter email.."
+                className="input-signin"
+                name="email"
+                value={logUser.email}
+                onChange={formInput}
+              ></input>
+              <br></br>
+              <br></br>
+              <p style={{ marginRight: "180px", marginBottom: "-1px" }}>
+                Password
+              </p>
+              <input
+                type="password"
+                placeholder="Enter Your Password"
+                className="input-signin"
+                name="password"
+                value={logUser.password}
+                onChange={formInput}
+              ></input>
+              <br></br>
+              <br></br>
+              <br></br>
+              <button className="button" onClick={LoginUser}>
+                Log In
+              </button>
+              <br></br>
+              <br></br>
+              <p className="p-signin">
+                You Have No Account?{" "}
+                <Link to="/signup" className="p-signin">
+                  Signup
+                </Link>
+              </p>
             </div>
-        </div><hr className="hr-signin"></hr>
-        <div style={{flex:"50%"}}>
-            <img src={signin} alt="crashed" style={{height:"700px"}}></img>
+          </div>
+          <hr className="hr-signin"></hr>
+          <div style={{ flex: "50%" }}>
+            <img src={signin} alt="crashed" style={{ height: "700px" }}></img>
+          </div>
         </div>
-    </div>;
-}
+      </form>
+    </>
+  );
+};
 
 export default Signin;
