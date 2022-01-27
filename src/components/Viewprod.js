@@ -16,6 +16,7 @@ import Carousel, {
 } from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
 import Modal from "react-modal/lib/components/Modal";
+import { useSelector } from "react-redux";
 
 Modal.setAppElement("#root");
 
@@ -34,112 +35,415 @@ const Viewprod = () => {
     },
   };
 
-  return (
-    <>
-      <Navbar />
-      <div className="view">
-        <div className="view-prod">
-          <div className="view-prod-slide">
-            <Carousel
-              className="slider"
-              plugins={[
-                "centered",
-                "infinite",
-                "arrows",
-                {
-                  resolve: slidesToShowPlugin,
-                  autoplayPlugin,
-                  options: {
-                    numberOfSlides: 1,
-                    interval: 4000,
+  const productId = useSelector((state) => state.productReducer)._id;
+  const productName = useSelector((state) => state.productReducer).productName;
+  const productImage = useSelector(
+    (state) => state.productReducer
+  ).productImage;
+  const productBrand = useSelector(
+    (state) => state.productReducer
+  ).productBrand;
+  const productCategory = useSelector(
+    (state) => state.productReducer
+  ).productCategory;
+  const productPrice = useSelector(
+    (state) => state.productReducer
+  ).productPrice;
+  const productStatus = useSelector(
+    (state) => state.productReducer
+  ).availableStatus;
+
+  console.log("productImage: ", productImage);
+
+  console.log("productImage: ", productImage.length);
+
+  if (productImage.length === 5) {
+    return (
+      <>
+        <Navbar />
+        <div className="view">
+          <div className="view-prod">
+            <div className="view-prod-slide">
+              <Carousel
+                className="slider"
+                plugins={[
+                  "centered",
+                  "infinite",
+                  "arrows",
+                  {
+                    resolve: slidesToShowPlugin,
+                    autoplayPlugin,
+                    options: {
+                      numberOfSlides: 1,
+                      interval: 4000,
+                    },
                   },
-                },
-              ]}
-              animationSpeed={1000}
-            >
-              <div className="brand">
-                <img src={dabur} alt="_img" />
+                ]}
+                animationSpeed={1000}
+              >
+                <div className="brand" id="img1">
+                  <img src={productImage[0]} alt="_img" />
+                </div>
+                <div className="brand" id="img2">
+                  <img src={productImage[1]} alt="_img" />
+                </div>
+                <div className="brand" id="img3">
+                  <img src={productImage[2]} alt="_img" />
+                </div>
+                <div className="brand" id="img4">
+                  <img src={productImage[4]} alt="_img" />
+                </div>
+                <div className="brand" id="img5">
+                  <img src={productImage[5]} alt="_img" />
+                </div>
+              </Carousel>
+              <div className="prod-img">
+                <img src={productImage[0]} alt="Dabur_img" />
+
+                <img src={productImage[1]} alt="Dettol_img" />
+
+                <img src={productImage[2]} alt="Garnier_img" />
+
+                <img src={productImage[4]} alt="Himalya_img" />
+
+                <img src={productImage[5]} alt="Mamaearth_img" />
               </div>
-              <div className="brand">
-                <img src={dettol} alt="_img" />
-              </div>
-              <div className="brand">
-                <img src={garnier} alt="_img" />
-              </div>
-              <div className="brand">
-                <img src={himalya} alt="_img" />
-              </div>
-              <div className="brand">
-                <img src={mamaearth} alt="_img" />
-              </div>
-            </Carousel>
-            <div className="prod-img">
-              <NavLink to="">
-                <img src={dabur} alt="Dabur_img" />
-              </NavLink>
-              <NavLink to="">
-                <img src={dettol} alt="Dettol_img" />
-              </NavLink>
-              <NavLink to="">
-                <img src={garnier} alt="Garnier_img" />
-              </NavLink>
-              <NavLink to="">
-                <img src={himalya} alt="Himalya_img" />
-              </NavLink>
-              <NavLink to="">
-                <img src={mamaearth} alt="Mamaearth_img" />
-              </NavLink>
+            </div>
+            <div className="prod-detail">
+              <section>{productName}</section>
+              <section>{productPrice}</section>
+              <section>{productPrice}</section>
+              <section>{productBrand}</section>
+              <section>{productCategory}</section>
+              <section className="btn">
+                <button>Add to Wishlist</button>
+                <button onClick={() => setModalIsOpen(true)}>Buy now</button>
+              </section>
             </div>
           </div>
-          <div className="prod-detail">
-            <section>Product Name</section>
-            <section>Product Price</section>
-            <section>Status (in stock)</section>
-            <section>Brand</section>
-            <section>Category</section>
-            <section className="btn">
-              <button>Add to Wishlist</button>
-              <button onClick={() => setModalIsOpen(true)}>Buy now</button>
-            </section>
+          <div className="view-prod-feedback">
+            <p>Feedback of product</p>
+            <textarea
+              className=""
+              placeholder="write a review"
+              rows="10"
+              cols="40"
+            ></textarea>
           </div>
         </div>
-        <div className="view-prod-feedback">
-          <p>Feedback of product</p>
-          <textarea
-            className=""
-            placeholder="write a review"
-            rows="10"
-            cols="40"
-          ></textarea>
-        </div>
-      </div>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={() => setModalIsOpen(false)}
-        style={customStyles}
-      >
-        <div className="modalbackground">
-          <div className="modalcontainer">
-            <div className="closebutton">
-              <button className="cancel" onClick={() => setModalIsOpen(false)}>
-                X
-              </button>
-            </div>
-            <div className="body">
-              Are You Sure <br />
-              You Want to Place Order ?
-            </div>
-            <div className="modalbutton">
-              <button className="no" onClick={() => setModalIsOpen(false)}>
-                Cancel
-              </button>
-              <button className="yes">Continue</button>
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={() => setModalIsOpen(false)}
+          style={customStyles}
+        >
+          <div className="modalbackground">
+            <div className="modalcontainer">
+              <div className="closebutton">
+                <button
+                  className="cancel"
+                  onClick={() => setModalIsOpen(false)}
+                >
+                  X
+                </button>
+              </div>
+              <div className="body">
+                Are You Sure <br />
+                You Want to Place Order ?
+              </div>
+              <div className="modalbutton">
+                <button className="no" onClick={() => setModalIsOpen(false)}>
+                  Cancel
+                </button>
+                <button className="yes">Continue</button>
+              </div>
             </div>
           </div>
+        </Modal>
+      </>
+    );
+  } else if (productImage.length === 4) {
+    return (
+      <>
+        <Navbar />
+        <div className="view">
+          <div className="view-prod">
+            <div className="view-prod-slide">
+              <Carousel
+                className="slider"
+                plugins={[
+                  "centered",
+                  "infinite",
+                  "arrows",
+                  {
+                    resolve: slidesToShowPlugin,
+                    autoplayPlugin,
+                    options: {
+                      numberOfSlides: 1,
+                      interval: 4000,
+                    },
+                  },
+                ]}
+                animationSpeed={1000}
+              >
+                <div className="brand">
+                  <img src={productImage[0]} alt="_img" id="img1" />
+                </div>
+                <div className="brand">
+                  <img src={productImage[1]} alt="_img" id="img2" />
+                </div>
+                <div className="brand">
+                  <img src={productImage[2]} alt="_img" id="img3" />
+                </div>
+                <div className="brand">
+                  <img src={productImage[3]} alt="_img" id="img4" />
+                </div>
+              </Carousel>
+              <div className="prod-img">
+                <img src={productImage[0]} alt="Dabur_img" />
+
+                <img src={productImage[1]} alt="Dettol_img" />
+
+                <img src={productImage[2]} alt="Garnier_img" />
+
+                <img src={productImage[3]} alt="Himalya_img" />
+              </div>
+            </div>
+            <div className="prod-detail">
+              <section>{productName}</section>
+              <section>{productPrice}</section>
+              <section>{productStatus}</section>
+              <section>{productBrand}</section>
+              <section>{productCategory}</section>
+              <section className="btn">
+                <button>Add to Wishlist</button>
+                <button onClick={() => setModalIsOpen(true)}>Buy now</button>
+              </section>
+            </div>
+          </div>
+          <div className="view-prod-feedback">
+            <p>Feedback of product</p>
+            <textarea
+              className=""
+              placeholder="write a review"
+              rows="10"
+              cols="40"
+            ></textarea>
+          </div>
         </div>
-      </Modal>
-    </>
-  );
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={() => setModalIsOpen(false)}
+          style={customStyles}
+        >
+          <div className="modalbackground">
+            <div className="modalcontainer">
+              <div className="closebutton">
+                <button
+                  className="cancel"
+                  onClick={() => setModalIsOpen(false)}
+                >
+                  X
+                </button>
+              </div>
+              <div className="body">
+                Are You Sure <br />
+                You Want to Place Order ?
+              </div>
+              <div className="modalbutton">
+                <button className="no" onClick={() => setModalIsOpen(false)}>
+                  Cancel
+                </button>
+                <button className="yes">Continue</button>
+              </div>
+            </div>
+          </div>
+        </Modal>
+      </>
+    );
+  } else if (productImage.length === 3) {
+    return (
+      <>
+        <Navbar />
+        <div className="view">
+          <div className="view-prod">
+            <div className="view-prod-slide">
+              <Carousel
+                className="slider"
+                plugins={[
+                  "centered",
+                  "infinite",
+                  "arrows",
+                  {
+                    resolve: slidesToShowPlugin,
+                    autoplayPlugin,
+                    options: {
+                      numberOfSlides: 1,
+                      interval: 4000,
+                    },
+                  },
+                ]}
+                animationSpeed={1000}
+              >
+                <div className="brand" id="img">
+                  <img src={productImage[0]} alt="_img" />
+                </div>
+                <div className="brand">
+                  <img src={productImage[1]} alt="_img" />
+                </div>
+                <div className="brand">
+                  <img src={productImage[2]} alt="_img" />
+                </div>
+              </Carousel>
+              <div className="prod-img">
+                <img src={productImage[0]} alt="Dabur_img" />
+
+                <img src={productImage[1]} alt="Dettol_img" />
+
+                <img src={productImage[2]} alt="Garnier_img" />
+              </div>
+            </div>
+            <div className="prod-detail">
+              <section>{productName}</section>
+              <section>{productPrice}</section>
+              <section>{productStatus}</section>
+              <section>{productBrand}</section>
+              <section>{productCategory}</section>
+              <section className="btn">
+                <button>Add to Wishlist</button>
+                <button onClick={() => setModalIsOpen(true)}>Buy now</button>
+              </section>
+            </div>
+          </div>
+          <div className="view-prod-feedback">
+            <p>Feedback of product</p>
+            <textarea
+              className=""
+              placeholder="write a review"
+              rows="10"
+              cols="40"
+            ></textarea>
+          </div>
+        </div>
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={() => setModalIsOpen(false)}
+          style={customStyles}
+        >
+          <div className="modalbackground">
+            <div className="modalcontainer">
+              <div className="closebutton">
+                <button
+                  className="cancel"
+                  onClick={() => setModalIsOpen(false)}
+                >
+                  X
+                </button>
+              </div>
+              <div className="body">
+                Are You Sure <br />
+                You Want to Place Order ?
+              </div>
+              <div className="modalbutton">
+                <button className="no" onClick={() => setModalIsOpen(false)}>
+                  Cancel
+                </button>
+                <button className="yes">Continue</button>
+              </div>
+            </div>
+          </div>
+        </Modal>
+      </>
+    );
+  } else if (productImage.length === 2) {
+    return (
+      <>
+        <Navbar />
+        <div className="view">
+          <div className="view-prod">
+            <div className="view-prod-slide">
+              <Carousel
+                className="slider"
+                plugins={[
+                  "centered",
+                  "infinite",
+                  "arrows",
+                  {
+                    resolve: slidesToShowPlugin,
+                    autoplayPlugin,
+                    options: {
+                      numberOfSlides: 1,
+                      interval: 4000,
+                    },
+                  },
+                ]}
+                animationSpeed={1000}
+              >
+                <div className="brand">
+                  <img src={productImage[0]} alt="_img" />
+                </div>
+                <div className="brand">
+                  <img src={productImage[1]} alt="_img" />
+                </div>
+              </Carousel>
+              <div className="prod-img">
+                <img src={productImage[0]} alt="Dabur_img" />
+
+                <img src={productImage[1]} alt="Dettol_img" />
+              </div>
+            </div>
+            <div className="prod-detail">
+              <section>{productName}</section>
+              <section>{productPrice}</section>
+              <section>{productStatus}</section>
+              <section>{productBrand}</section>
+              <section>{productCategory}</section>
+              <section className="btn">
+                <button>Add to Wishlist</button>
+                <button onClick={() => setModalIsOpen(true)}>Buy now</button>
+              </section>
+            </div>
+          </div>
+          <div className="view-prod-feedback">
+            <p>Feedback of product</p>
+            <textarea
+              className=""
+              placeholder="write a review"
+              rows="10"
+              cols="40"
+            ></textarea>
+          </div>
+        </div>
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={() => setModalIsOpen(false)}
+          style={customStyles}
+        >
+          <div className="modalbackground">
+            <div className="modalcontainer">
+              <div className="closebutton">
+                <button
+                  className="cancel"
+                  onClick={() => setModalIsOpen(false)}
+                >
+                  X
+                </button>
+              </div>
+              <div className="body">
+                Are You Sure <br />
+                You Want to Place Order ?
+              </div>
+              <div className="modalbutton">
+                <button className="no" onClick={() => setModalIsOpen(false)}>
+                  Cancel
+                </button>
+                <button className="yes">Continue</button>
+              </div>
+            </div>
+          </div>
+        </Modal>
+      </>
+    );
+  }
 };
 
 export default Viewprod;

@@ -36,8 +36,8 @@ export const loginUserService = async (data) => {
   }
 };
 
-export const searchProductbyBrand = async () => {
-  const url = "/getSearchProductbyBrand/dabur";
+export const searchProductbyBrand = async (brand) => {
+  const url = `/getSearchProductbyBrand/${brand}`;
   const link = host + url;
   console.log("link: ", link);
   try {

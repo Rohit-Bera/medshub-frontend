@@ -2,8 +2,15 @@ import React from "react";
 import "../style/Accountdetails.css";
 import YourAccount from "./Youraccount";
 import Navbar from "./Navbar";
+import { useSelector } from "react-redux";
 
 const Accountdetails = () => {
+  const name = useSelector((state) => state.userReducer).name;
+  const email = useSelector((state) => state.userReducer).email;
+  const address = useSelector((state) => state.userReducer).address;
+  console.log("address: ", address);
+  const phone = useSelector((state) => state.userReducer).phoneNumber;
+
   return (
     <div>
       <Navbar />
@@ -21,20 +28,20 @@ const Accountdetails = () => {
             <br></br>
 
             <div style={{ marginLeft: "30px" }}>
-              <span className="bold">First Name</span> -{" "}
-              <span className="margin-left">Manthan</span>
+              <span className="bold">Name</span> -{" "}
+              <span className="margin-left">{name}</span>
               <br></br>
               <br></br>
-              <span className="bold">Last Name</span> -{" "}
-              <span className="margin-left">Manthan</span>
+              <span className="bold">Address</span> -{" "}
+              <span className="margin-left">{address}</span>
               <br></br>
               <br></br>
               <span className="bold">Mobile No</span> -{" "}
-              <span className="margin-left">Manthan</span>
+              <span className="margin-left">{phone}</span>
               <br></br>
               <br></br>
               <span className="bold">Email ID</span> -{" "}
-              <span className="margin-left">Manthan</span>
+              <span className="margin-left">{email}</span>
               <br></br>
               <br></br>
               <span className="bold">Change Password</span> <br></br>
