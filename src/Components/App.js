@@ -38,6 +38,11 @@ import Medicine from "./Medicine";
 import Viewmed from "./Viewmed";
 import Medslist from "./Medslist";
 import Ourbrands from "./Ourbrands";
+import admin from  "../Admin/Admin.Home";
+import ManageProduct from "../Admin/Products";
+import ManageOrder from "../Admin/Order";
+import ManagePrescription from  "../Admin/Prescription";
+import ManageMedicine from "../Admin/Medicine";
 
 const App = () => {
   return (
@@ -144,6 +149,33 @@ const App = () => {
             exact
             component={Accountdetails}
           />
+          {/* Admin Routes */}
+          <Route
+            path="/ADmIn/adminHome"
+            exact
+            component={admin}
+          />
+          <Route
+            path="/ADmIn/ManageProducts"
+            exact
+            component={ManageProduct}
+          />
+          <Route
+            path="/ADmIn/ManageOrder"
+            exact
+            component={ManageOrder}
+          />
+          <Route
+            path="/ADmIn/ManageMedicine"
+            exact
+            component={ManageMedicine}
+          />
+          <Route
+            path="/ADmIn/ManagePrescription"
+            exact
+            component={ManagePrescription}
+          />
+          
           {/* <Route 
           path="/yourAccount" 
           exact

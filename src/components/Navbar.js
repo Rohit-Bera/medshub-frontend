@@ -25,13 +25,13 @@ const Navbar = () => {
         </Link></div>
      
       <div className='flex'>
-          <span >
+          <span className="span-nav">
               Prescription
           </span>
-          <span>
+          <span className="span-nav">
               Cart
           </span>
-          <span>
+          <span className="span-nav">
               Account
           </span>
           </div>
