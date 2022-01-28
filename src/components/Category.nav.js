@@ -9,38 +9,53 @@ const CategoryNav = () => {
         <div className="nav-bar">
           <ul type="none">
             <li>
-              <Link to="/Medicines">Medicines</Link>
+              <Link to="/medicines">Medicines</Link>
             </li>
             <li>
-              <Link to="/productCategories">Our Categories</Link>
+              <Link to="/productCategories/covid-essentials">
+                Covid Essentials
+              </Link>
+            </li>
+            <li>
+              <Link to="/productCategories/devices">Devices</Link>
+            </li>
+            <li>
+              <Link to="/productCategories/momandbabies">Mom and Babies</Link>
             </li>
             <li>
               <Link to="/productCategories/ourBrands">Our Brands</Link>
             </li>
             <ul type="none">
               <li>
-                <Link to="/productCategories/Dabur">Dabur</Link>
+                <Link to="/productCategories/Brandproducts/dabur">Dabur</Link>
               </li>
               <li>
-                <Link to="/productCategories/Dettol">Dettol</Link>
+                <Link to="/productCategories/Brandproducts/dettol">Dettol</Link>
               </li>
               <li>
-                <Link to="/productCategories/Garnier">Garnier</Link>
+                <Link to="/productCategories/Brandproducts/garnier">
+                  Garnier
+                </Link>
               </li>
               <li>
-                <Link to="/productCategories/Himalya">Himalya</Link>
+                <Link to="/productCategories/Brandproducts/himalya">
+                  Himalya
+                </Link>
               </li>
               <li>
-                <Link to="/productCategories/Mamaearth">Mama Earth</Link>
+                <Link to="/productCategories/Brandproducts/mamaearth">
+                  Mama Earth
+                </Link>
               </li>
               <li>
-                <Link to="/productCategories/Muscleblaze">Muscle Blaze</Link>
+                <Link to="/productCategories/Brandproducts/muscleblaze">
+                  Muscle Blaze
+                </Link>
               </li>
               <li>
-                <Link to="/productCategories/Zandu">Zandu</Link>
+                <Link to="/productCategories/Brandproducts/zandu">Zandu</Link>
               </li>
             </ul>
-
             <li>
               <Link to="/productCategories/Beautyproducts">
                 Beauty Products
@@ -48,27 +63,51 @@ const CategoryNav = () => {
             </li>
             <ul type="none">
               <li>
-                <Link to="">Lip Care</Link>
+                <Link to="/productCategories/Beautyproducts/lipcare">
+                  Lip Care
+                </Link>
               </li>
               <li>
-                <Link to="">Hair Care</Link>
+                <Link to="/productCategories/Beautyproducts/haircare">
+                  Hair Care
+                </Link>
               </li>
               <li>
-                <Link to="">Body Care</Link>
+                <Link to="/productCategories/Beautyproducts/bodycare">
+                  Body Care
+                </Link>
               </li>
               <li>
-                <Link to="">Facial Care</Link>
+                <Link to="/productCategories/Beautyproducts/facialkit">
+                  Facial Care
+                </Link>
               </li>
             </ul>
 
             <li>
-              <Link to="">Men's Grooming</Link>
+              <Link to="/productCategories/Men'sgrooming">Men's Grooming</Link>
             </li>
             <ul type="none">
-              <li>Beard Oil</li>
-              <li>Beard Wash</li>
-              <li>Hair Gel</li>
-              <li>Men Deodrant</li>
+              <li>
+                <Link to="/productCategories/Men'sgrooming/beardwash">
+                  Beard Wash
+                </Link>
+              </li>
+              <li>
+                <Link to="/productCategories/Men'sgrooming/beardoil">
+                  Beard Oil
+                </Link>
+              </li>
+              <li>
+                <Link to="/productCategories/Men'sgrooming/hairgel">
+                  Hair Gel
+                </Link>
+              </li>
+              <li>
+                <Link to="/productCategories/Men'sgrooming/mendeo">
+                  Men Deodrant
+                </Link>
+              </li>
             </ul>
           </ul>
         </div>

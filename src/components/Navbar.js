@@ -1,36 +1,60 @@
-import React from 'react';
+import { React } from "react";
 import "../style/Navbar.css";
-import Logo from "../images/logo.png"
 
+import Logo from "../images/logo.png";
+import { Link, useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const Navbar = () =>{
-    return <div className='main'>
-      <div className='left-nav'>
-          <img src={Logo} alt="crashed"></img>
-       </div>
-      <div className='center-nav'>
-          <div className='width'>
-              <input type="text" placeholder='Search'></input>&nbsp;<i class="fas fa-search"></i>
-              </div>
+const Navbar = () => {
+  // const histoy = useHistory();
+
+  // const name = useSelector((state) => state.userReducer).name;
+  // console.log("name: ", name);
+  // const email = useSelector((state) => state.userReducer).email;
+  // console.log("email: ", email);
+  // const phoneNumber = useSelector((state) => state.userReducer).phoneNumber;
+  // console.log("phoneNumber: ", phoneNumber);
+
+  // if (name === "" || email === "" || phoneNumber === "") {
+  //   histoy.push("/checkuser");
+  // }
+
+  return (
+    <div className="main">
+      <div className="left-nav">
+        <Link to="/">
+          <img src={Logo} alt="crashed"></img>{" "}
+        </Link>
+      </div>
+      <div className="center-nav">
+        <div className="width">
+          <input type="text" placeholder="Search" className="input"></input>
+          &nbsp;<i class="fas fa-search"></i>
         </div>
-      <div className='right-nav'>
-     <div className='flex margin'> <i class="fas fa-notes-medical margin-left"></i>
-      <i class="fas fa-shopping-cart margin-left"></i>
-      <i class="fas fa-user margin-left"></i></div>
-      <div className='flex'>
-          <span >
-              Prescription
-          </span>
-          <span>
-              Cart
-          </span>
-          <span>
-              Account
-          </span>
       </div>
-      </div>
+      <div className="right-nav">
+        <div className="flex margin">
+          <i class="fas fa-notes-medical margin-left-nav"></i>
+          <i class="fas fa-shopping-cart margin-left-nav"></i>
+          <Link to="/yourAccount/AccountDetails">
+            <i class="fas fa-user margin-left-nav"></i>
+          </Link>
+        </div>
 
-    </div>;
+        <div className="flex">
+          <span>
+            <Link> Prescription</Link>
+          </span>
+          <span>
+            <Link>Cart</Link>
+          </span>
+          <span>
+            <Link to="/checkuser">Account</Link>
+          </span>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Navbar;

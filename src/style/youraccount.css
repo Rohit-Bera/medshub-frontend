@@ -8,6 +8,7 @@ h4{
     font-family: "Trirong", serif;
     width: 80%;
     margin-left: 30px;
+    line-height: 50px;
 }
 
 .margin-main-icon{
@@ -16,17 +17,16 @@ h4{
 }
 .margin-arrow-icon{
     margin-left: 15px;
+    
 }
 .span{
     font-size: 45px;
     padding: 5px;
-    
-    
+    margin-left: 10px;
+
 }
-.left-menu{
-    flex: 30%;
-}
-p{
+
+.p{
     text-align: center;
     font-family: "Trirong", serif;
 }
