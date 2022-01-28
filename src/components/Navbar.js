@@ -36,22 +36,35 @@ const Navbar = () => {
         <div className="flex margin">
           <i class="fas fa-notes-medical margin-left-nav"></i>
           <i class="fas fa-shopping-cart margin-left-nav"></i>
-          <Link to="/yourAccount/AccountDetails">
-            <i class="fas fa-user margin-left-nav"></i>
-          </Link>
+
+        <Link to="/checkuser"> 
+        <i class="fas fa-user margin-left-nav"></i>
+        </Link></div>
+     
+      <div className='flex'>
+          <span className="span-nav">
+          <Link> Prescription</Link>
+          </span>
+          <span className="span-nav">
+          <Link>Cart</Link>
+          </span>
+          <span className="span-nav">
+          <Link to="/checkuser">Account</Link>
+          </span>
+          
         </div>
 
-        <div className="flex">
-          <span>
+        {/* <div className="flex">
+          <span  className="span-nav">
             <Link> Prescription</Link>
-          </span>
-          <span>
+          </span >
+          <span  className="span-nav">
             <Link>Cart</Link>
           </span>
-          <span>
+          <span  className="span-nav">
             <Link to="/checkuser">Account</Link>
           </span>
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -41,8 +41,8 @@ const Signin = () => {
 
       const { user, token } = response.receive.data.loguser;
 
-      const { name, email, password, phoneNumber } = user;
-      const signupUser = { name, email, password, phoneNumber };
+      const { name, email, address, phoneNumber } = user;
+      const signupUser = { name, email, phoneNumber, address };
       const theUser = { signupUser, token };
 
       dispatch(userData({ theUser }));

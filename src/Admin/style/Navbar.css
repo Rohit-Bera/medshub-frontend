@@ -1,0 +1,19 @@
+.main{
+    display: flex;
+    background-color: rgb(56,182,255);
+    height: 100px;
+    justify-content: space-between;
+}
+.img{
+    height: 80px;
+    width: 450px;
+}
+.logout-admin-nav{
+    font-size: 25px;
+    margin-right: 45px;
+    margin-top: 20px;
+    color: white;
+}
+
+
+

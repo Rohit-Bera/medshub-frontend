@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import Modal from "react-modal/lib/components/Modal";
 import { searchProductbyBrand } from "../Data/Services/Oneforall";
+import { useDispatch } from "react-redux";
+import { productData } from "../Data/Reducers/product.reducer";
 
 Modal.setAppElement("#root");
 
@@ -14,10 +16,13 @@ const Dabur = () => {
   }, []);
 
   const [daburProd, setDaburprod] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const getProductDabur = async () => {
     try {
-      const response = await searchProductbyBrand();
+      const brand = "dabur";
+      const response = await searchProductbyBrand(brand);
       console.log("response: ", response);
       setDaburprod(response.data);
     } catch (error) {
@@ -25,7 +30,11 @@ const Dabur = () => {
     }
   };
 
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const getProductName = (product) => {
+    console.log("product: ", product);
+
+    dispatch(productData({ product }));
+  };
 
   const customStyles = {
     content: {
@@ -46,9 +55,7 @@ const Dabur = () => {
         <div className="brand-body">
           <div className="brand-child">
             {/* array of prod */}
-            {console.log("dabur : ", daburProd)}
             {daburProd.map((item) => {
-              console.log("item: ", item);
               return (
                 <div className="product">
                   <img src={item.productImage[0]} alt="_img" />
@@ -68,7 +75,12 @@ const Dabur = () => {
                     </p>
                   </div>
                   <Link to="/viewproduct">
-                    <button className="view">view</button>
+                    <button
+                      className="view"
+                      onClick={() => getProductName(item)}
+                    >
+                      view
+                    </button>
                   </Link>
                 </div>
               );

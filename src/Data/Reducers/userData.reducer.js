@@ -20,11 +20,12 @@ const userDataSlice = createSlice({
       state.name = payload.theUser.signupUser.name;
       state.email = payload.theUser.signupUser.email;
       state.password = payload.theUser.signupUser.password;
+      state.address = payload.theUser.signupUser.address;
       state.phoneNumber = payload.theUser.signupUser.phoneNumber;
       state.token = payload.theUser.token;
     },
   },
 });
 
-export const { userData, logOut } = userDataSlice.actions;
+export const { userData } = userDataSlice.actions;
 export default userDataSlice.reducer;
