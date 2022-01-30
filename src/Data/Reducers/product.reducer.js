@@ -16,6 +16,7 @@ const productSlice = createSlice({
     productData: (state, action) => {
       console.log("action: ", action);
       const { payload } = action;
+      console.log("payload: ", payload);
 
       state._id = payload.product._id;
       state.availableStatus = payload.product.availableStatus;
