@@ -46,7 +46,7 @@ const Navbar = () => {
             <Link> Prescription</Link>
           </span>
           <span>
-            <Link>Cart</Link>
+            <Link to="/yourAccount/myCart">Cart</Link>
           </span>
           <span>
             <Link to="/checkuser">Account</Link>

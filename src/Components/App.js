@@ -36,9 +36,9 @@ import Momandbaby from "./Momandbaby";
 import Viewprod from "./Viewprod";
 import Medicine from "./Medicine";
 import Viewmed from "./Viewmed";
-import Medslist from "./Medslist";
 import Ourbrands from "./Ourbrands";
 import CheckUser from "./CheckUser";
+import Cart from "./Cart";
 
 const App = () => {
   return (
@@ -153,6 +153,7 @@ const App = () => {
           <Route path="/yourAccount/About" exact component={About} />
           <Route path="/yourAccount/myOrders" exact component={Myorders} />
           <Route path="/yourAccount/MyWishlist" exact component={mywishlist} />
+          <Route path="/yourAccount/myCart" exact component={Cart} />
           <Route
             path="/yourAccount/notification"
             exact
@@ -180,7 +181,6 @@ const App = () => {
           <Route path="/viewproduct" exact component={Viewprod} />
           {/* meds route */}
           <Route path="/medicines" exact component={Medicine} />
-          <Route path="/medicines/medicinelist" exact component={Medslist} />
           <Route path="/medicines/viewmedcines" exact component={Viewmed} />
 
           {/* test */}
