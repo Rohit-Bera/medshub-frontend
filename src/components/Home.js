@@ -32,6 +32,7 @@ import Carousel, {
 } from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
 import Feedback from "./Feedback";
+import Footer from "./Footer";
 
 const Home = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -253,7 +254,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <Feedback />
+      <Footer />
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}

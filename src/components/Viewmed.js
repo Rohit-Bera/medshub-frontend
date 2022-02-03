@@ -14,11 +14,15 @@ import { useSelector } from "react-redux";
 import { Triangle, Rings, Oval } from "react-loader-spinner";
 
 import Navbar from "./Navbar";
-import { postMedWishlistApi } from "../Data/Services/Oneforall";
+import {
+  postMedFeedbackApi,
+  postMedWishlistApi,
+} from "../Data/Services/Oneforall";
 Modal.setAppElement("#root");
 
 const Viewmed = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [feedback, setFeedback] = useState("");
 
   const token = useSelector((state) => state.userReducer).token;
 
@@ -39,7 +43,17 @@ const Viewmed = () => {
     (state) => state.medicineReducer
   ).availableStatus;
 
-  console.log("availableStatus: ", availableStatus);
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      border: "1px solid black",
+    },
+  };
 
   const addMedtoWishlist = async () => {
     setModalIsOpen(true);
@@ -57,6 +71,31 @@ const Viewmed = () => {
 
     if (response) {
       setModalIsOpen(false);
+    }
+  };
+
+  const refresh = (e) => {
+    e.preventDefault();
+  };
+
+  const takeInput = (e) => {
+    setFeedback(e.target.value);
+  };
+
+  const postMedFeedback = async () => {
+    setModalIsOpen(true);
+    console.log("feed : ", feedback);
+
+    const medicineId = med_id;
+
+    const data = { feedback, medicineId, medicineName };
+
+    const response = await postMedFeedbackApi(data, token);
+    console.log("response: ", response);
+
+    if (response) {
+      setModalIsOpen(false);
+      setFeedback("");
     }
   };
 
@@ -134,15 +173,43 @@ const Viewmed = () => {
           </div>
         </div>
         <div className="view-prod-feedback">
-          <p>Feedback of product</p>
-          <textarea
-            className=""
-            placeholder="write a review"
-            rows="10"
-            cols="40"
-          ></textarea>
+          <form onSubmit={(e) => refresh(e)}>
+            <p>Feedback of product</p>
+            <textarea
+              className=""
+              placeholder="write a review"
+              rows="10"
+              cols="40"
+              name="feedback"
+              onChange={takeInput}
+            ></textarea>
+            <button onClick={postMedFeedback}>review</button>
+          </form>
         </div>
       </div>
+
+      <Modal
+        isOpen={modalIsOpen}
+        // onRequestClose={() => setModalIsOpen(false)}
+        style={customStyles}
+      >
+        <div
+          style={{
+            width: "7vw",
+            height: "13vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Triangle
+            color="black
+          "
+            height={100}
+            width={100}
+          />
+        </div>
+      </Modal>
     </>
   );
 };

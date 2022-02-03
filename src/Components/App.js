@@ -37,14 +37,14 @@ import Viewprod from "./Viewprod";
 import Medicine from "./Medicine";
 import Viewmed from "./Viewmed";
 import Ourbrands from "./Ourbrands";
-import admin from  "../Admin/Admin.Home";
+import admin from "../Admin/Admin.Home";
 import ManageProduct from "../Admin/Products";
 import ManageOrder from "../Admin/Order";
-import ManagePrescription from  "../Admin/Prescription";
+import ManagePrescription from "../Admin/Prescription";
 import ManageMedicine from "../Admin/Medicine";
 import CheckUser from "./CheckUser";
 import Cart from "./Cart";
-
+import Uploadprescription from "./Uploadprescription";
 
 const App = () => {
   return (
@@ -152,21 +152,9 @@ const App = () => {
             component={Accountdetails}
           />
           {/* Admin Routes */}
-          <Route
-            path="/ADmIn/adminHome"
-            exact
-            component={admin}
-          />
-          <Route
-            path="/ADmIn/ManageProducts"
-            exact
-            component={ManageProduct}
-          />
-          <Route
-            path="/ADmIn/ManageOrder"
-            exact
-            component={ManageOrder}
-          />
+          <Route path="/ADmIn/adminHome" exact component={admin} />
+          <Route path="/ADmIn/ManageProducts" exact component={ManageProduct} />
+          <Route path="/ADmIn/ManageOrder" exact component={ManageOrder} />
           <Route
             path="/ADmIn/ManageMedicine"
             exact
@@ -177,7 +165,7 @@ const App = () => {
             exact
             component={ManagePrescription}
           />
-          
+
           {/* <Route 
           path="/yourAccount" 
           exact
@@ -215,6 +203,11 @@ const App = () => {
           {/* meds route */}
           <Route path="/medicines" exact component={Medicine} />
           <Route path="/medicines/viewmedcines" exact component={Viewmed} />
+          <Route
+            path="/uploadprescription"
+            exact
+            component={Uploadprescription}
+          />
 
           {/* test */}
           <Route path="/checkuser" exact component={CheckUser} />

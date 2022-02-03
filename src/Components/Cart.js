@@ -20,7 +20,7 @@ const Cart = () => {
   // -------------------------------------------------------states
   const [myCart, setMyCart] = useState([]);
   const history = useHistory();
-  const [modalIsOpen, setModalIsOpen] = useState(true);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const dispatch = useDispatch();
 
   const token = useSelector((state) => state.userReducer).token;

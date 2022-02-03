@@ -62,7 +62,11 @@ const Myorder = () => {
               if (item.product && item.deliverystatus === true) {
                 return (
                   <div
-                    style={{ display: "flex", justifyContent: "space-around" }}
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-around",
+                      marginBottom: "1%",
+                    }}
                   >
                     <div className="order-bg">
                       <img src={himalya} alt="img" className="size"></img>
@@ -77,7 +81,11 @@ const Myorder = () => {
                 console.log("item.medicine: ", item.medicine);
                 return (
                   <div
-                    style={{ display: "flex", justifyContent: "space-around" }}
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-around",
+                      marginBottom: "1%",
+                    }}
                   >
                     <div className="order-bg">
                       <img src={himalya} alt="img" className="size"></img>
@@ -86,14 +94,6 @@ const Myorder = () => {
                       <p style={{ marginLeft: "25px" }}>Himalya Products</p>
                       <p style={{ marginLeft: "25px" }}>566/-</p>
                     </div>
-                  </div>
-                );
-              } else {
-                return (
-                  <div
-                    style={{ display: "flex", justifyContent: "space-around" }}
-                  >
-                    <p>No products or medicines Delievered yet</p>
                   </div>
                 );
               }

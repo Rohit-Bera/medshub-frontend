@@ -2,7 +2,12 @@ import { React, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "../style/viewprod.css";
 import Navbar from "./Navbar";
-import { postprodWishlistApi } from "../Data/Services/Oneforall";
+import {
+  postProdFeedbackApi,
+  postprodWishlistApi,
+} from "../Data/Services/Oneforall";
+import Modal from "react-modal/lib/components/Modal";
+import { Triangle, Rings, Oval } from "react-loader-spinner";
 
 //for slider
 import Carousel, {
@@ -11,8 +16,10 @@ import Carousel, {
 } from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
 import { useSelector } from "react-redux";
+Modal.setAppElement("#root");
 
 const Viewprod = () => {
+  // ==================================states
   const productId = useSelector((state) => state.productReducer)._id;
   const productName = useSelector((state) => state.productReducer).productName;
   const productImage = useSelector(
@@ -31,13 +38,26 @@ const Viewprod = () => {
     (state) => state.productReducer
   ).availableStatus;
 
+  const [feedback, setFeedback] = useState("");
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const token = useSelector((state) => state.userReducer).token;
 
-  console.log("productImage: ", productImage);
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      border: "1px solid black",
+    },
+  };
 
-  console.log("productImage: ", productImage.length);
-
+  // ===========================================functions
   const addMedtoWishlist = async () => {
+    setModalIsOpen(true);
+
     const item = {
       productId,
       productName,
@@ -52,6 +72,33 @@ const Viewprod = () => {
     const response = await postprodWishlistApi(productId, item, token);
 
     console.log("response: ", response);
+    if (response) {
+      setModalIsOpen(false);
+      setFeedback("");
+    }
+  };
+
+  const refresh = (e) => {
+    e.preventDefault();
+  };
+
+  const takeInput = (e) => {
+    setFeedback(e.target.value);
+  };
+
+  const sendProdFeedback = async () => {
+    setModalIsOpen(true);
+
+    console.log("feed : ", feedback);
+
+    const data = { feedback, productId, productName, productBrand };
+
+    const response = await postProdFeedbackApi(data, token);
+    console.log("response: ", response);
+    if (response) {
+      setModalIsOpen(false);
+      setFeedback("");
+    }
   };
 
   return (
@@ -127,15 +174,44 @@ const Viewprod = () => {
           </div>
         </div>
         <div className="view-prod-feedback">
-          <p>Feedback of product</p>
-          <textarea
-            className=""
-            placeholder="write a review"
-            rows="10"
-            cols="40"
-          ></textarea>
+          <form onSubmit={(e) => refresh(e)}>
+            <p>Feedback of product</p>
+            <textarea
+              className=""
+              placeholder="write a review"
+              rows="10"
+              cols="40"
+              name="prodFeedback"
+              value={feedback}
+              onChange={takeInput}
+            ></textarea>
+            <button onClick={sendProdFeedback}>send review</button>
+          </form>
         </div>
       </div>
+
+      <Modal
+        isOpen={modalIsOpen}
+        // onRequestClose={() => setModalIsOpen(false)}
+        style={customStyles}
+      >
+        <div
+          style={{
+            width: "7vw",
+            height: "13vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Triangle
+            color="black
+          "
+            height={100}
+            width={100}
+          />
+        </div>
+      </Modal>
     </>
   );
 };

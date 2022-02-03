@@ -86,7 +86,6 @@ const Dabur = () => {
           <div className="brand-child">
             {/* array of prod */}
             {Products.map((item) => {
-              console.log("item.productImage[0]: ", item.productImage[0]);
               return (
                 <div className="product">
                   <img src={item.productImage[0]} alt="_img" />

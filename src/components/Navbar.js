@@ -44,10 +44,10 @@ const Navbar = () => {
 
         <div className="flex">
           <span className="span-nav">
-            <Link> Prescription</Link>
+            <Link to="/uploadprescription"> Prescription</Link>
           </span>
           <span className="span-nav">
-            <Link>Cart</Link>
+            <Link to="/yourAccount/myCart">Cart</Link>
           </span>
           <span className="span-nav">
             <Link to="/checkuser">Account</Link>

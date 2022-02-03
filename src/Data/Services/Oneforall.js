@@ -220,3 +220,79 @@ export const getmyWishlistApi = async (token) => {
     console.log("error: ", error);
   }
 };
+
+export const postWebFeedback = async (data, token) => {
+  const url = "/postWebFeedback";
+  // const host = "http://localhost:5500";
+
+  const link = host + url;
+  console.log("link: ", link);
+  const headers = { headers: { Authorization: `Bearer ${token}` } };
+
+  try {
+    const receive = await axios.post(link, data, headers);
+
+    return receive;
+  } catch (error) {
+    console.log("error: ", error);
+
+    return error;
+  }
+};
+
+export const postProdFeedbackApi = async (data, token) => {
+  console.log("token: ", token);
+  console.log("data: ", data);
+
+  const url = "/postProductFeedback";
+  const link = host + url;
+  const headers = { headers: { Authorization: `Bearer ${token}` } };
+
+  try {
+    const receive = await axios.post(link, data, headers);
+
+    return receive;
+  } catch (error) {
+    console.log("error: ", error);
+
+    return error;
+  }
+};
+
+export const postMedFeedbackApi = async (data, token) => {
+  console.log("token: ", token);
+  console.log("data: ", data);
+
+  const url = "/postMedicineFeedback";
+  const link = host + url;
+  const headers = { headers: { Authorization: `Bearer ${token}` } };
+
+  try {
+    const receive = await axios.post(link, data, headers);
+
+    return receive;
+  } catch (error) {
+    console.log("error: ", error);
+
+    return error;
+  }
+};
+
+export const uploadPrescriptionApi = async (fd, token) => {
+  console.log("token: ", token);
+  console.log("fd: ", fd);
+
+  const url = "/uploadPrescription";
+
+  const link = host + url;
+  const headers = { headers: { Authorization: `Bearer ${token}` } };
+
+  try {
+    const receive = await axios.post(link, fd, headers);
+
+    return receive;
+  } catch (error) {
+    console.log("error: ", error);
+    return error;
+  }
+};
