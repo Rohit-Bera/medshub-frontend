@@ -1,38 +1,34 @@
-.nav,
-.footer {
-  background-color: rgb(56, 182, 255);
-  /* width: ; */
-  height: 15vh;
-}
-
 /* category styles */
 .category-home {
   display: flex;
 }
 /* category - nav */
 .cat-nav {
-  background-color: rgb(56, 182, 255);
-  border: 2px solid aqua;
-  width: 22vw;
+  /* background-color: rgb(56, 182, 255); */
+  width: 20vw;
   height: 83vh;
-  margin-top: 1%;
-  margin-left: 1%;
+  margin-top: 4.5%;
+  margin-left: 2%;
   margin-bottom: 1%;
   border-radius: 8px;
+  position: fixed;
 }
 
 .cat-nav ul {
-  font-size: 20px;
+  font-size: 18px;
   color: white;
 }
-.cat-nav li {
-  font-size: 20px;
+.cat-nav ul li {
+  font-size: 17px;
   color: white;
+  margin-top: 10%;
+  margin-top: 10%;
+  letter-spacing: 2px;
 }
 
-.cat-nav ul li {
-  font-size: 20px;
-  color: white;
+.cat-nav ul li i {
+  font-size: 19px;
+  margin-right: 2%;
 }
 
 .cat-nav a {
@@ -45,19 +41,21 @@
 }
 .our-brands .brand-body {
   /* background-color: aqua; */
-  width: 74vw;
-  margin-left: 1%;
+  width: 76vw;
+  margin-left: 21%;
+  margin-top: 2%;
   display: flex;
   /* align-items: center; */
   justify-content: center;
 }
 
 .our-brands .brand-body .brand-child {
-  background: linear-gradient(
+  /* background: linear-gradient(
     to right bottom,
     rgba(56, 182, 255, 0.7),
     rgba(56, 182, 255, 0.3)
-  );
+  ); */
+  background-color: white;
 
   width: 93vw;
   /* height: 75vh; */
@@ -205,7 +203,8 @@
       border-top-right-radius: 100px; */
   border-radius: 8px;
 
-  margin: 1%;
+  margin-top: 2%;
+  margin-bottom: 2%;
 
   box-shadow: 0px 0px 10px grey;
 }

@@ -14,7 +14,7 @@
   position: absolute;
   left: 0;
   top: 0;
-  height: 110%;
+  height: 115%;
   width: 100%;
   background-image: url("../images/home-bg.jpg");
   z-index: -1;
@@ -121,12 +121,6 @@
 a {
   text-decoration: none;
 }
-.nav,
-.footer {
-  background-color: rgb(56, 182, 255);
-  /* width: ; */
-  height: 15vh;
-}
 
 /* home-top-brands */
 .home-parent {
@@ -164,9 +158,10 @@ a {
   /* background-color: aqua; */
   height: 62vh;
   background-color: black;
-  margin-bottom: 2%;
+  margin-bottom: 3%;
   border: 5px solid rgb(56, 182, 255);
   border-radius: 8px;
+  margin-top: 2.5%;
 }
 
 .home .home-top-brands .slider {
@@ -421,13 +416,15 @@ a {
   bottom: 10vh;
   right: 12vh;
 
-  background-color: rgb(56, 182, 255);
-  border: 2px solid white;
+  background-color: black;
+  border: 2px solid rgb(56, 182, 255);
   border-radius: 50%;
   height: 10vh;
   width: 5vw;
   font-size: 35px;
   color: white;
+
+  z-index: 2;
 }
 /* chat-bot-ui */
 .bot-body {

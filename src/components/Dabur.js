@@ -79,7 +79,7 @@ const Dabur = () => {
   };
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="our-brands">
         <CategoryNav />
         <div className="brand-body">

@@ -14,7 +14,6 @@ import Navbar from "./Navbar";
 const Ourbrands = () => {
   return (
     <>
-      <Navbar />
       <div className="our-brands">
         <CategoryNav />
         <div className="brand-body">
@@ -67,7 +66,6 @@ const Ourbrands = () => {
           </div>
         </div>
       </div>
-      <div className="footer">footer</div>
     </>
   );
 };
