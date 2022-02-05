@@ -22,6 +22,10 @@ import mendeo from "../images/mendeodrant.jfif";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 // import Navbar from "../components/Navbar";
+<<<<<<< HEAD
+=======
+
+>>>>>>> d7083cb99e5e63d8b5d0dace074bbddb647d1158
 
 //requirements
 import { Link } from "react-router-dom";
@@ -265,8 +269,16 @@ const Home = () => {
         </div>
       </div>
 
+<<<<<<< HEAD
       <Footer />
 
+=======
+      
+        <Footer/>
+      
+
+     
+>>>>>>> d7083cb99e5e63d8b5d0dace074bbddb647d1158
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}
@@ -301,6 +313,7 @@ const Home = () => {
           </div>
         </div>
       </Modal>
+
     </>
   );
 };

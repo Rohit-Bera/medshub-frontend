@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .footer {
   /* position:absolute; */
   bottom: 0;
@@ -20,4 +21,28 @@ ul {
 .col {
   width: 25%;
   padding: 0 15px;
+=======
+.footer-container{
+    background-color:#38b6ff;
+    display:flex;
+    height:50vh;
+}
+.footer-feedback{
+    display:flex;
+    flex-direction: column;
+}
+.footer-elements{
+    display: flex;
+    width:75vw;
+
+}
+.footer-element-column{
+    width:35vw;
+    display:flex;
+    /* justify-content:space-around; */
+    align-items:center;
+    flex-direction: column;
+    height:40vh;
+    font-size:21px;
+>>>>>>> d7083cb99e5e63d8b5d0dace074bbddb647d1158
 }
