@@ -1,5 +1,5 @@
 .main-admin-product{
-    margin-top: 25px;
+    margin-top: 35px;
     margin-left: 550px;
     font-family: "Trirong", serif;
     font-size: 20px;
@@ -27,4 +27,10 @@
    margin-left: auto;
    margin-right: auto ;
    font-size: 20px;
+   border: 1px solid #ddd;
+   margin-top: 25px;   
+   border-collapse: collapse;
+}
+.border-tr{
+    border-bottom: 1pt solid #ddd;
 }

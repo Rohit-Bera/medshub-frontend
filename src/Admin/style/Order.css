@@ -11,3 +11,50 @@
     font-size: 30px;
     margin-left: 205px;
 }
+.input-admin-order{
+opacity: 0;
+width: 0;
+height: 0;
+}
+.span-admin-order{
+position: absolute;
+cursor: pointer;
+top: 0;
+right: 0;
+left: 0;
+bottom: 0;
+background-color: gray;
+transition: 0.4s;
+border-radius: 34px;
+}
+.switch{
+    position:relative;   
+    display: inline-block;
+     width: 60px;
+    height: 34px;   
+}
+.span-admin-order::before{
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+
+
+}
+.input-admin-order:checked + .span-admin-order{
+    background-color: #2196f3;
+}
+.input-admin-order:checked + .span-admin-order::before{
+    transform: translateX(26px);
+}
+.span-admin-order.rounded{
+    border-radius: 34px;
+}
+.span-admin-order.rounded::before{
+    border-radius: 50%;
+}

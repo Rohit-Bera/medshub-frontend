@@ -23,7 +23,7 @@ const Adminhome = () => {
     </div>
     <br></br>
     <div className="admin-flex "> 
-      <Link to="/">
+      <Link to="/ADmIn/AdminFeedback">
         <div className="box-admin link-admin" >
         <i class="fas fa-clipboard" style={{marginTop:"20px"}}></i><br></br>
           Feedback

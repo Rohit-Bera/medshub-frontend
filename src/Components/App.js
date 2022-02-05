@@ -40,10 +40,12 @@ import Medslist from "./Medslist";
 import Ourbrands from "./Ourbrands";
 import admin from  "../Admin/Admin.Home";
 import ManageProduct from "../Admin/Products";
-import ManageOrder from "../Admin/Order";
+import ManageOrder from "../Admin/Admin.Order";
 import ManagePrescription from  "../Admin/Prescription";
-import ManageMedicine from "../Admin/Medicine";
+import ManageMedicine from "../Admin/Admin.Medicine";
 import CheckUser from "./CheckUser";
+import Payment from "../payment/Payment";
+import AdminFeedback from "../Admin/Admin.Feedback.js";
 
 
 const App = () => {
@@ -166,6 +168,13 @@ const App = () => {
             path="/ADmIn/ManageOrder"
             exact
             component={ManageOrder}
+           
+          />
+          <Route
+            path="/ADmIn/AdminFeedback"
+            exact
+            component={AdminFeedback}
+           
           />
           <Route
             path="/ADmIn/ManageMedicine"
@@ -176,6 +185,11 @@ const App = () => {
             path="/ADmIn/ManagePrescription"
             exact
             component={ManagePrescription}
+          />
+          <Route
+            path="/payment"
+            exact
+            component={Payment}
           />
           
           {/* <Route 

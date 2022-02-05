@@ -51,3 +51,155 @@ export const searchProductbyBrand = async (brand) => {
     return { error };
   }
 };
+
+
+export const addMedicineApi = async(data,headers)=>{
+  
+  const url = "/addMedicine"
+  const link = host+url;
+  try{
+    const response = await axios.post(link,data,headers);
+    console.log('response: ', response);
+    return response;
+  }
+  catch(error){
+    console.log('error: ', error);
+    return error; 
+  }
+};
+
+
+export const getallMedicineApi = async(headers)=>{
+  const url= "/getMedicine";
+  const link = host+url;
+  try {
+      const result = await axios.get(link,headers);
+      return result;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const deleteMedicineApi = async(headers,_id)=>{
+ try {
+  const url = `/deleteMedicine/${_id}`;
+  const link = host+url;
+  const response = await axios.delete(link,headers);
+  return response;
+ } catch (error) {
+   console.log('error: ', error); 
+   return error; 
+
+ }
+}
+
+export const updateMedicineApi = async(_id,data,headers)=>{
+  try {
+    const url=`/updateMedicine/${_id}`;
+    const link = host+url;
+    
+    const result = await axios.put(link,data,headers);
+    console.log('response: ', result);
+    return result;
+  } catch (error) {
+    console.log('error: ', error);
+   return error; 
+  }
+}
+
+export const getallProductApi = async(headers)=>{
+  const url= "/getAllProducts";
+  const link = host+url;
+  try {
+      const result = await axios.get(link,headers);
+      return result;
+  } catch (error) {
+    return error;
+  }
+}
+export const addProductApi = async(data,headers)=>{
+  const url = "/addProduct"
+  const link = host+url;
+  try {
+    const response = await axios.post(link,data,headers);
+    console.log('response: ', response);
+    return response;
+  } catch (error) {
+    console.log('error: ', error);
+    return error;
+    
+  }
+} ;
+export const deleteProductApi = async(headers,_id)=>{
+  try {
+    const url = `/deleteProduct/${_id}`;
+  const link = host+url;
+  const response = await axios.delete(link,headers);
+return response;
+  } catch (error) {
+    console.log('error: ', error);
+    return error;
+    
+  }
+};
+export const updateProductsApi = async(_id,data,headers)=>{
+  try {
+    const url = `/updateProduct/${_id}`;
+    const link = host+url;
+    const result = await axios.put(link,data,headers);
+    console.log('response: ', result);
+    return result;
+  } catch (error) {
+    console.log('error: ', error);
+    return error;
+    
+  }
+}
+
+export const getOrderApi = async(headers)=>{
+  const url= "/allOrders";
+  const link = host+url;
+  try {
+    const result = await axios.get(link,headers);
+    return result;
+  } catch (error) {
+    return error;
+  }
+}
+
+export const getPrescriptionApi = async(headers)=>{
+  const url = "/getAllPrescription";
+  const link = host+url;
+  try {
+    const result = await axios.get(link,headers);
+    return result;
+  } catch (error) {
+    return error;
+  }
+
+}
+export const updateOrderApi = async(_id,data,headers)=>{
+  try {
+    const url = `/updateOrder/${_id}`;
+  const link = host+url;
+  const result = await axios.put(link,data,headers);
+  console.log('result: ', result);
+  return result;
+  } catch (error) {
+    console.log('error: ', error);
+    return error;
+    
+  }
+}
+export const updatePrescriptionApi = async(_id,data,headers)=>{
+  try {
+    const url = `/updatePrescription/${_id}`;
+  const link = host+url;
+  const result = await axios.put(link,data,headers);
+  console.log('result: ', result);
+  } catch (error) {
+    console.log('error: ', error);
+    return error;
+    
+  }
+}
