@@ -1,12 +1,12 @@
 import { React, useState } from "react";
 import "../style/home.css";
-import dabur from "../images/dabur.jpg";
-import dettol from "../images/dettol.jpg";
-import garnier from "../images/garnier.jpg";
-import himalya from "../images/himalya.jpg";
-import mamaearth from "../images/mamaearth.jpg";
-import muscleblaze from "../images/muscleblaze.jpg";
-import zandu from "../images/zandu.jpg";
+import dabur from "../images/dabur-banner.jfif";
+import dettol from "../images/dettol-banner.jpg";
+import garnier from "../images/garnier-banner.jpg";
+import himalya from "../images/himalya-banner.jfif";
+import mamaearth from "../images/mamaearth-banner.jfif";
+import muscleblaze from "../images/muscleblaze-banner.jfif";
+import zandu from "../images/zandu-banner.jfif";
 import sanitizer from "../images/sanitizer.png";
 import babies from "../images/babies.png";
 import fitness from "../images/fitness.jpg";
@@ -19,7 +19,9 @@ import beardoil from "../images/beardoil.jpg";
 import beardwash from "../images/beardwash.jfif";
 import hairgel from "../images/hairgel.jpg";
 import mendeo from "../images/mendeodrant.jfif";
-import Navbar from "../components/Navbar";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
+// import Navbar from "../components/Navbar";
 
 //requirements
 import { Link } from "react-router-dom";
@@ -31,8 +33,7 @@ import Carousel, {
   autoplayPlugin,
 } from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
-import Feedback from "./Feedback";
-import Footer from "./Footer";
+// import Feedback from "./Feedback";?
 
 const Home = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -56,13 +57,48 @@ const Home = () => {
       <button className="nurse" onClick={() => setModalIsOpen(true)}>
         <i class="fas fa-user-nurse"></i>
       </button>
+
+      <div className="aboutus-part">
+        <div className="about-container">
+          <div className="logo"></div>
+          <div className="home-bg"></div>
+          <div className="about">
+            <label>
+              Medshub 24/7 <br />
+              delivers the daily required health products ,<br />
+              Prescribed medicines and medicines
+            </label>
+            <div className="home-card">
+              <div className="search-product">
+                <i class="fas fa-search"></i>
+                <p>search product</p>
+              </div>
+              <div className="card-prod">
+                <i class="fas fa-truck-loading"></i>
+                <p>health product</p>
+              </div>
+
+              <div className="card-med">
+                <i class="fas fa-prescription-bottle-alt"></i>
+                <p>medicines</p>
+              </div>
+
+              <div className="search-medicine">
+                <i class="fas fa-search-plus"></i>
+                <p>search medicine</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="home-parent">
         <div className="home">
           <div className="home-top-brands">
             <label>
               <Link to="/productCategories/ourBrands">
-                <span className="font1">Top</span>{" "}
-                <span className="font2">Brands</span>
+                <span className="font3">Top</span>{" "}
+                <span className="font4">Brands</span>
               </Link>
             </label>
 
@@ -73,8 +109,7 @@ const Home = () => {
                 "infinite",
                 "arrows",
                 {
-                  resolve: slidesToShowPlugin,
-                  autoplayPlugin,
+                  resolve: autoplayPlugin,
                   options: {
                     numberOfSlides: 3,
                     interval: 4000,
@@ -86,43 +121,36 @@ const Home = () => {
               <Link to="/productCategories/Brandproducts/dabur">
                 <div className="brand">
                   <img src={dabur} alt="Dabur_img" />
-                  <p>Dabur</p>
                 </div>
               </Link>
               <Link to="/productCategories/Brandproducts/dettol">
                 <div className="brand">
                   <img src={dettol} alt="Dettol_img" />
-                  <p>Dettol</p>
                 </div>
               </Link>
               <Link to="/productCategories/Brandproducts/garnier">
                 <div className="brand">
                   <img src={garnier} alt="Garnier_img" />
-                  <p>Garnier</p>
                 </div>
               </Link>
               <Link to="/productCategories/Brandproducts/himalya">
                 <div className="brand">
                   <img src={himalya} alt="Himalya_img" />
-                  <p>Himalya</p>
                 </div>
               </Link>
               <Link to="/productCategories/Brandproducts/mamaearth">
                 <div className="brand">
                   <img src={mamaearth} alt="Mamaearth_img" />
-                  <p>Mamaearth</p>
                 </div>
               </Link>
               <Link to="/productCategories/Brandproducts/muscleblaze">
                 <div className="brand">
                   <img src={muscleblaze} alt="Muscleblaze_img" />
-                  <p>Muscleblaze</p>
                 </div>
               </Link>
               <Link to="/productCategories/Brandproducts/zandu">
                 <div className="brand">
                   <img src={zandu} alt="Zandu_img" />
-                  <p>Zandu</p>
                 </div>
               </Link>
             </Carousel>
@@ -139,8 +167,8 @@ const Home = () => {
             </div>
             <div className="categories2">
               <label>
-                <span className="font1">Shop By</span>
-                <span className="font2">Category</span>
+                <span className="font3">Shop By</span>
+                <span className="font4">Category</span>
               </label>
               <div className="categories">
                 <Link to="/productCategories/momandbabies">
@@ -167,58 +195,40 @@ const Home = () => {
           </div>
 
           <div className="home-beauty">
-            <Link to="/productCategories/Beautyproducts">
-              <label>
-                <p className="font1">Beauty</p>
-                <p className="font2">Products</p>
-              </label>
-            </Link>
-            <div className="beauty-products">
-              <Link to="/productCategories/Beautyproducts/lipcare">
-                <div className="beauty">
-                  <img src={lipcare} alt="lipcare" />
-                  <p>Lip Care</p>
+            <div className="home-beauty-container">
+              <div className="beauty-bg">
+                <div className="beauty-prod">
+                  <div className="home-beauty-title">
+                    <p>
+                      <span className="font1">Beauty</span>{" "}
+                      <span className="font2">Products</span>
+                    </p>
+                  </div>
+                  <div className="home-beauty-body">
+                    <div className="beauty-product">
+                      <img src={haircare} />
+                      <p>Hair Care</p>
+                    </div>
+                    <div className="beauty-product">
+                      <img src={facialkit} />
+                      <p>Facial Kit</p>
+                    </div>
+                    <div className="beauty-product">
+                      <img src={lipcare} />
+                      <p>Lip Care</p>
+                    </div>
+                    <div className="beauty-product">
+                      <img src={bodycare} />
+                      <p>Body Care</p>
+                    </div>
+                  </div>
                 </div>
-              </Link>
-              <Link to="/productCategories/Beautyproducts/haircare">
-                <div className="beauty">
-                  <img src={haircare} alt="haircare" />
-                  <p>Hair Care</p>
-                </div>
-              </Link>
-              <Link to="/productCategories/Beautyproducts/bodycare">
-                <div className="beauty">
-                  <img src={bodycare} alt="bodycare" />
-                  <p>body Care</p>
-                </div>
-              </Link>
-              <Link to="/productCategories/Beautyproducts/facialkit">
-                <div className="beauty">
-                  <img src={facialkit} alt="lipcare" />
-                  <p>facial Care</p>
-                </div>
-              </Link>
+              </div>
             </div>
           </div>
 
           <div className="home-men">
-            <Carousel
-              className="slider"
-              plugins={[
-                "centered",
-                "infinite",
-                "arrows",
-                {
-                  resolve: slidesToShowPlugin,
-                  autoplayPlugin,
-                  options: {
-                    numberOfSlides: 3,
-                    interval: 4000,
-                  },
-                },
-              ]}
-              animationSpeed={1000}
-            >
+            <div className="slider">
               <Link to="/productCategories/Men'sgrooming/beardoil">
                 <div className="men-card">
                   <img src={beardoil} alt="beard_img" />
@@ -243,18 +253,20 @@ const Home = () => {
                   <p>Men Deodrant</p>
                 </div>
               </Link>
-            </Carousel>
+            </div>
 
             <label>
               <Link to="/productCategories/Men'sgrooming">
-                <span className="font1">Men's </span>
-                <span className="font2">Grooming</span>
+                <span className="font3">Men's </span>
+                <span className="font4">Grooming</span>
               </Link>
             </label>
           </div>
         </div>
       </div>
+
       <Footer />
+
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}

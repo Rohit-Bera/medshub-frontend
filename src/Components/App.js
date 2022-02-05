@@ -175,6 +175,7 @@ const App = () => {
           <Route path="/yourAccount/myOrders" exact component={Myorders} />
           <Route path="/yourAccount/MyWishlist" exact component={mywishlist} />
           <Route path="/yourAccount/myCart" exact component={Cart} />
+
           <Route
             path="/yourAccount/notification"
             exact

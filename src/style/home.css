@@ -1,3 +1,85 @@
+/* about us part */
+/* header */
+.aboutus-part {
+  min-height: 100vh;
+  /* background-color: aqua; */
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/* container the image */
+.aboutus-part .about-container .home-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 110%;
+  width: 100%;
+  background-image: url("../images/home-bg.jpg");
+  z-index: -1;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+.aboutus-part .about-container .about {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 0px 8px grey;
+  height: 40vh;
+  width: 53vw;
+  text-align: center;
+  border-radius: 10px;
+  font-family: "Ubuntu Condensed", sans-serif;
+}
+
+.aboutus-part .about-container .about label {
+  font-size: 25px;
+  color: black;
+}
+
+.aboutus-part .about-container .about .home-card {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 50vw;
+  height: 9vh;
+  margin-top: 2%;
+}
+
+.aboutus-part .about-container .about .home-card .search-product,
+.aboutus-part .about-container .about .home-card .card-prod,
+.aboutus-part .about-container .about .home-card .card-med,
+.aboutus-part .about-container .about .home-card .search-medicine {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  border-radius: 5px;
+  color: rgb(56, 182, 255);
+}
+
+.aboutus-part .about-container .about .home-card .search-product i,
+.aboutus-part .about-container .about .home-card .card-prod i,
+.aboutus-part .about-container .about .home-card .card-med i,
+.aboutus-part .about-container .about .home-card .search-medicine i {
+  margin-left: 7%;
+}
+
+.aboutus-part .about-container .about .home-card .search-product p,
+.aboutus-part .about-container .about .home-card .card-prod p,
+.aboutus-part .about-container .about .home-card .card-med p,
+.aboutus-part .about-container .about .home-card .search-medicine p {
+  width: 9vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap");
@@ -15,6 +97,21 @@
 
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke-color: black;
+  -webkit-text-stroke-width: 2px;
+
+  font-size: 113px;
+}
+
+.font3 {
+  font-family: "Fjalla One", sans-serif;
+  color: rgb(56, 182, 255);
+  font-size: 83px;
+}
+.font4 {
+  font-family: "Rajdhani", sans-serif;
+
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-color: rgb(56, 182, 255);
   -webkit-text-stroke-width: 2px;
 
   font-size: 113px;
@@ -38,21 +135,15 @@ a {
   align-items: center;
 }
 .home {
-  background: linear-gradient(
-    to right bottom,
-    rgba(56, 182, 255, 0.7),
-    rgba(56, 182, 255, 0.3)
-  );
-
   width: 95vw;
-  height: 78vh;
+  /* height: 78vh; */
   margin-top: 2%;
   margin-bottom: 2%;
   border-radius: 10px;
 
   /* scroll */
-  overflow: hidden;
-  overflow-y: scroll;
+  /* overflow: hidden;
+  overflow-y: scroll; */
 }
 
 .home .home-top-brands label {
@@ -67,17 +158,21 @@ a {
 
 .home .home-top-brands {
   /* margin-bottom: 3%; */
-  display: flex;
+  /* display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: center; */
   /* background-color: aqua; */
-  height: 78vh;
+  height: 62vh;
+  background-color: black;
+  margin-bottom: 2%;
+  border: 5px solid rgb(56, 182, 255);
+  border-radius: 8px;
 }
 
 .home .home-top-brands .slider {
   /* background-color: crimson; */
-  height: 34vh;
-  width: 58vw;
+  height: 44vh;
+  width: 94vw;
 }
 
 .home .home-top-brands .slider .BrainhubCarousel__arrows {
@@ -92,7 +187,7 @@ a {
   align-items: center;
   flex-direction: column;
   justify-content: space-around;
-  background-color: white;
+  /* background-color: white; */
   width: 16vw;
   height: 32vh;
 
@@ -103,8 +198,8 @@ a {
 }
 
 .home .home-top-brands .brand img {
-  height: 17vh;
-  width: 10vw;
+  height: 40vh;
+  width: 50vw;
 }
 
 .home .home-top-brands .brand p {
@@ -117,17 +212,19 @@ a {
 /* categories */
 
 .home .home-categories {
-  height: 78vh;
+  background: white;
+  height: 90vh;
   /* background-color: aqua; */
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
   margin-bottom: 3%;
+  margin-top: 2%;
 }
 
 .home .home-categories .categories1 {
-  background-color: rgb(56, 182, 255);
+  background-color: black;
   width: 20vw;
   height: 65vh;
   border-bottom-left-radius: 300px;
@@ -142,7 +239,7 @@ a {
   font-weight: bold;
 
   font-family: "Fjalla One", sans-serif;
-  color: white;
+  color: rgb(56, 182, 255);
 }
 
 .home .home-categories .categories1 img {
@@ -152,7 +249,7 @@ a {
 }
 
 .home .home-categories .categories2 {
-  background-color: rgb(56, 182, 255);
+  background-color: black;
   width: 55vw;
   height: 70vh;
   text-align: center;
@@ -185,10 +282,8 @@ a {
   margin: 1%;
 
   /* box-shadow: 0px 0px 10px grey; */
-  font-size: 25px;
-
   font-family: "Ubuntu Condensed", sans-serif;
-  color: rgb(56, 182, 255);
+  color: black;
 }
 
 .home .home-categories .categories2 .categories .category img {
@@ -197,95 +292,110 @@ a {
 }
 
 /* beauty - products */
-
-.home .home-beauty {
-  height: 78vh;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.home .home-beauty label {
+.home-beauty {
+  /* min-height: 80vh; */
   /* background-color: aqua; */
-  width: 40vw;
+
   display: flex;
+  justify-content: space-around;
   align-items: center;
 }
 
-.home .home-beauty .beauty-products {
-  height: 70vh;
-  background-color: rgb(56, 182, 255);
-
-  width: 50vw;
-
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: space-around;
-
-  flex-wrap: wrap;
-  border-radius: 10px;
+.home-beauty .home-beauty-container {
 }
 
-.home .home-beauty .beauty-products .beauty {
+/* parallel image */
+.home-beauty .home-beauty-container .beauty-bg {
+  background: url("../images/beauty-bg.jpg") no-repeat center;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 90vh;
   display: flex;
+  justify-content: center;
   align-items: center;
-  flex-direction: column;
+  margin-bottom: 1%;
+  width: 90vw;
+}
+
+.home-beauty .home-beauty-container .beauty-prod {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.home-beauty .home-beauty-container .home-beauty-title {
+  display: flex;
   justify-content: space-around;
+}
 
-  /* flex-wrap: wrap; */
-
-  background-color: white;
-  width: 18vw;
-  height: 32vh;
-
+.home-beauty .home-beauty-container .home-beauty-body {
+  /* background-color: rgba(255, 255, 255, 0.5); */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 80vw;
+  height: 55vh;
   border-radius: 8px;
-  margin: 1%;
-
-  /* box-shadow: 0px 0px 10px grey; */
-  font-size: 25px;
-
-  font-family: "Ubuntu Condensed", sans-serif;
-  color: rgb(56, 182, 255);
 }
 
-.home .home-beauty .beauty-products .beauty img {
-  height: 19vh;
+.home-beauty .home-beauty-container .home-beauty-body .beauty-product {
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  color: black;
+  height: 35vh;
+  width: 18vw;
+  border-radius: 8px;
+  box-shadow: 0px 0px 8px gray;
+  font-family: "Ubuntu Condensed", sans-serif;
+}
+.home-beauty .home-beauty-container .home-beauty-body .beauty-product img {
+  height: 20vh;
   width: 12vw;
 }
 
 /* mens-grooming */
 .home .home-men {
+  margin-top: 2%;
+  /* background: linear-gradient(
+    to right bottom,
+    rgba(56, 182, 255, 0.7),
+    rgba(56, 182, 255, 0.3)
+  ); */
+  background-color: black;
   /* margin-bottom: 3%; */
   display: flex;
   justify-content: space-between;
   align-items: center;
   /* background-color: aqua; */
   height: 78vh;
+  border: 5px solid rgb(56, 182, 255);
+  border-radius: 10px;
 }
 
 .home .home-men .slider {
   /* background-color: crimson; */
-  height: 34vh;
+  height: 50vh;
   width: 58vw;
-}
-
-.home .home-men .slider .BrainhubCarousel__arrows {
-  background-color: rgb(56, 182, 255);
-
-  margin-left: 1%;
-  margin-right: 1%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-left: 2%;
+  margin-right: 2%;
 }
 
 .home .home-men .men-card {
   display: flex;
   align-items: center;
-  flex-direction: column;
+
   justify-content: space-around;
   background-color: white;
-  width: 16vw;
-  height: 32vh;
+  color: black;
+  width: 20vw;
+  height: 20vh;
+
+  box-shadow: 0px 0px 10px white;
 
   border-radius: 8px;
 
@@ -295,15 +405,13 @@ a {
 }
 
 .home .home-men .men-card img {
-  height: 17vh;
-  width: 10vw;
+  height: 12vh;
+  width: 9vw;
 }
 
 .home .home-men .men-card p {
-  font-size: 25px;
-
   font-family: "Ubuntu Condensed", sans-serif;
-  color: rgb(56, 182, 255);
+  color: black;
 }
 
 /* button color */

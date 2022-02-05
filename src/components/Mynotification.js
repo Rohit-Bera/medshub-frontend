@@ -88,14 +88,6 @@ const Mynotification = () => {
                   </div>
                 </div>
               );
-            } else {
-              return (
-                <div
-                  style={{ display: "flex", justifyContent: "space-around" }}
-                >
-                  <p>No products or medicines Ordered yet</p>
-                </div>
-              );
             }
           })}
         </div>

@@ -21,7 +21,7 @@ const Mywishlist = () => {
 
   //   -------------------------------states
   const token = useSelector((state) => state.userReducer).token;
-  const [modalIsOpen, setModalIsOpen] = useState(true);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [myList, setMyList] = useState([]);
 
   const customStyles = {
@@ -94,10 +94,6 @@ const Mywishlist = () => {
                   <p style={{ marginLeft: "25px" }}>Himalya Products</p>
                   <p style={{ marginLeft: "25px" }}>566/-</p>
                 </div>
-              </div>;
-            } else {
-              <div style={{ display: "flex", justifyContent: "space-around" }}>
-                <p> no product or medicine added to Wishlist</p>
               </div>;
             }
           })}

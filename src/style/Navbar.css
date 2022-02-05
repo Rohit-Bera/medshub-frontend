@@ -1,64 +1,61 @@
-.input{
-    border: none;
-    padding: 4px;
-    margin-top: 4px;
-    width: 300px;
-    border-radius: 7px;
-    background-color : white;
+.input {
+  border: none;
+  padding: 4px;
+  margin-top: 4px;
+  width: 300px;
+  border-radius: 7px;
+  background-color: white;
 }
 /* button{
     background-color : white;
     padding: 4px;
-
-} */    
-.main{
-    display: flex;
-    background-color: rgb(56,182,255);
-    height: 90px;
+} */
+.main {
+  display: flex;
+  background-color: rgb(56, 182, 255);
+  height: 90px;
 }
-.left-nav{
-flex: 30%;
-
+.left-nav {
+  flex: 30%;
 }
-.center-nav{
-flex: 30%;
-padding:"10px";
-text-align: center;
+.center-nav {
+  flex: 30%;
+  padding: "10px";
+  text-align: center;
 }
-.width{
-    width: 345px;
-    background-color: white;
-    padding: 5px;
-    margin-top: 25px;
-    height: 30px;
-    border: none;
-    border-radius: 20px;
-    margin-left:55px
+.width {
+  width: 345px;
+  background-color: white;
+  padding: 5px;
+  margin-top: 25px;
+  height: 30px;
+  border: none;
+  border-radius: 20px;
+  margin-left: 55px;
 }
-.right-nav{
-flex: 40%;
+.right-nav {
+  flex: 40%;
 }
-img{
-    height: 75px;
-    width: 100%;
-
+img {
+  height: 75px;
+  width: 100%;
 }
-.right-nav i{
-    font-size: 25px;
+.right-nav i {
+  font-size: 25px;
 }
-.flex{
-display: flex;
-justify-content: end;
-color: rgb(255,255,200);
+.flex {
+  display: flex;
+  justify-content: end;
+  color: rgb(255, 255, 200);
 }
-.margin{
-    margin-top: 20px;
+.margin {
+  margin-top: 20px;
 }
-.margin-left-nav{
-    margin-right:80px;
-    text-decoration: none;
-    color: white;
+.margin-left-nav {
+  margin-right: 80px;
+  text-decoration: none;
+  color: white;
 }
-.span-nav{
-    margin-right: 60px;
+.span-nav {
+  margin-right: 60px;
 }

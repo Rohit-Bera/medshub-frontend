@@ -26,12 +26,7 @@ const Navbar = () => {
           <img src={Logo} alt="crashed"></img>{" "}
         </Link>
       </div>
-      <div className="center-nav">
-        <div className="width">
-          <input type="text" placeholder="Search" className="input"></input>
-          &nbsp;<i class="fas fa-search"></i>
-        </div>
-      </div>
+
       <div className="right-nav">
         <div className="flex margin">
           <i class="fas fa-notes-medical margin-left-nav"></i>
@@ -44,10 +39,10 @@ const Navbar = () => {
 
         <div className="flex">
           <span className="span-nav">
-            <Link to="/uploadprescription"> Prescription</Link>
+            <Link> Prescription</Link>
           </span>
           <span className="span-nav">
-            <Link to="/yourAccount/myCart">Cart</Link>
+            <Link>Cart</Link>
           </span>
           <span className="span-nav">
             <Link to="/checkuser">Account</Link>
