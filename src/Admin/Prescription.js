@@ -6,7 +6,8 @@ import { useSelector } from "react-redux";
 import Modal from "react-modal/lib/components/Modal";
 import {getPrescriptionApi,updatePrescriptionApi} from "../Data/Services/Oneforall";
 import cx from "classnames";
-
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 const Prescription = ({rounded = false}) =>{
     const [ordermodalIsOpen, setOrederModel] = useState(false);
@@ -18,6 +19,9 @@ const Prescription = ({rounded = false}) =>{
     useEffect(() => {
         getPrescription();
       }, []);
+      useEffect(()=>{
+        Aos.init({duration:1000});
+      },[]);
     const customStyles = {
       content: {
         top: "50%",
@@ -76,15 +80,24 @@ const Prescription = ({rounded = false}) =>{
     })
     return <div>
         <Navbar />
+        <p className="p-prescription-admin">All Prescription</p>
+        <table cellPadding="20px" className="table-order">
+            <tr className="border-tr-prescription table-title-prescription">
+                <td>prescription Image</td>
+                <td>Owner Name</td>
+                <td>Owner Email</td>
+                <td>Owner Address</td>
+                <td>Owner Phone No.</td>
+                <td></td>
+                <td></td>
+            </tr>
         {
            allPrescription.map((item)=>{
-               
-               
                if(item.prescriptionStatus === false){
                 return(
-                   <div>
-                       <table>
-                       <tr>
+                  
+                       
+                       <tr className="border-tr-prescription" data-aos="zoom-in-down">
                             <td>
                                  <img src={item.prescriptionImage} alt="noImage"/>
                                  
@@ -103,20 +116,18 @@ const Prescription = ({rounded = false}) =>{
                             </td>
                             <td> <label className="switch"><input type="checkbox" name="deliverystatus" className="input-admin-order" onClick={()=>acceptPrescription(item)}></input>
                             <span className={sildercx}></span></label></td>
-                            <td>
-                             <p title="update"><i class="fas fa-edit"></i></p>
-                            </td>
+                            
                              <td>
-                             <button className="button-admin-medicine" onClick={()=>updatePrescription()}>update</button>
+                             <button className="button-admin-prescription" onClick={()=>updatePrescription()}><i class="fas fa-check"></i></button>
 
                              </td>
                          </tr>
-                       </table>
-                    </div>
+                 
                )
                }
            })
        }
+       </table>
                 <Modal
                     isOpen={ordermodalIsOpen}
                     onRequestClose={() => setOrederModel(false)}

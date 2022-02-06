@@ -4,6 +4,8 @@ import Navbar from "./Navbar";
 import  { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {addMedicineApi,getallMedicineApi,deleteMedicineApi,updateMedicineApi} from "../Data/Services/Oneforall";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 
 
@@ -29,7 +31,9 @@ const Medicine = () =>{
     useEffect(() => {
         getMedicine();
       }, []);
-
+      useEffect(()=>{
+        Aos.init({duration:1000});
+      },[]);
     //getallmedicine state
     const [allMedicine,setAllMedicine]= useState([]);
     //token
@@ -102,20 +106,22 @@ const Medicine = () =>{
             // const url = "https://localhost:5500/addMedicine";
             const headers = {headers:{Authorization: `Bearer ${token}` }}
             const result = await addMedicineApi(fd,headers);
-            return result;
-          
-        } catch (error) {
-            console.log('error: ', error.response);
-            
-        }
-        getMedicine()
-        setStatus({availableStatus:false});
+            console.log('result: ', result);
+            getMedicine();
+            setStatus({availableStatus:false});
         setMeds({
             medicineName:"",
             medicinePrice:"",
             manufacturerName:"",
             medicineCategory:"",
         });
+          
+        } catch (error) {
+            console.log('error: ', error.response);
+            
+        }
+        
+        
         
         
     };
@@ -198,53 +204,83 @@ const Medicine = () =>{
 
     return <div>
                     <Navbar/>
-                    <h2 className="h2-medicine-admin">Medicine</h2>
+                   <div className="form-main-medicine">
+                   <p className="p-medicine-admin">Add Medicine</p><hr style={{color:"black",border:"2px solid"}}></hr>
                     <form className="main-admin-medicine" onSubmit={refresh}>
+                        <div  className="form-flex-Medadmin">
+                        <div>
+                            <p>Medicine Name</p>
                         <input type="text" 
                         placeholder="Enter Medicine Name" 
                         className="input-medicine-admin"
                         name="medicineName"
                         value={meds.medicineName}
-                        onChange={inputData}/><br></br><br></br>
+                        onChange={inputData}/><br></br>
+                        <p>Medicine Price</p>
                         <input type="text" 
                         placeholder="Medicine price" 
                         min="0" 
                         className="input-medicine-admin"
                         name="medicinePrice"
                         value={meds.medicinePrice}
-                        onChange={inputData}/><br></br><br></br>
+                        onChange={inputData}/><br></br>
+                        <p>Manufacturer Name</p>
                         <input type="text" 
                         placeholder="Manufacturer Name"  
                         className="input-medicine-admin"
                         name="manufacturerName"
                         value={meds.manufacturerName}
-                        onChange={inputData}/><br></br><br></br>
+                        onChange={inputData}/><br></br>
+                        <p>Medicine Category</p>
                         <input type="text" 
-                        placeholder="medicine Category"  
+                        placeholder="Medicine Category"  
                         className="input-medicine-admin"
                         name="medicineCategory"
                         value={meds.medicineCategory}
-                        onChange={inputData}/><br></br><br></br>
+                        onChange={inputData}/><br></br>
+                        </div>
+                        <div>
+                        <div className="upload-btn-wrapper-medicine">
+                            <btn className="btn-admin-medicine"><i class="fas fa-cloud-upload-alt" style={{marginTop:"100px"}}></i></btn>
                         <input type="file"
                         multiple
                         name="medicineImage"
                         onChange={inputImg}/><br></br><br></br>
+                        </div><br></br>
+                        <div className="upload-image-button-medicine"> 
+                                <button className="btn2-admin-medicine">UPLOAD MEDICINE IMAGE</button>
+                        </div><br></br>
                         <input type="checkbox"
                         name="availableStatus"
                         checked={status.availableStatus}
-                        onChange={inputStatus}/>medicine is in stock<br></br><br></br>
+                        onChange={inputStatus}
+                        className="largeCheckbov-medicine-admin"/>medicine is in stock<br></br><br></br>
+                        </div>
+                        </div><br></br>
+                        <div className="form-flex-Medadmin">
                         <button className="button-admin-medicine" onClick={()=>addMedicine()}>Add medicine</button>
                         <button className="button-admin-medicine" onClick={()=>updateMedicine()}>update</button>
+                        </div>
 
                     </form>
-                    
+                    </div>   
+                        <table cellPadding="20px"  className="table-medicine ">
+                        <tr className="border-tr-medicine table-title-medicine" >
+                            <td>Medicine Image</td>
+                            <td>Medicine Name</td>
+                            <td>Medicine Price</td>
+                            <td>Manufacturer Name</td>
+                            <td>Medicine Category</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
                      {allMedicine.map((item) => {
                         //  console.log('item: ', item);
                         //  if(item.availableStatus === true){
                              return(
-                                 <div>
-                                     <table>
-                                         <tr>
+                                 
+                                         <tr className="border-tr-medicine" data-aos="zoom-in-down">
                                              <td>
                                                  <img src={item.medicineImage[0]} alt="noImage"/>
                                              </td>
@@ -261,17 +297,25 @@ const Medicine = () =>{
                                                  <p>{item.medicineCategory}</p>
                                              </td>
                                              <td>
-                                             <p title="update" onClick={()=>editMedicine(item)}><i class="fas fa-edit"></i></p>
+                                                    {item.availableStatus ? (
+                                                        <p style={{backgroundColor:"green",color:"white",padding:"5px"}}>In Stock</p>
+                                                    ):(<p style={{backgroundColor:"red",color:"white",padding:"5px"}}>Out of stock</p>)}
+                                                </td>   
+                                             <td>
+                                             <button title="update" onClick={()=>editMedicine(item)} className="btn-updateDelte-medicine"><i class="fas fa-edit"></i></button>
                                              </td>
                                              <td>
-                                                 <p title="delete" onClick={()=>deleteMedicine(item)}><i class="fas fa-trash-alt"></i></p>
+                                                 <button title="delete" onClick={()=>deleteMedicine(item)} className="btn-updateDelte-medicine"><i class="fas fa-trash-alt"></i></button>
                                              </td>
                                          </tr>
-                                     </table>
-                                 </div>
+                                   
+                                 
                              )
                         //  }
-                     })}
+                     }
+                     )}
+                     </table>
+
                    
     </div>; 
 

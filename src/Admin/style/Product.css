@@ -1,24 +1,28 @@
 .main-admin-product{
     margin-top: 35px;
-    margin-left: 550px;
+   
     font-family: "Trirong", serif;
     font-size: 20px;
 }
 .input-product-admin{
-    width: 225px;
-    height: 25px;
-    border-radius: 5px;
+    width: 240px;
+    height: 30px;
+    margin-left: 10px;
+    background-color: black;
+    color: white;
   
 }
-.h2-product-admin{
+.p-product-admin{
     font-family: "Trirong", serif;
     font-size: 30px;
-    margin-left: 205px;
+    text-align: center;
+    
 }
 .button-admin-product{
     padding: 10px;
     border: none;
-    background-color: rgb(56,182,255);
+    background-color: black;
+    color: white;
     border-radius: 5px;
 }
 .table-product{
@@ -32,5 +36,87 @@
    border-collapse: collapse;
 }
 .border-tr{
-    border-bottom: 1pt solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background-color: black;
+    border: 3px solid rgb(56,182,255);
+    color:white
 }
+.table-title{
+    background-color: rgb(56,182,255);
+}
+.form-main{
+    height: 600px;
+    width: 650px;
+    background-color: rgb(56,182,255);
+    margin-top: 25px;
+    margin-left: 405px;
+    padding: 15px;
+    border-radius: 15px;
+}
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    height: 250px;
+    width: 250px;
+    background-color: black;
+    text-align: center;
+    margin-top: 35px;
+  }
+  .btn-admin-product{
+    border:none;
+    color: gray;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 50px;
+    font-weight: bold;
+  
+  }
+  .upload-btn-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left:0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+  }
+  .form-flex-admin{
+      display: flex;
+      justify-content: space-around;
+  }
+.upload-image-button{
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    height: 45px;
+    width: 250px;
+    background-color: black;
+    text-align: center;
+   
+}
+
+  .btn2-admin-product{
+      background-color: black;
+      border: none;
+      color: white;
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 5px;
+  }
+  .p-admin-product{
+    color: white;
+  }
+  .largeCheckbov-product-admin{
+      height: 17px;
+      width: 17px;
+      margin-top: 5px;
+  }
+
+  .btn-updateDelte-product{
+      background-color: black;
+      color: white;
+      border: none;
+      padding: 10px;
+      font-size: 20px;
+  }

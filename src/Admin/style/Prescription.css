@@ -4,5 +4,29 @@
    margin-left: auto;
    margin-right: auto ;
    font-size: 20px;
+   border: 1px solid #ddd;
+   margin-top: 25px;   
+   border-collapse: collapse;
 
+}
+.border-tr-prescription{
+    border-bottom: 1px solid #ddd;
+    background-color: black;
+    border: 3px solid rgb(56,182,255);
+    color:white
+}
+.table-title-prescription{
+    background-color: rgb(56,182,255);
+}
+.p-prescription-admin{
+    font-family: "Trirong", serif;
+    font-size: 30px;
+    margin-left: 50px;
+}
+.button-admin-prescription{
+    padding: 10px;
+    border: 2px solid rgb(56,182,255);
+    background-color: black;
+    color: white;
+    font-size: 20px;
 }

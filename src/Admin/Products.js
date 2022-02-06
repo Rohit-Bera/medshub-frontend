@@ -28,7 +28,7 @@ const Product = () =>{
         getProduct();
       }, []);
       useEffect(()=>{
-        Aos.init({duration:2000});
+        Aos.init({duration:1000});
       },[]);
     //all products state 
     const [allProducts,setAllProducts]= useState([]);
@@ -94,20 +94,25 @@ const Product = () =>{
             }
             const headers = {headers:{Authorization: `Bearer ${token}` }}
             const result = await addProductApi(fd,headers);
-            return result;
-
+            console.log('result: ', result);
+            getProduct();
+            setStatus({availableStatus:false});
+            setProducts({
+                productName:"",
+            productPrice:"",
+            productBrand:"",
+            productCategory:"",
+            });
+            
+            
 
         } catch (error) {
             console.log('error: ', error);
             
         }
-        setStatus({availableStatus:false});
-        setProducts({
-            productName:"",
-        productPrice:"",
-        productBrand:"",
-        productCategory:"",
-        });
+       
+     
+        
     };
     //delete prodcts api
     const deleteProducts = async(item)=>{
@@ -182,89 +187,158 @@ const Product = () =>{
     }
     return <div>
         <Navbar/>
-        <h2 className="h2-product-admin">Product</h2>
-        <form className="main-admin-product" onSubmit={refresh}>
-            <input type="text" 
-            placeholder="Enter Product Name" 
-            className="input-product-admin"
-            name="productName"
-            value={products.productName} 
-            onChange={inputData}
-            /><br></br><br></br>
-            <input type="number" 
-            placeholder=" Product price" 
-            min="0" 
-            className="input-product-admin"
-            name="productPrice"
-            value={products.productPrice}
-            onChange={inputData} /><br></br><br></br>
-            <input type="text" 
-            placeholder="Enter Product brand" 
-            className="input-product-admin"
-            name="productBrand"
-            value={products.productBrand} 
-            onChange={inputData}/><br></br><br></br>
-            <input type="text" 
-            placeholder="Enter Product category" 
-            className="input-product-admin"
-            name="productCategory"
-            value={products.productCategory}
-            onChange={inputData} /><br></br><br></br>
-            <input type="file"
-            multiple
-            name="productImage"
-            onChange={inputImg}/><br></br><br></br>
-            <input type="checkbox"
-             name="availableStatus"
-            checked={status.availableStatus}
-            onChange={inputStatus}/>product is in stock<br></br><br></br>
-            <button className="button-admin-product" onClick={()=>addProduct()}>Add product</button>
-            <button className="button-admin-medicine" onClick={()=>updateProducts()}>update</button>
-        </form>
+        <div className="form-main">
+            
+            <p className="p-product-admin">Add Products</p><hr style={{color:"black",border:"2px solid"}}></hr>
+            
+            <form className="main-admin-product" onSubmit={refresh}>
+            <div className="form-flex-admin">
+                <div >
+                    <p>Product Name</p>
+                <input type="text" 
+                placeholder="Enter Product Name" 
+                className="input-product-admin"
+                name="productName"
+                value={products.productName} 
+                onChange={inputData}
+                /><br></br>
+                <p>Product Price</p>
+                <input type="number" 
+                placeholder=" Product price" 
+                min="0" 
+                className="input-product-admin"
+                name="productPrice"
+                value={products.productPrice}
+                onChange={inputData} /><br></br>
+                <p>Product Brand</p>
+                <input type="text" 
+                placeholder="Enter Product brand" 
+                className="input-product-admin"
+                name="productBrand"
+                value={products.productBrand} 
+                onChange={inputData}/><br></br>
+                <p>Product Category</p>
+                <input type="text" 
+                placeholder="Enter Product category" 
+                className="input-product-admin"
+                name="productCategory"
+                value={products.productCategory}
+                onChange={inputData} /><br></br><br></br>
+                    </div>
+                <div>
+                    <div className="upload-btn-wrapper" >
+                        <btn className="btn-admin-product"><i class="fas fa-cloud-upload-alt" style={{marginTop:"100px"}}></i></btn>
+                        <input type="file"
+                            multiple
+                            name="productImage"
+                            onChange={inputImg}/><br></br><br></br>
+                    </div><br></br>
+                   <div className="upload-image-button"> 
+                   <button className="btn2-admin-product">UPLOAD PRODUCT IMAGE</button>
+                  
+                   </div><br></br>
+                   
+                  <input type="checkbox"
+                        name="availableStatus"
+                        checked={status.availableStatus}         
+                        onChange={inputStatus}
+                        className="largeCheckbov-product-admin"/>product is in stock
+                       
+        
+                </div>
+            </div>
+
+           
+            <div className="form-flex-admin">
+               <div> <button className="button-admin-product" onClick={()=>addProduct()}>Add product</button></div>
+               <div> <button className="button-admin-product" onClick={()=>updateProducts()}>update</button></div>
+            </div>
+         </form>
+           
+        </div>
 
             
-             <table cellPadding="20px"  className="table-product" >
-             <tr className="border-tr" >
+             <table cellPadding="20px"  className="table-product ">
+             <tr className="border-tr table-title" >
                     <td>Product Image</td>
                     <td>Product Name</td>
                     <td>Prodct Price</td>
                     <td>Prodct Brand</td>
                     <td>Prodct Category</td>
-                    {/* <td></td>
-                    <td></td> */}
+                    <td>Status</td>
+                    <td></td>
+                    <td></td>
              </tr>
              {
            allProducts.map((item)=>{
-               return(
+            //    if(item.availableStatus === true){
+                return(
+   
+                   <tr className="border-tr" data-aos="zoom-in-down">
+                                <td >
+                                    <img src={item.productImage[0]} alt="noImage"/>
+                                 </td>
+                                <td>
+                                 <p>{item.productName}</p>
+                                </td>
+                               <td>
+                                 <p>{item.productPrice}</p>
+                              </td>
+                              <td>
+                             <p>{item.productBrand}</p>
+                            </td>
+                             <td>
+                              <p>{item.productCategory}</p>
+                            </td>
+                              <td>
+                                {item.availableStatus ? (
+                                    <p style={{backgroundColor:"green",color:"white",padding:"5px"}}>In Stock</p>
+                                ):(<p style={{backgroundColor:"red",color:"white",padding:"5px"}}>Out of stock</p>)}
+                            </td>           
+                           <td>
+                              <button title="update" onClick={()=>editProduct(item)} className="btn-updateDelte-product"><i class="fas fa-edit"></i></button>
+                          </td>
+                         <td>
+                              <button title="delete" onClick={()=>deleteProducts(item)} className="btn-updateDelte-product"><i class="fas fa-trash-alt"></i></button>
+                         </td>
+                     </tr>
                    
-                      
-                       <tr className="border-tr" data-aos="zoom-in-down">
-                                             <td >
-                                                 <img src={item.productImage[0]} alt="noImage"/>
-                                             </td>
-                                             <td>
-                                                 <p>{item.productName}</p>
-                                             </td>
-                                             <td>
-                                                 <p>{item.productPrice}</p>
-                                             </td>
-                                             <td>
-                                                 <p>{item.productBrand}</p>
-                                             </td>
-                                             <td>
-                                                 <p>{item.productCategory}</p>
-                                             </td>
-                                             <td>
-                                             <p title="update" onClick={()=>editProduct(item)}><i class="fas fa-edit"></i></p>
-                                             </td>
-                                             <td>
-                                                 <p title="delete" onClick={()=>deleteProducts(item)}><i class="fas fa-trash-alt"></i></p>
-                                             </td>
-                         </tr>
-                       
-                    
-               )
-           })
+                
+           )
+        }
+        //        else if(item.availableStatus === false){
+        //         return(
+   
+        //            <tr className="border-tr" data-aos="zoom-in-down">
+        //                         <td >
+        //                             <img src={item.productImage[0]} alt="noImage"/>
+        //                          </td>
+        //                         <td>
+        //                          <p>{item.productName}</p>
+        //                         </td>
+        //                        <td>
+        //                          <p>{item.productPrice}</p>
+        //                       </td>
+        //                       <td>
+        //                      <p>{item.productBrand}</p>
+        //                     </td>
+        //                      <td>
+        //                       <p>{item.productCategory}</p>
+        //                     </td>
+                                        
+        //                    <td>
+        //                       <button title="update" onClick={()=>editProduct(item)} className="btn-updateDelte-product"><i class="fas fa-edit"></i></button>
+        //                   </td>
+        //                  <td>
+        //                       <button title="delete" onClick={()=>deleteProducts(item)} className="btn-updateDelte-product"><i class="fas fa-trash-alt"></i></button>
+        //                  </td>
+        //              </tr>
+                   
+                
+        //    )
+        //        }
+        //    }
+           )
        }
              </table>
       

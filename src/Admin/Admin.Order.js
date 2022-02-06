@@ -6,7 +6,8 @@ import Modal from "react-modal/lib/components/Modal";
 import { useSelector } from "react-redux";
 import {getOrderApi,updateOrderApi} from "../Data/Services/Oneforall";
 import cx from "classnames";
- 
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 
 
@@ -15,6 +16,9 @@ const AdminOrder = ({rounded = false}) =>{
     useEffect(() => {
         getOrder();
       }, []);
+      useEffect(()=>{
+        Aos.init({duration:1000});
+      },[]);
 
     const [ordermodalIsOpen, setOrederModel] = useState(false);
     const [allOrders,setallOrder]=useState([]);
@@ -80,17 +84,27 @@ const AdminOrder = ({rounded = false}) =>{
     })
     return <div>
         <Navbar />
-       
-        <h2 className="h2-order-admin">Order</h2>
+        <div>
+        <p className="p-order-admin">Product Orders</p>
+        <table cellPadding="20px" className="table-prescription ">
+            <tr className="border-tr-order table-title-order">
+                <td>Product Image</td>
+                <td>Product Name</td>
+                <td>Product Price</td>
+                <td>Owner Name</td>
+                <td>Owner Email</td>
+                <td>Owner Address</td>
+                <td>Owner Phone No.</td>
+                <td></td>
+                <td></td>
+            </tr>
         {
            allOrders.map((item)=>{
             //    console.log('item: ', item);
             
                if(item.product && item.deliverystatus===false){
                 return(
-                   <div>
-                       <table>
-                       <tr>
+                       <tr className="border-tr-order" data-aos="zoom-in-down">
                            
                             <td>
                                  <img src={item.product.productImage[0]} alt="noImage"/>
@@ -117,65 +131,80 @@ const AdminOrder = ({rounded = false}) =>{
                             <td> <label className="switch"><input type="checkbox" name="deliverystatus" className="input-admin-order" onClick={()=>acceptOrder(item)}></input>
                             <span className={sildercx}></span></label></td>
                              <td>
-                                <p title="delete"><i class="fas fa-trash-alt"></i></p>
+                                     <button className="button-admin-order" onClick={()=>updateOrder()}>
+                                         Deliver</button>
                              </td>
-                             <td>
-                                     <button className="button-admin-medicine" onClick={()=>updateOrder()}>update</button>
-                             </td>
-                         </tr>
-                       </table>
-                    </div>
+                         </tr>    
                )
                }
-               else if(item.medicine && item.deliverystatus===false){
-                return(
-                   <div>
-                       <table>
-                           
-                       <tr>
-                            <td>
-                                 <img src={item.medicine.medicineImage[0]} alt="noImage"/>
-                            </td>
-                            <td>
-                            <p>{item.medicine.medicineName}</p> 
-                            </td>
-                             <td>
-                                 <p>{item.medicine.medicinePrice}</p>
-                             </td>
-                          
-                            <td>
-                                 <p>{item.owner.name}</p>
-                             </td>
-                            <td>
-                                 <p>{item.owner.email}</p>
-                            </td>
-                            <td>
-                                <p>{item.owner.address}</p>
-                            </td>
-                            <td>
-                                <p>{item.owner.phoneNumber}</p>
-                            </td>
-                            <td>
-                            <label className="switch"><input type="checkbox" name="deliverystatus" className="input-admin-order" onClick={()=>acceptOrder(item)}></input>
-                            <span className={sildercx}></span></label>
-                            </td>
-                            <td>
-                             <p title="update" onClick={()=>acceptOrder(item)}><i class="fas fa-edit"></i></p>
-                            </td>
-                             <td>
-                                <p title="delete"><i class="fas fa-trash-alt"></i></p>
-                             </td>
-                             <td>
-                             <button className="button-admin-medicine" onClick={()=>updateOrder()}>update</button>
-
-                             </td>
-                         </tr>
-                       </table>
-                    </div>
-               )
-               }
+               
            })
        }
+       </table>
+        </div>
+        <div>
+        <p className="p-order-admin">Medicine Orders</p>
+        <table cellPadding="20px" className="table-order " >
+            <tr className="border-tr-order table-title-order">
+                <td>Medicine Image</td>
+                <td>Medicine Name</td>
+                <td>Medicine Price</td>
+                <td>Owner Name</td>
+                <td>Owner Email</td>
+                <td>Owner Address</td>
+                <td>Owner Phone No.</td>
+                <td></td>
+                <td></td>
+            </tr>
+            {
+                allOrders.map((item)=>{
+                 if(item.medicine && item.deliverystatus===false){
+                     return(
+                         
+       
+               
+           <tr className="border-tr-order" data-aos="zoom-in-down"> 
+                <td>
+                     <img src={item.medicine.medicineImage[0]} alt="noImage"/>
+                </td>
+                <td>
+                <p>{item.medicine.medicineName}</p> 
+                </td>
+                 <td>
+                     <p>{item.medicine.medicinePrice}</p>
+                 </td>
+              
+                <td>
+                     <p>{item.owner.name}</p>
+                 </td>
+                <td>
+                     <p>{item.owner.email}</p>
+                </td>
+                <td>
+                    <p>{item.owner.address}</p>
+                </td>
+                <td>
+                    <p>{item.owner.phoneNumber}</p>
+                </td>
+                <td>
+                <label className="switch"><input type="checkbox" name="deliverystatus" className="input-admin-order" onClick={()=>acceptOrder(item)}></input>
+                <span className={sildercx}></span></label>
+                </td>
+                
+                 <td>
+                 <button className="button-admin-order" onClick={()=>updateOrder()}>Deliver</button>
+
+                 </td>
+             </tr>
+   
+                     )
+                 }
+                })
+
+            }
+            </table>
+        </div>
+        
                 <Modal
                     isOpen={ordermodalIsOpen}
                     onRequestClose={() => setOrederModel(false)}
