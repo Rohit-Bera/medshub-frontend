@@ -1,5 +1,5 @@
 import React from "react";
-import "../style/feedback.css";
+// import "../style/feedback.css";
 const Feedback = () => {
   return (
     <div className="bgcolor footer">
