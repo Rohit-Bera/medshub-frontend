@@ -2,35 +2,64 @@ import React from "react";
 import Navbar from "./Navbar";
 import YourAccount from "./Youraccount";
 import "../style/About.css";
+import { Link } from "react-router-dom";
 
+const About = () => {
+  return (
+    <>
+      <YourAccount />
+      <div className="medshub-body">
+        <div className="about-medshub">
+          <i class="fas fa-quote-right"></i>
+          <h2>About us</h2>
+          <p>
+            This project is basically based on MERN conept where Reactjs and
+            Nodejs with Mongodb came into keyexistence. Where For frontend we
+            have used reactjs and for backend we have used nodejs and mongodb
+            for backend. for the Deployment we have use Heroku for backend
+            hosting and for frontend we have used Netlify. All the hosting are
+            done with the " Github " through backend and frontend repositories.
+          </p>
+          <p>
+            This project is an E-pharmacy with daily required health product
+            based web-application. You can order products as well as medicines
+            through this webapp. You can also upload your precsription and order
+            medicines.
+          </p>
+        </div>
+        <div className="account-details-nav">
+          <div className="details-nav">
+            <Link to="/yourAccount/AccountDetails">
+              <section>
+                <i class="far fa-user-circle " />
+                My Account
+              </section>
+            </Link>
+            <Link to="/yourAccount/MyWishlist">
+              <section>
+                <i class="fas fa-heart margin-main-icon"></i>My Wishlist
+              </section>
+            </Link>
+            <Link to="/yourAccount/myOrders">
+              <section>
+                <i class="fas fa-clipboard margin-main-icon"></i>My Orders
+              </section>
+            </Link>
+            <Link to="/yourAccount/notification">
+              <section>
+                <i class="fas fa-bell margin-main-icon"></i>My Notification
+              </section>
+            </Link>
+            <Link to="/yourAccount/myCart">
+              <section>
+                <i class="fas fa-shopping-cart"></i>My Cart
+              </section>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
 
-const About = ()=>{
-        return <div>
-                <Navbar/>
-                <div style={{display:"flex"}}>
-                    <div style={{flex:"30%"}}><YourAccount/></div><hr></hr>
-                    <div className="About-main">
-                        <div style={{marginLeft:"50px"}}>
-                        <h3 style={{fontSize:"30px"}}>About</h3>
-                        <p>Terms & conditions</p>
-                        <p>Welcome to www.medshub24/7("Medshub24/7.com","Medshub24/7","Website","Pharmacy",or "we").</p>
-                        <br></br>
-                        <p>By using the Platform, you expressly agree to be bound by the Terms. 
-                            If you do not agree with any of the Terms, please do not use the Platform. 
-                            If you have any questions about the terms, please contact cs@medshub 24/7.com
-                             Please note that your access to the Services, other Platforms or utilisation of 
-                             Products (defined below), offers or promotions in relation to the Products and 
-                             services as may be provided by us or our affiliates, may be governed by other 
-                             terms and conditions, policies or guidelines ("Additional Terms") along with these Terms. 
-                             If these Terms are inconsistent with any Additional Terms, the Additional Terms 
-                             will control to the extent of such inconsistency with respect to the applicable 
-                             Service or utilisation of the Product. 
-                             These Terms govern your use of the Platform and transaction or dealings thereon.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        ;
-}
-
-export default About
+export default About;

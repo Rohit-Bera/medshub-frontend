@@ -40,66 +40,35 @@ const Youraccount = () => {
 
   return (
     <>
-      <div>
-        {/* <Navbar /> */}
-        <div
-          style={{
-            display: "flex",
-            backgroundColor: "#f5f5f0",
-            height: "1000px",
-          }}
-        >
-          <div>
-            <p className=".p">
-              <span className="span">Your Account</span>
-            </p>
-            <div className="menu">
-              <div>
-                <i class="fas fa-clipboard margin-main-icon"></i>My Order
-                <Link to="/yourAccount/myOrders">
-                  <i class="fas fa-chevron-circle-right margin-arrow-icon link"></i>
-                </Link>
-              </div>
-              <div>
-                <i class="fas fa-heart margin-main-icon"></i>My Wishlist
-                <Link to="/yourAccount/MyWishlist">
-                  <i class="fas fa-chevron-circle-right margin-arrow-icon link"></i>
-                </Link>
-              </div>
-
-              <div>
-                <i class="fas fa-bell margin-main-icon"></i>My Notification
-                <Link to="/yourAccount/notification">
-                  <i class="fas fa-chevron-circle-right margin-arrow-icon link"></i>
-                </Link>
-              </div>
-              <div>
-                <i class="fas fa-user margin-main-icon"></i>Account details
-                <Link to="/yourAccount/accountDetails">
-                  <i class="fas fa-chevron-circle-right margin-arrow-icon link"></i>
-                </Link>
-              </div>
-              <div>
-                <i class="far fa-question-circle margin-main-icon"></i>Help?
-                <Link to="/yourAccount/Help">
-                  <i class="fas fa-chevron-circle-right margin-arrow-icon link"></i>
-                </Link>
-              </div>
-              <div>
-                <i class="fas fa-info-circle margin-main-icon"></i>About
-                <Link to="/yourAccount/About">
-                  <i class="fas fa-chevron-circle-right margin-arrow-icon link"></i>
-                </Link>
-              </div>
-              <div>
-                <button onClick={() => setModalIsOpen(true)}>
-                  <i class="fas fa-power-off margin-main-icon"></i>Logout
-                  <i class="fas fa-chevron-circle-right margin-arrow-icon"></i>
-                </button>
-              </div>
-            </div>
-          </div>
+      <div className="your-account">
+        <div>
+          <span className="logo1">Medshub </span>
+          <span className="logo2">24/7</span>
         </div>
+
+        <ul type="none">
+          <Link to="/">
+            <li>
+              <i class="fas fa-home"></i>Home
+            </li>
+          </Link>
+
+          <Link to="/yourAccount/About">
+            <li>
+              <i class="fas fa-info-circle margin-main-icon"></i>About
+            </li>
+          </Link>
+          <Link to="/yourAccount/Help">
+            <li>
+              <i class="far fa-question-circle margin-main-icon"></i>Help?
+            </li>
+          </Link>
+          <li>
+            <button className="logout" onClick={() => setModalIsOpen(true)}>
+              <i class="fas fa-power-off margin-main-icon"></i>logout
+            </button>
+          </li>
+        </ul>
       </div>
 
       <Modal
@@ -114,7 +83,7 @@ const Youraccount = () => {
                 X
               </button>
             </div>
-            <div className="body">
+            <div className="body" style={{ color: "black" }}>
               Are You Sure <br />
               You Want to Log out ?
             </div>

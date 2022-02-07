@@ -17,6 +17,12 @@ const CategoryNav = () => {
               </Link>
             </li>
             <li>
+              <Link to="/yourAccount/AccountDetails">
+                <i class="far fa-user-circle " />
+                My Account
+              </Link>
+            </li>
+            <li>
               <Link to="/">
                 <i class="fas fa-search"></i>Search Product
               </Link>

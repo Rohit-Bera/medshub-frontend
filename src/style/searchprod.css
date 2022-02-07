@@ -1,0 +1,82 @@
+.search-prod {
+  display: flex;
+}
+
+.search-prod .search-container {
+  margin-left: 27%;
+  margin-top: 3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.search-prod .search-container .search-form form {
+  width: 45vw;
+  /* background-color: aqua; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.search-prod .search-container .search-form input {
+  width: 40vw;
+  height: 6vh;
+  font-size: 18px;
+  outline: none;
+  border: 3px solid white;
+  color: white;
+  background-color: black;
+}
+
+.search-prod .search-container .search-form button {
+  background-color: white;
+  color: black;
+  height: 3vw;
+  width: 4vw;
+  outline: none;
+  border: 2px solid black;
+}
+
+.search-prod .search-container .search-form button i {
+  font-size: 23px;
+}
+
+.search-prod .search-container .searched {
+  margin-top: 2%;
+  background-color: crimson;
+  width: 65vw;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.search-prod .search-container .searched .item {
+  background-color: white;
+  color: black;
+  width: 20vw;
+  height: 40vh;
+  /* display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column; */
+}
+
+.search-prod .search-container .searched .item .item-like {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.search-prod .search-container .searched .item .item-img {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.search-prod .search-container .searched .item .item-disc {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

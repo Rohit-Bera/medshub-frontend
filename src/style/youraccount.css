@@ -1,32 +1,32 @@
-h4{
-    padding: 4px;
-}
-.menu{
-    background-color: white;
-    padding: 5px;
-    font-size: 20px;
-    font-family: "Trirong", serif;
-    width: 80%;
-    margin-left: 30px;
-    line-height: 50px;
+.your-account {
+  margin-top: 8%;
+  /* background-color: crimson; */
+  width: 20vw;
+  position: fixed;
+  margin-left: 2%;
 }
 
-.margin-main-icon{
-    margin-left: 15px;
-    margin-right: 10px;
-}
-.margin-arrow-icon{
-    margin-left: 15px;
-    
-}
-.span{
-    font-size: 45px;
-    padding: 5px;
-    margin-left: 10px;
-
+.your-account ul li {
+  font-size: 17px;
+  color: white;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  letter-spacing: 2px;
 }
 
-.p{
-    text-align: center;
-    font-family: "Trirong", serif;
+.your-account ul li i {
+  margin-right: 5%;
+}
+
+.your-account ul li:active {
+  transform: scale(0.9);
+}
+.your-account ul li:focus {
+  outline: 0;
+}
+
+.your-account ul li .logout {
+  color: black;
+  font-size: 17px;
+  letter-spacing: 2px;
 }
