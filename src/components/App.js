@@ -39,7 +39,6 @@ import Viewmed from "./Viewmed";
 import Ourbrands from "./Ourbrands";
 import admin from "../Admin/Admin.Home";
 import ManageProduct from "../Admin/Products";
-
 import ManageOrder from "../Admin/Admin.Order";
 import ManagePrescription from "../Admin/Prescription";
 import ManageMedicine from "../Admin/Admin.Medicine";
