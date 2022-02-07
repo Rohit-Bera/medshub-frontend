@@ -52,6 +52,42 @@ export const searchProductbyBrand = async (brand) => {
   }
 };
 
+export const getMyCart = async (token) => {
+  const url = "/myCart";
+  const link = host + url;
+
+  const headers = { headers: { Authorization: `Bearer ${token}` } };
+
+  try {
+    const receive = await axios.get(link, headers);
+
+    return receive;
+  } catch (error) {
+    console.log("error: ", error);
+
+    return error;
+  }
+};
+export const deleteFromCart = async (_id, token) => {
+  console.log("token: ", token);
+  console.log("_id: ", _id);
+
+  const url = `/deleteFromCart/${_id}`;
+
+  const link = host + url;
+  console.log("link: ", link);
+
+  const headers = { headers: { Authorization: `Bearer ${token}` } };
+  try {
+    const receive = await axios.delete(link, headers);
+
+    return receive;
+  } catch (error) {
+    console.log("error: ", error);
+
+    return error;
+  }
+};
 
 export const addMedicineApi = async(data,headers)=>{
   
