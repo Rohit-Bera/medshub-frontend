@@ -5,7 +5,7 @@ import { useHistory, Link } from "react-router-dom";
 import "../style/Prescription.css";
 import Navbar from "./Navbar";
 import { Triangle, Rings, Oval } from "react-loader-spinner";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+// import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Modal from "react-modal/lib/components/Modal";
 import { uploadPrescriptionApi } from "../Data/Services/Oneforall";
 Modal.setAppElement("#root");

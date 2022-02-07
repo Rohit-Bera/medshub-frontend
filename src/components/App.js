@@ -45,11 +45,7 @@ import ManagePrescription from "../Admin/Prescription";
 import ManageMedicine from "../Admin/Admin.Medicine";
 import CheckUser from "./CheckUser";
 import Cart from "./Cart";
-// import Uploadprescription from "./Prescription";
-
-
 import Uploadprescription from "./Uploadprescription";
-
 
 const App = () => {
   return (
