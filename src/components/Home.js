@@ -66,24 +66,32 @@ const Home = () => {
               Prescribed medicines and medicines
             </label>
             <div className="home-card">
-              <div className="search-product">
-                <i class="fas fa-search"></i>
-                <p>search product</p>
-              </div>
-              <div className="card-prod">
-                <i class="fas fa-truck-loading"></i>
-                <p>health product</p>
-              </div>
+              <Link to="/searchproducts">
+                <div className="search-product">
+                  <i class="fas fa-search"></i>
+                  <p>search product</p>
+                </div>
+              </Link>
+              <Link to="">
+                <div className="card-prod">
+                  <i class="fas fa-truck-loading"></i>
+                  <p>health product</p>
+                </div>
+              </Link>
 
-              <div className="card-med">
-                <i class="fas fa-prescription-bottle-alt"></i>
-                <p>medicines</p>
-              </div>
+              <Link to="">
+                <div className="card-med">
+                  <i class="fas fa-prescription-bottle-alt"></i>
+                  <p>medicines</p>
+                </div>
+              </Link>
 
-              <div className="search-medicine">
-                <i class="fas fa-search-plus"></i>
-                <p>search medicine</p>
-              </div>
+              <Link to="/searchmedicines">
+                <div className="search-medicine">
+                  <i class="fas fa-search-plus"></i>
+                  <p>search medicine</p>
+                </div>
+              </Link>
             </div>
           </div>
         </div>
@@ -197,27 +205,37 @@ const Home = () => {
                 <div className="beauty-prod">
                   <div className="home-beauty-title">
                     <p>
-                      <span className="font1">Beauty</span>{" "}
-                      <span className="font2">Products</span>
+                      <Link to="/productCategories/Beautyproducts">
+                        <span className="font1">Beauty</span>{" "}
+                        <span className="font2">Products</span>
+                      </Link>
                     </p>
                   </div>
                   <div className="home-beauty-body">
-                    <div className="beauty-product">
-                      <img src={haircare} />
-                      <p>Hair Care</p>
-                    </div>
-                    <div className="beauty-product">
-                      <img src={facialkit} />
-                      <p>Facial Kit</p>
-                    </div>
-                    <div className="beauty-product">
-                      <img src={lipcare} />
-                      <p>Lip Care</p>
-                    </div>
-                    <div className="beauty-product">
-                      <img src={bodycare} />
-                      <p>Body Care</p>
-                    </div>
+                    <Link to="/productCategories/Beautyproducts/haircare">
+                      <div className="beauty-product">
+                        <img src={haircare} />
+                        <p>Hair Care</p>
+                      </div>
+                    </Link>
+                    <Link to="/productCategories/Beautyproducts/facialkit">
+                      <div className="beauty-product">
+                        <img src={facialkit} />
+                        <p>Facial Kit</p>
+                      </div>
+                    </Link>
+                    <Link to="/productCategories/Beautyproducts/lipcare">
+                      <div className="beauty-product">
+                        <img src={lipcare} />
+                        <p>Lip Care</p>
+                      </div>
+                    </Link>
+                    <Link to="/productCategories/Beautyproducts/bodycare">
+                      <div className="beauty-product">
+                        <img src={bodycare} />
+                        <p>Body Care</p>
+                      </div>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -261,7 +279,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-
 
       <Footer />
 

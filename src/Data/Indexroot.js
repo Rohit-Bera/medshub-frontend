@@ -6,15 +6,11 @@ import adminReducer from "./Reducers/adminData.reducer";
 
 import medicineReducer from "./Reducers/medicine.reducer";
 
-
 const rootReducer = combineReducers({
   userReducer,
   productReducer,
-
   adminReducer,
-
   medicineReducer,
-
 });
 
 export default rootReducer;

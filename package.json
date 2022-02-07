@@ -27,7 +27,6 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^5.0.0",
     "react-scroll-to-bottom": "^4.2.0",
-    "react-spinner-loader": "^1.1.1",
     "react-stripe-checkout": "^2.6.3",
     "react-toastify": "^8.1.0",
     "redux": "^4.1.2",

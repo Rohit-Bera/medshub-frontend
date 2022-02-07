@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import CategoryNav from "./Category.nav";
-import "../style/searchprod.css";
+import "../style/category.css";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import Modal from "react-modal/lib/components/Modal";
@@ -16,7 +16,7 @@ import { productData } from "../Data/Reducers/product.reducer";
 
 Modal.setAppElement("#root");
 
-const Searchproduct = () => {
+const Searchmedicine = () => {
   useEffect(() => {
     getProduct();
   }, []);
@@ -27,7 +27,6 @@ const Searchproduct = () => {
 
   const token = useSelector((state) => state.userReducer).token;
 
-  //
   const getProduct = async () => {
     try {
       setModalIsOpen(true);
@@ -43,14 +42,12 @@ const Searchproduct = () => {
     }
   };
 
-  //
   const getProductName = (product) => {
     console.log("product: ", product);
 
     dispatch(productData({ product }));
   };
 
-  //
   const addToWishlist = async (item) => {
     console.log("item id: ", item._id);
     const _id = item._id;
@@ -82,43 +79,41 @@ const Searchproduct = () => {
   };
   return (
     <>
-      <div className="search-prod">
+      <div className="our-brands">
         <CategoryNav />
-        <div className="search-container">
-          <div className="search-form">
-            <form>
-              <input type="text" />
-              <button>
-                <i class="fas fa-search"></i>
-              </button>
-            </form>
-          </div>
-          <div className="searched">
-            <div className="item">
-              <div className="item-like">
-                <i class="fas fa-heart"></i>
-              </div>
-              <div className="item-img">
-                <img />
-              </div>
-              <div className="item-disc">
-                <p>item name</p>
-                <p>item price</p>
-              </div>
-              <div className="item-btn">
-                <section>
-                  <i class="far fa-eye"></i>view
-                </section>
-                <section>
-                  <i class="fas fa-money-check-alt"></i>
-                  <label>buy now</label>
-                </section>
-                <section>
-                  <i class="fas fa-shopping-cart"></i>
-                  <label>add to cart</label>
-                </section>
-              </div>
-            </div>
+        <div className="brand-body">
+          <div className="brand-child">
+            {/* array of prod */}
+            {Products.map((item) => {
+              return (
+                <div className="product">
+                  <img src={item.productImage[0]} alt="_img" />
+                  <div className="prod-details">
+                    <p>{item.productName}</p>
+
+                    <p>{item.productPrice}</p>
+                    <p>
+                      <button onClick={() => addToCartProd(item)}>
+                        <i class="fas fa-shopping-cart"></i>
+                      </button>
+                    </p>
+                    <p>
+                      <button onClick={() => addToWishlist(item)}>
+                        <i class="fas fa-heart"></i>
+                      </button>
+                    </p>
+                  </div>
+                  <Link to="/viewproduct">
+                    <button
+                      className="view"
+                      onClick={() => getProductName(item)}
+                    >
+                      view
+                    </button>
+                  </Link>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -148,4 +143,4 @@ const Searchproduct = () => {
   );
 };
 
-export default Searchproduct;
+export default Searchmedicine;

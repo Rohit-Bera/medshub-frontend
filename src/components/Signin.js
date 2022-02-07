@@ -43,19 +43,17 @@ const Signin = () => {
       const { name, email, address, phoneNumber, usertype } = user;
       const signupUser = { name, email, phoneNumber, address };
       const theUser = { signupUser, token };
-      if(usertype==="admin"){
-        dispatch(adminData({theUser}));
+      if (usertype === "admin") {
+        dispatch(adminData({ theUser }));
         if (response.receive.data.loguser) {
           return history.push("/ADmIn/adminHome");
         }
-      }
-      else{
+      } else {
         dispatch(userData({ theUser }));
         if (response.receive.data.loguser) {
           return history.push("/yourAccount/AccountDetails");
         }
       }
-      
 
       if (response.receive.data.loguser) {
         return history.push("/yourAccount/AccountDetails");

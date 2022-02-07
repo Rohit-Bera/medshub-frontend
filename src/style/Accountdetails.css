@@ -1,18 +1,95 @@
-.bold{
-    font-weight: 700;
-    margin-right: 10px;
+.account-details {
+  display: flex;
+  /* height: 100vh; */
 }
-.main-details{
-    padding: 10px;
-    flex: 70%;
-    font-family: "Trirong", serif;
-    font-size: 20px;
-    background-color:#f5f5f0;
+
+.account-details .account-profile .profile-details {
+  border-radius: 8px;
+  width: 25vw;
+  background-color: white;
+  color: black;
+
+  height: 65vh;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  margin-bottom: 4%;
+  flex-wrap: wrap;
+
+  box-shadow: 0px 0px 8px whitesmoke;
 }
-.margin-left{
-    margin-left: 10px;
+
+.account-details .account-profile {
+  margin-left: 26%;
+  margin-top: 5%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
 }
-.link{
-    text-decoration: none;
-    color: black;
+
+.account-details .account-profile .account-update {
+  background-color: white;
+  color: black;
+  height: 12vh;
+  width: 25vw;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0px 0px 8px whitesmoke;
+}
+
+.account-details .profile-details .fa-user-circle {
+  font-size: 100px;
+}
+
+.account-details .profile-details section {
+  font-size: 20px;
+}
+
+.account-details .profile-card {
+  /* background-color: rgba(245, 245, 245, 0.5); */
+  background-color: white;
+  width: 42vw;
+  border-radius: 8px;
+
+  margin-left: 2%;
+  margin-top: 5%;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.account-details .profile-card .card {
+  background-color: black;
+  color: white;
+  width: 20vw;
+  height: 13vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: 0px 0px 8px black;
+  font-size: 20px;
+}
+
+.account-details .profile-card .card i {
+  font-size: 25px;
+  text-shadow: 0px 0px 8px whitesmoke;
+  margin-right: 2%;
+}
+
+.account-details .profile-card section:active {
+  transform: scale(0.9);
+}
+.account-details .profile-card section:focus {
+  outline: 0;
 }

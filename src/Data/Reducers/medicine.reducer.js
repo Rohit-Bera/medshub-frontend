@@ -28,4 +28,3 @@ const medicineSlice = createSlice({
 export const { medicineData } = medicineSlice.actions;
 
 export default medicineSlice.reducer;
-

@@ -10,6 +10,7 @@ import { productData } from "../Data/Reducers/product.reducer";
 import { Triangle, Rings, Oval } from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Modal from "react-modal/lib/components/Modal";
+import Youraccount from "./Youraccount";
 Modal.setAppElement("#root");
 
 const Cart = () => {
@@ -108,74 +109,81 @@ const Cart = () => {
 
   return (
     <>
-      <Navbar />
-      <div className="mycart">
-        <div className="mycart-prods">
+      <Youraccount />
+      <div className="your-wishlist">
+        <div className="wishlist-items">
+          <p style={{ fontSize: "20px" }}>My Cart</p>
           {myCart.map((item) => {
             if (item.product) {
-              // console.log("item: ", item.product);
-              console.log("item: ", item);
-
               return (
                 <div className="item">
-                  <div className="item-detail">
-                    <img src={item.product.productImage[0]} alt="_img" />
-                    <p>{item.product.productName}</p>
-                    <p>{item.product.productPrice}</p>
-                    <div className="btn">
-                      <Link to="/viewproduct">
-                        <button
-                          className="cart-btn"
-                          onClick={() => viewProduct(item.product)}
-                        >
-                          view product
-                        </button>
-                      </Link>
-                      <button className="cart-btn">Buy now</button>
-                      <button
-                        className="cart-btn"
-                        onClick={() => removeFromCart(item._id)}
-                      >
-                        remove
-                      </button>
-                    </div>
-                  </div>
+                  <img src={item.product.productImage[0]} alt="product_img" />
+                  <p>{item.product.productName}</p>
+                  <p>{item.product.productPrice}</p>
+
+                  <button onClick={() => viewProduct(item.product)}>
+                    <Link to="/viewproduct">
+                      <i class="fas fa-eye"></i>
+                    </Link>
+                  </button>
+
+                  <button onClick={() => removeFromCart(item._id)}>
+                    <i class="fas fa-times"></i>
+                  </button>
+                  <button className="buynow">Buy Now</button>
                 </div>
               );
             } else if (item.medicine) {
-              // console.log("item.medicine: ", item.medicine);
-              console.log("item: ", item);
-
               return (
                 <div className="item">
-                  <div className="item-detail">
-                    <img src={item.medicine.medicineImage[0]} alt="_img" />
-                    <p>{item.medicine.medicineName}</p>
-                    <p>{item.medicine.medicinePrice}</p>
-                    <div className="btn">
-                      <Link to="/medicines/viewmedcines">
-                        <button
-                          className="cart-btn"
-                          onClick={() => viewProduct(item.medicine)}
-                        >
-                          view product
-                        </button>
-                      </Link>
-                      <button className="cart-btn">Buy now</button>
-                      <button
-                        className="cart-btn"
-                        onClick={() => removeFromCart(item._id)}
-                      >
-                        remove
-                      </button>
-                    </div>
-                  </div>
+                  <img src={item.medicine[0]} alt="product_img" />
+                  <p>{item.medicine.medicineName}</p>
+                  <p>{item.medicine.medicinePrice}</p>
+
+                  <button onClick={() => viewProduct(item.medicine)}>
+                    <Link to="/medicines/viewmedcines">
+                      <i class="fas fa-eye"></i>
+                    </Link>
+                  </button>
+
+                  <button onClick={() => removeFromCart(item._id)}>
+                    <i class="fas fa-times"></i>
+                  </button>
+                  <button className="buynow">Buy Now</button>
                 </div>
               );
-            } else {
-              return "";
             }
           })}
+        </div>
+        <div className="account-details-nav">
+          <div className="details-nav">
+            <Link to="/yourAccount/AccountDetails">
+              <section>
+                <i class="far fa-user-circle " />
+                My Account
+              </section>
+            </Link>
+            <Link to="/yourAccount/MyWishlist">
+              <section>
+                <i class="fas fa-heart margin-main-icon"></i>My Wishlist
+              </section>
+            </Link>
+            <Link to="/yourAccount/myOrders">
+              <section>
+                <i class="fas fa-clipboard margin-main-icon"></i>My Orders
+              </section>
+            </Link>
+            <Link to="/yourAccount/notification">
+              <section>
+                <i class="fas fa-bell margin-main-icon"></i>My Notification
+              </section>
+            </Link>
+            <Link to="/yourAccount/myCart">
+              <section>
+                <i class="fas fa-shopping-cart"></i>My Cart
+              </section>
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -204,6 +212,5 @@ const Cart = () => {
     </>
   );
 };
-
 
 export default Cart;

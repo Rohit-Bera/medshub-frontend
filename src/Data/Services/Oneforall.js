@@ -55,7 +55,6 @@ export const searchProductbyBrand = async (brand) => {
   }
 };
 
-
 export const addToCartProduct = async (prod) => {
   console.log("prod: ", prod);
   const { item, token } = prod;
@@ -138,33 +137,30 @@ export const deleteFromCart = async (_id, token) => {
   }
 };
 
-export const addMedicineApi = async(data,headers)=>{
-  
-  const url = "/addMedicine"
-  const link = host+url;
-  try{
-    const response = await axios.post(link,data,headers);
-    console.log('response: ', response);
+export const addMedicineApi = async (data, headers) => {
+  const url = "/addMedicine";
+  const link = host + url;
+  try {
+    const response = await axios.post(link, data, headers);
+    console.log("response: ", response);
     return response;
-  }
-  catch(error){
-    console.log('error: ', error);
-    return error; 
+  } catch (error) {
+    console.log("error: ", error);
+    return error;
   }
 };
 
-
-export const getallMedicineApi = async(headers)=>{
-  const url= "/getMedicine";
-  const link = host+url;
+export const getallMedicineApi = async (headers) => {
+  const url = "/getMedicine";
+  const link = host + url;
   try {
-      const result = await axios.get(link,headers);
-      return result;
+    const result = await axios.get(link, headers);
+    return result;
   } catch (error) {
-    console.log('error: ', error);
+    console.log("error: ", error);
     return error;
   }
-}
+};
 
 export const getMedicinesApi = async () => {
   const url = "/getMedicineUser";
@@ -177,136 +173,127 @@ export const getMedicinesApi = async () => {
   } catch (error) {
     console.log("error: ", error);
 
-
     return error;
   }
 };
 
-
-export const deleteMedicineApi = async(headers,_id)=>{
- try {
-  const url = `/deleteMedicine/${_id}`;
-  const link = host+url;
-  const response = await axios.delete(link,headers);
-  return response;
- } catch (error) {
-   console.log('error: ', error); 
-   return error; 
-
- }
-}
-
-export const updateMedicineApi = async(_id,data,headers)=>{
+export const deleteMedicineApi = async (headers, _id) => {
   try {
-    const url=`/updateMedicine/${_id}`;
-    const link = host+url;
-    
-    const result = await axios.put(link,data,headers);
-    console.log('response: ', result);
-    return result;
-  } catch (error) {
-    console.log('error: ', error);
-   return error; 
-  }
-}
-
-export const getallProductApi = async(headers)=>{
-  const url= "/getAllProducts";
-  const link = host+url;
-  try {
-      const result = await axios.get(link,headers);
-      return result;
-  } catch (error) {
-    return error;
-  }
-}
-
-export const addProductApi = async(data,headers)=>{
-  const url = "/addProduct"
-  const link = host+url;
-  try {
-    const response = await axios.post(link,data,headers);
-    console.log('response: ', response);
+    const url = `/deleteMedicine/${_id}`;
+    const link = host + url;
+    const response = await axios.delete(link, headers);
     return response;
   } catch (error) {
-    console.log('error: ', error);
+    console.log("error: ", error);
     return error;
-    
-  }
-} ;
-export const deleteProductApi = async(headers,_id)=>{
-  try {
-    const url = `/deleteProduct/${_id}`;
-  const link = host+url;
-  const response = await axios.delete(link,headers);
-return response;
-  } catch (error) {
-    console.log('error: ', error);
-    return error;
-    
   }
 };
-export const updateProductsApi = async(_id,data,headers)=>{
+
+export const updateMedicineApi = async (_id, data, headers) => {
+  try {
+    const url = `/updateMedicine/${_id}`;
+    const link = host + url;
+
+    const result = await axios.put(link, data, headers);
+    console.log("response: ", result);
+    return result;
+  } catch (error) {
+    console.log("error: ", error);
+    return error;
+  }
+};
+
+export const getallProductApi = async (headers) => {
+  const url = "/getAllProducts";
+  const link = host + url;
+  try {
+    const result = await axios.get(link, headers);
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const addProductApi = async (data, headers) => {
+  const url = "/addProduct";
+  const link = host + url;
+  try {
+    const response = await axios.post(link, data, headers);
+    console.log("response: ", response);
+    return response;
+  } catch (error) {
+    console.log("error: ", error);
+    return error;
+  }
+};
+export const deleteProductApi = async (headers, _id) => {
+  try {
+    const url = `/deleteProduct/${_id}`;
+    const link = host + url;
+    const response = await axios.delete(link, headers);
+    return response;
+  } catch (error) {
+    console.log("error: ", error);
+    return error;
+  }
+};
+export const updateProductsApi = async (_id, data, headers) => {
   try {
     const url = `/updateProduct/${_id}`;
-    const link = host+url;
-    const result = await axios.put(link,data,headers);
-    console.log('response: ', result);
+    const link = host + url;
+    const result = await axios.put(link, data, headers);
+    console.log("response: ", result);
     return result;
   } catch (error) {
-    console.log('error: ', error);
+    console.log("error: ", error);
     return error;
-    
   }
-}
+};
 
-export const getOrderApi = async(headers)=>{
-  const url= "/allOrders";
-  const link = host+url;
+export const getOrderApi = async (headers) => {
+  const url = "/allOrders";
+  const link = host + url;
   try {
-    const result = await axios.get(link,headers);
+    const result = await axios.get(link, headers);
     return result;
   } catch (error) {
     return error;
   }
-}
+};
 
-export const getPrescriptionApi = async(headers)=>{
+export const getPrescriptionApi = async (headers) => {
   const url = "/getAllPrescription";
-  const link = host+url;
+  const link = host + url;
   try {
-    const result = await axios.get(link,headers);
+    const result = await axios.get(link, headers);
     return result;
   } catch (error) {
     return error;
   }
-
-}
-export const updateOrderApi = async(_id,data,headers)=>{
+};
+export const updateOrderApi = async (_id, data, headers) => {
   try {
     const url = `/updateOrder/${_id}`;
-  const link = host+url;
-  const result = await axios.put(link,data,headers);
-  console.log('result: ', result);
-  return result;
+    const link = host + url;
+    const result = await axios.put(link, data, headers);
+    console.log("result: ", result);
+    return result;
   } catch (error) {
-    console.log('error: ', error);
+    console.log("error: ", error);
     return error;
-    
   }
-}
-export const updatePrescriptionApi = async(_id,data,headers)=>{
+};
+export const updatePrescriptionApi = async (_id, data, headers) => {
   try {
     const url = `/updatePrescription/${_id}`;
-  const link = host+url;
-  const result = await axios.put(link,data,headers);
-  console.log('result: ', result);
+    const link = host + url;
+    const result = await axios.put(link, data, headers);
+    console.log("result: ", result);
   } catch (error) {
-    console.log('error: ', error);
+    console.log("error: ", error);
     return error;
-    
   }
-}
+};
 
 export const postprodWishlistApi = async (_id, item, token) => {
   console.log("token: ", token);
@@ -361,6 +348,21 @@ export const getmyOrderApi = async (token) => {
   }
 };
 
+export const deleteOrderApi = async (id, token) => {
+  const headers = { headers: { Authorization: `Bearer ${token}` } };
+  const url = `/cancleOrder/${id}`;
+  const link = host + url;
+  try {
+    const receive = await axios.delete(link, headers);
+
+    return receive;
+  } catch (error) {
+    console.log("error: ", error);
+
+    return error;
+  }
+};
+
 export const getmyWishlistApi = async (token) => {
   console.log("token: ", token);
 
@@ -374,6 +376,24 @@ export const getmyWishlistApi = async (token) => {
     return receive;
   } catch (error) {
     console.log("error: ", error);
+  }
+};
+
+export const deleteWishlistApi = async (id, token) => {
+  const url = `/removeFromWishlist/${id}`;
+
+  const link = host + url;
+
+  const headers = { headers: { Authorization: `Bearer ${token}` } };
+
+  try {
+    const receive = await axios.delete(link, headers);
+
+    return receive;
+  } catch (error) {
+    console.log("error: ", error);
+
+    return error;
   }
 };
 
@@ -434,6 +454,25 @@ export const postMedFeedbackApi = async (data, token) => {
   }
 };
 
+export const postProblemFeedbackApi = async (data, token) => {
+  console.log("token: ", token);
+  console.log("data: ", data);
+
+  const headers = { headers: { Authorization: `Bearer ${token}` } };
+
+  const url = "/postOrderProblem";
+
+  const link = host + url;
+  try {
+    const receive = await axios.post(link, data, headers);
+
+    return receive;
+  } catch (error) {
+    console.log("error: ", error);
+
+    return error;
+  }
+};
 
 export const uploadPrescriptionApi = async (fd, token) => {
   console.log("token: ", token);
@@ -452,6 +491,4 @@ export const uploadPrescriptionApi = async (fd, token) => {
     console.log("error: ", error);
     return error;
   }
-
 };
-
