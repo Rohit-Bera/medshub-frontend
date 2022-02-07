@@ -239,3 +239,21 @@ export const updatePrescriptionApi = async(_id,data,headers)=>{
     
   }
 }
+export const uploadPrescriptionApi = async (fd, token) => {
+  console.log("token: ", token);
+  console.log("fd: ", fd);
+
+  const url = "/uploadPrescription";
+
+  const link = host + url;
+  const headers = { headers: { Authorization: `Bearer ${token}` } };
+
+  try {
+    const receive = await axios.post(link, fd, headers);
+
+    return receive;
+  } catch (error) {
+    console.log("error: ", error);
+    return error;
+  }
+};
