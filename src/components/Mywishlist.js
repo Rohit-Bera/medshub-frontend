@@ -10,7 +10,12 @@ import Modal from "react-modal/lib/components/Modal";
 
 import { useDispatch, useSelector } from "react-redux";
 import { productData } from "../Data/Reducers/product.reducer";
-import { getmyWishlistApi } from "../Data/Services/Oneforall";
+import {
+  deleteWishlistApi,
+  getmyWishlistApi,
+} from "../Data/Services/Oneforall";
+import { Link } from "react-router-dom";
+import { medicineData } from "../Data/Reducers/medicine.reducer";
 
 Modal.setAppElement("#root");
 
@@ -23,6 +28,8 @@ const Mywishlist = () => {
   const token = useSelector((state) => state.userReducer).token;
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [myList, setMyList] = useState([]);
+
+  const dispatch = useDispatch();
 
   const customStyles = {
     content: {
@@ -49,56 +56,104 @@ const Mywishlist = () => {
     }
   };
 
+  const removeFromWishlist = async (item) => {
+    // setModalIsOpen(true);
+    console.log("item: ", item);
+    const { _id } = item;
+    const response = await deleteWishlistApi(_id, token);
+    console.log("response: ", response);
+
+    getmyWishlist();
+  };
+
+  const dispatchProd = (product) => {
+    console.log("product: ", product);
+
+    dispatch(productData({ product }));
+  };
+
+  const dispatchMed = (medicine) => {
+    dispatch(medicineData({ medicine }));
+  };
+
   return (
     <>
-      <Navbar />
-      <div style={{ display: "flex" }}>
-        <div style={{ flex: "30%" }}>
-          <YourAccount />
-        </div>
-        <hr></hr>
-        <div className="main-wish">
-          <h2 style={{ marginLeft: "30px", marginTop: "45px" }}>My Wishlist</h2>
+      <YourAccount />
+      <div className="your-wishlist">
+        <div className="wishlist-items">
+          <p style={{ fontSize: "20px" }}>My Wishlist</p>
           {myList.map((item) => {
-            console.log("item: ", item);
             if (item.product) {
               return (
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-around",
-                    marginBottom: "1%",
-                  }}
-                >
-                  <div className="wish-bg">
-                    <img src={himalya} alt="img" className="size"></img>
-                  </div>
-                  <div className="wish-text">
-                    <p style={{ marginLeft: "25px" }}>Himalya Products</p>
-                    <p style={{ marginLeft: "25px" }}>566/-</p>
-                  </div>
+                <div className="item">
+                  <img src={item.product.productImage[0]} alt="product_img" />
+                  <p>{item.product.productName}</p>
+                  <p>{item.product.productPrice}</p>
+
+                  <button onClick={() => dispatchProd(item.product)}>
+                    <Link to="/viewproduct">
+                      <i class="fas fa-eye"></i>
+                    </Link>
+                  </button>
+
+                  <button onClick={() => removeFromWishlist(item)}>
+                    <i class="fas fa-times"></i>
+                  </button>
                 </div>
               );
             } else if (item.medicine) {
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-around",
-                  marginBottom: "1%",
-                }}
-              >
-                <div className="wish-bg">
-                  <img src={himalya} alt="img" className="size"></img>
+              return (
+                <div className="item">
+                  <img src={item.medicine[0]} alt="product_img" />
+                  <p>{item.medicine.medicineName}</p>
+                  <p>{item.medicine.medicinePrice}</p>
+
+                  <button onClick={() => dispatchMed(item.medicine)}>
+                    <Link to="/medicines/viewmedcines">
+                      <i class="fas fa-eye"></i>
+                    </Link>
+                  </button>
+
+                  <button onClick={() => removeFromWishlist(item)}>
+                    <i class="fas fa-times"></i>
+                  </button>
                 </div>
-                <div className="wish-text">
-                  <p style={{ marginLeft: "25px" }}>Himalya Products</p>
-                  <p style={{ marginLeft: "25px" }}>566/-</p>
-                </div>
-              </div>;
+              );
             }
           })}
         </div>
+        <div className="account-details-nav">
+          <div className="details-nav">
+            <Link to="/yourAccount/AccountDetails">
+              <section>
+                <i class="far fa-user-circle " />
+                My Account
+              </section>
+            </Link>
+            <Link to="/yourAccount/MyWishlist">
+              <section>
+                <i class="fas fa-heart margin-main-icon"></i>My Wishlist
+              </section>
+            </Link>
+            <Link to="/yourAccount/myOrders">
+              <section>
+                <i class="fas fa-clipboard margin-main-icon"></i>My Orders
+              </section>
+            </Link>
+            <Link to="/yourAccount/notification">
+              <section>
+                <i class="fas fa-bell margin-main-icon"></i>My Notification
+              </section>
+            </Link>
+            <Link to="/yourAccount/myCart">
+              <section>
+                <i class="fas fa-shopping-cart"></i>My Cart
+              </section>
+            </Link>
+          </div>
+        </div>
       </div>
+
       <Modal
         isOpen={modalIsOpen}
         // onRequestClose={() => setModalIsOpen(false)}

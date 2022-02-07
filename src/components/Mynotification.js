@@ -8,7 +8,10 @@ import { useHistory, Link } from "react-router-dom";
 import { Triangle, Rings, Oval } from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Modal from "react-modal/lib/components/Modal";
-import { getmyOrderApi } from "../Data/Services/Oneforall";
+import { deleteOrderApi, getmyOrderApi } from "../Data/Services/Oneforall";
+import { medicineData } from "../Data/Reducers/medicine.reducer";
+import { productData } from "../Data/Reducers/product.reducer";
+
 Modal.setAppElement("#root");
 
 const Mynotification = () => {
@@ -29,8 +32,9 @@ const Mynotification = () => {
       border: "1px solid black",
     },
   };
-  const [modalIsOpen, setModalIsOpen] = useState(true);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [myorders, setMyOrders] = useState([]);
+  const dispatch = useDispatch();
   const token = useSelector((state) => state.userReducer).token;
 
   // ---------------------------------functions
@@ -45,53 +49,108 @@ const Mynotification = () => {
       setMyOrders(response.data.myOrder);
     }
   };
+
+  const dispatchProd = (product) => {
+    console.log("product: ", product);
+
+    dispatch(productData({ product }));
+  };
+
+  const dispatchMed = (medicine) => {
+    dispatch(medicineData({ medicine }));
+  };
+
+  const deleteOrder = async (item) => {
+    setModalIsOpen(true);
+    console.log("item: ", item);
+    const { _id } = item;
+
+    const response = await deleteOrderApi(_id, token);
+    console.log("response: ", response);
+    if (response) {
+      setModalIsOpen(false);
+    }
+    myOrder();
+  };
+
   return (
     <>
-      <Navbar />
-      <div style={{ display: "flex" }}>
-        <div style={{ flex: "30%" }}>
-          <YourAccount />
-        </div>
-        <hr></hr>
-        <div className="main-noti">
-          <h2 style={{ marginLeft: "30px", marginTop: "45px" }}>
-            My Notification
-          </h2>
+      <YourAccount />
+      <div className="your-wishlist">
+        <div className="wishlist-items">
+          <p style={{ fontSize: "20px" }}>My Notifications</p>
           {myorders.map((item) => {
-            console.log("item: ", item);
-            if (item.product && item.deliverystatus === false) {
+            if (item.product && item.deliverystatus == false) {
               return (
-                <div
-                  style={{ display: "flex", justifyContent: "space-around" }}
-                >
-                  <div className="order-bg">
-                    <img src={himalya} alt="img" className="size"></img>
-                  </div>
-                  <div className="order-text">
-                    <p style={{ marginLeft: "25px" }}>Himalya Products</p>
-                    <p style={{ marginLeft: "25px" }}>566/-</p>
-                  </div>
+                <div className="item">
+                  <img src={item.product.productImage[0]} alt="product_img" />
+                  <p>{item.product.productName}</p>
+                  <p>{item.product.productPrice}</p>
+
+                  <button onClick={() => dispatchProd(item.product)}>
+                    <Link to="/viewproduct">
+                      <i class="fas fa-eye"></i>
+                    </Link>
+                  </button>
+
+                  <button onClick={() => deleteOrder(item)}>
+                    <i class="fas fa-times"></i>
+                  </button>
                 </div>
               );
-            } else if (item.medicine && item.deliverystatus === true) {
-              console.log("item.medicine: ", item.medicine);
+            } else if (item.medicine && item.deliverystatus == false) {
               return (
-                <div
-                  style={{ display: "flex", justifyContent: "space-around" }}
-                >
-                  <div className="order-bg">
-                    <img src={himalya} alt="img" className="size"></img>
-                  </div>
-                  <div className="order-text">
-                    <p style={{ marginLeft: "25px" }}>Himalya Products</p>
-                    <p style={{ marginLeft: "25px" }}>566/-</p>
-                  </div>
+                <div className="item">
+                  <img src={item.medicine[0]} alt="product_img" />
+                  <p>{item.medicine.medicineName}</p>
+                  <p>{item.medicine.medicinePrice}</p>
+
+                  <button onClick={() => dispatchMed(item.medicine)}>
+                    <Link to="/medicines/viewmedcines">
+                      <i class="fas fa-eye"></i>
+                    </Link>
+                  </button>
+
+                  <button onClick={() => deleteOrder(item)}>
+                    <i class="fas fa-times"></i>
+                  </button>
                 </div>
               );
             }
           })}
         </div>
+        <div className="account-details-nav">
+          <div className="details-nav">
+            <Link to="/yourAccount/AccountDetails">
+              <section>
+                <i class="far fa-user-circle " />
+                My Account
+              </section>
+            </Link>
+            <Link to="/yourAccount/MyWishlist">
+              <section>
+                <i class="fas fa-heart margin-main-icon"></i>My Wishlist
+              </section>
+            </Link>
+            <Link to="/yourAccount/myOrders">
+              <section>
+                <i class="fas fa-clipboard margin-main-icon"></i>My Orders
+              </section>
+            </Link>
+            <Link to="/yourAccount/notification">
+              <section>
+                <i class="fas fa-bell margin-main-icon"></i>My Notification
+              </section>
+            </Link>
+            <Link to="/yourAccount/myCart">
+              <section>
+                <i class="fas fa-shopping-cart"></i>My Cart
+              </section>
+            </Link>
+          </div>
+        </div>
       </div>
+
       <Modal
         isOpen={modalIsOpen}
         // onRequestClose={() => setModalIsOpen(false)}

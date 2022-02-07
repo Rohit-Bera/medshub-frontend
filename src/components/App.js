@@ -45,6 +45,8 @@ import ManageMedicine from "../Admin/Medicine";
 import CheckUser from "./CheckUser";
 import Cart from "./Cart";
 import Uploadprescription from "./Uploadprescription";
+import Searchproduct from "./Searchproduct";
+import Searchmedicine from "./Searchmedicine";
 
 const App = () => {
   return (
@@ -209,6 +211,8 @@ const App = () => {
             exact
             component={Uploadprescription}
           />
+          <Route path="/searchproducts" exaact component={Searchproduct} />
+          <Route path="/searchmedicines" exaact component={Searchmedicine} />
 
           {/* test */}
           <Route path="/checkuser" exact component={CheckUser} />

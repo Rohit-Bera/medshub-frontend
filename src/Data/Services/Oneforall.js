@@ -205,6 +205,21 @@ export const getmyOrderApi = async (token) => {
   }
 };
 
+export const deleteOrderApi = async (id, token) => {
+  const headers = { headers: { Authorization: `Bearer ${token}` } };
+  const url = `/cancleOrder/${id}`;
+  const link = host + url;
+  try {
+    const receive = await axios.delete(link, headers);
+
+    return receive;
+  } catch (error) {
+    console.log("error: ", error);
+
+    return error;
+  }
+};
+
 export const getmyWishlistApi = async (token) => {
   console.log("token: ", token);
 
@@ -218,6 +233,24 @@ export const getmyWishlistApi = async (token) => {
     return receive;
   } catch (error) {
     console.log("error: ", error);
+  }
+};
+
+export const deleteWishlistApi = async (id, token) => {
+  const url = `/removeFromWishlist/${id}`;
+
+  const link = host + url;
+
+  const headers = { headers: { Authorization: `Bearer ${token}` } };
+
+  try {
+    const receive = await axios.delete(link, headers);
+
+    return receive;
+  } catch (error) {
+    console.log("error: ", error);
+
+    return error;
   }
 };
 
@@ -267,6 +300,26 @@ export const postMedFeedbackApi = async (data, token) => {
   const link = host + url;
   const headers = { headers: { Authorization: `Bearer ${token}` } };
 
+  try {
+    const receive = await axios.post(link, data, headers);
+
+    return receive;
+  } catch (error) {
+    console.log("error: ", error);
+
+    return error;
+  }
+};
+
+export const postProblemFeedbackApi = async (data, token) => {
+  console.log("token: ", token);
+  console.log("data: ", data);
+
+  const headers = { headers: { Authorization: `Bearer ${token}` } };
+
+  const url = "/postOrderProblem";
+
+  const link = host + url;
   try {
     const receive = await axios.post(link, data, headers);
 

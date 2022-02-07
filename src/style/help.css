@@ -1,18 +1,39 @@
-.main-help{
-    flex:70%;
-    background-color: #f5f5f0;
-    padding: 10px;
-    font-family: "Trirong", serif;
-    font-size: 20px;
-    
+.main-help {
+  display: flex;
+  /* flex-direction: column; */
 }
-.hr{
-border-top: black solid 1.5px;   
+
+.main-help .help-container {
+  margin-top: 7%;
 }
-.help-box{
-    background-color: #d9d9d8;
-    padding: 10px;
-    border-radius: 7px;
-    width: 450px;
-    margin-left: 30px;
+
+.main-help .help {
+  background-color: white;
+  color: black;
+  width: 40vw;
+  margin-left: 70%;
+  margin-bottom: 1%;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+.main-help .help button {
+  border: 3px solid black;
+  outline: none;
+  border-radius: 50%;
+  font-size: 18px;
+}
+
+.main-help .account-details-nav {
+  margin-left: 35%;
+}
+
+/* modal style */
+.help-modal {
+  color: black;
+  background-color: aqua;
+  width: 30vw;
 }

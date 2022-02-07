@@ -1,8 +1,33 @@
-.About-main{
-    flex:70%;
-    background-color: #f5f5f0;
-    font-family: "Trirong", serif;
-    padding: 10px;
-    
+.medshub-body {
+  display: flex;
+}
 
+.medshub-body .about-medshub {
+  background-color: white;
+  color: black;
+  width: 45vw;
+  height: 65vh;
+  margin-top: 5%;
+  margin-left: 27%;
+  margin-right: 5%;
+
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px whitesmoke;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+.medshub-body .about-medshub p {
+  /* background-color: aqua; */
+  text-align: justify;
+
+  width: 30vw;
+  height: 40vh;
+  margin-bottom: 3%;
+}
+
+.medshub-body .about-medshub i {
+  font-size: 50px;
 }
