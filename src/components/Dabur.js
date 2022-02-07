@@ -4,27 +4,39 @@ import "../style/category.css";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import Modal from "react-modal/lib/components/Modal";
-import { searchProductbyBrand } from "../Data/Services/Oneforall";
-import { useDispatch } from "react-redux";
+import {
+  searchProductbyBrand,
+  addToCartProduct,
+  postprodWishlistApi,
+} from "../Data/Services/Oneforall";
+import { Triangle, Rings, Oval } from "react-loader-spinner";
+
+import { useDispatch, useSelector } from "react-redux";
 import { productData } from "../Data/Reducers/product.reducer";
 
 Modal.setAppElement("#root");
 
 const Dabur = () => {
   useEffect(() => {
-    getProductDabur();
+    getProduct();
   }, []);
 
-  const [daburProd, setDaburprod] = useState([]);
+  const [Products, setProducts] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const dispatch = useDispatch();
 
-  const getProductDabur = async () => {
+  const token = useSelector((state) => state.userReducer).token;
+
+  const getProduct = async () => {
     try {
+      setModalIsOpen(true);
       const brand = "dabur";
       const response = await searchProductbyBrand(brand);
       console.log("response: ", response);
-      setDaburprod(response.data);
+      if (response) {
+        setModalIsOpen(false);
+      }
+      setProducts(response.data);
     } catch (error) {
       console.log("error: ", error);
     }
@@ -34,6 +46,24 @@ const Dabur = () => {
     console.log("product: ", product);
 
     dispatch(productData({ product }));
+  };
+
+  const addToWishlist = async (item) => {
+    console.log("item id: ", item._id);
+    const _id = item._id;
+
+    const response = await postprodWishlistApi(_id, item, token);
+  };
+
+  const addToCartProd = async (item) => {
+    console.log("product: ", item._id);
+
+    if (!token) {
+    }
+
+    const prod = { item, token };
+    const response = await addToCartProduct(prod);
+    console.log("response: ", response);
   };
 
   const customStyles = {
@@ -49,13 +79,13 @@ const Dabur = () => {
   };
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="our-brands">
         <CategoryNav />
         <div className="brand-body">
           <div className="brand-child">
             {/* array of prod */}
-            {daburProd.map((item) => {
+            {Products.map((item) => {
               return (
                 <div className="product">
                   <img src={item.productImage[0]} alt="_img" />
@@ -64,12 +94,12 @@ const Dabur = () => {
 
                     <p>{item.productPrice}</p>
                     <p>
-                      <button onClick={() => setModalIsOpen(true)}>
+                      <button onClick={() => addToCartProd(item)}>
                         <i class="fas fa-shopping-cart"></i>
                       </button>
                     </p>
                     <p>
-                      <button>
+                      <button onClick={() => addToWishlist(item)}>
                         <i class="fas fa-heart"></i>
                       </button>
                     </p>
@@ -88,30 +118,26 @@ const Dabur = () => {
           </div>
         </div>
       </div>
-
       <Modal
         isOpen={modalIsOpen}
-        onRequestClose={() => setModalIsOpen(false)}
+        // onRequestClose={() => setModalIsOpen(false)}
         style={customStyles}
       >
-        <div className="modalbackground">
-          <div className="modalcontainer">
-            <div className="closebutton">
-              <button className="cancel" onClick={() => setModalIsOpen(false)}>
-                X
-              </button>
-            </div>
-            <div className="body">
-              Are You Sure <br />
-              You Want to Place Order ?
-            </div>
-            <div className="modalbutton">
-              <button className="no" onClick={() => setModalIsOpen(false)}>
-                Cancel
-              </button>
-              <button className="yes">Continue</button>
-            </div>
-          </div>
+        <div
+          style={{
+            width: "7vw",
+            height: "13vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Triangle
+            color="black
+          "
+            height={100}
+            width={100}
+          />
         </div>
       </Modal>
     </>

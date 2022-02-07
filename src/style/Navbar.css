@@ -1,64 +1,70 @@
-.input{
-    border: none;
-    padding: 4px;
-    margin-top: 4px;
-    width: 300px;
-    border-radius: 7px;
-    background-color : white;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap");
+.nav-part {
+  background-color: black;
+  height: 12vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 2px solid rgb(56, 182, 255);
 }
-/* button{
-    background-color : white;
-    padding: 4px;
 
-} */    
-.main{
-    display: flex;
-    background-color: rgb(56,182,255);
-    height: 90px;
+/* logo fonts */
+.logo1 {
+  font-family: "Fjalla One", sans-serif;
+  color: white;
+  font-size: 35px;
 }
-.left-nav{
-flex: 30%;
+.logo2 {
+  font-family: "Rajdhani", sans-serif;
+  color: initial;
 
-}
-.center-nav{
-flex: 30%;
-padding:"10px";
-text-align: center;
-}
-.width{
-    width: 345px;
-    background-color: white;
-    padding: 5px;
-    margin-top: 25px;
-    height: 30px;
-    border: none;
-    border-radius: 20px;
-    margin-left:55px
-}
-.right-nav{
-flex: 40%;
-}
-img{
-    height: 75px;
-    width: 100%;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-color: white;
+  -webkit-text-stroke-width: 2px;
 
+  font-size: 50px;
 }
-.right-nav i{
-    font-size: 25px;
+
+.nav-part .nav-part-logo {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* background-color: crimson; */
+  width: 35vw;
+  height: 9vh;
 }
-.flex{
-display: flex;
-justify-content: end;
-color: rgb(255,255,200);
+
+.nav-part .nav-part-link {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* background-color: gold; */
+  width: 35vw;
 }
-.margin{
-    margin-top: 20px;
+
+.nav-part .nav-part-link .nav-box {
+  /* background-color: aliceblue; */
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* background-color: green; */
+  height: 7vh;
+  width: 11vw;
+  margin-top: 2%;
 }
-.margin-left-nav{
-    margin-right:80px;
-    text-decoration: none;
-    color: white;
+
+.nav-part .nav-part-link .cart {
+  /* background-color: aliceblue; */
+  width: 6vw;
 }
-.span-nav{
-    margin-right: 60px;
+
+.nav-part .nav-part-link .nav-box i {
+  font-size: 20px;
+  margin-top: 2%;
+}
+
+.nav-part .nav-part-link .nav-box p {
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  margin: 2%;
 }

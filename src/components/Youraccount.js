@@ -66,6 +66,7 @@ const Youraccount = () => {
                   <i class="fas fa-chevron-circle-right margin-arrow-icon link"></i>
                 </Link>
               </div>
+
               <div>
                 <i class="fas fa-bell margin-main-icon"></i>My Notification
                 <Link to="/yourAccount/notification">

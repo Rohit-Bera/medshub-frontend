@@ -20,53 +20,39 @@ const Navbar = () => {
   // }
 
   return (
-    <div className="main">
-      <div className="left-nav">
-        <Link to="/">
-          <img src={Logo} alt="crashed"></img>{" "}
-        </Link>
-      </div>
-      <div className="center-nav">
-        <div className="width">
-          <input type="text" placeholder="Search" className="input"></input>
-          &nbsp;<i class="fas fa-search"></i>
+    <>
+      <div className="nav-part">
+        <div className="nav-part-logo">
+          <Link to="/">
+            <div>
+              <img />
+              <span className="logo1">Medshub </span>
+              <span className="logo2">24/7</span>
+            </div>
+          </Link>
+        </div>
+        <div className="nav-part-link">
+          <Link to="/uploadprescription">
+            <div className="nav-box">
+              <i class="fas fa-notes-medical"></i>
+              <p>upload prescription</p>
+            </div>
+          </Link>
+          <Link to="/yourAccount/AccountDetails">
+            <div className="nav-box">
+              <i class="fas fa-user"></i>
+              <p>my account</p>
+            </div>
+          </Link>
+          <Link to="/yourAccount/myCart">
+            <div className="nav-box cart">
+              <i class="fas fa-shopping-cart"></i>
+              <p>cart</p>
+            </div>
+          </Link>
         </div>
       </div>
-      <div className="right-nav">
-        <div className="flex margin">
-          <i class="fas fa-notes-medical margin-left-nav"></i>
-          <i class="fas fa-shopping-cart margin-left-nav"></i>
-
-        <Link to="/checkuser"> 
-        <i class="fas fa-user margin-left-nav"></i>
-        </Link></div>
-     
-      <div className='flex'>
-          <span className="span-nav">
-          <Link> Prescription</Link>
-          </span>
-          <span className="span-nav">
-          <Link>Cart</Link>
-          </span>
-          <span className="span-nav">
-          <Link to="/checkuser">Account</Link>
-          </span>
-          
-        </div>
-
-        {/* <div className="flex">
-          <span  className="span-nav">
-            <Link> Prescription</Link>
-          </span >
-          <span  className="span-nav">
-            <Link>Cart</Link>
-          </span>
-          <span  className="span-nav">
-            <Link to="/checkuser">Account</Link>
-          </span>
-        </div> */}
-      </div>
-    </div>
+    </>
   );
 };
 
