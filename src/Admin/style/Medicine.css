@@ -1,31 +1,117 @@
 .main-admin-medicine{
     margin-top: 25px;
-    margin-left: 550px;
+   
     font-family: "Trirong", serif;
     font-size: 20px;
 }
 .input-medicine-admin{
-    width: 225px;
-    height: 25px;
-    border-radius: 5px;
-  
+    width: 240px;
+    height: 30px;
+  margin-left: 10px;
+  background-color: black;
+  color: white;
 }
-.h2-medicine-admin{
+.p-medicine-admin{
     font-family: "Trirong", serif;
     font-size: 30px;
-    margin-left: 205px;
+    text-align: center;
+   
 }
 .button-admin-medicine{
     padding: 10px;
     border: none;
-    background-color: rgb(56,182,255);
+    background-color: black;
+    color: white;
     border-radius: 5px;
 }
 .table-medicine{
     text-align: center ;
     padding: 10px;
    margin-left: auto;
-   font-size: 20px;
-
    margin-right: auto ;
+   font-size: 20px;
+   border: 1px solid #ddd;
+   margin-top: 25px;   
+   border-collapse: collapse;
+}
+.form-main-medicine{
+    height: 600px;
+    width: 650px;
+    background-color: rgb(56,182,255);
+    margin-top: 25px;
+    margin-left: 405px;
+    padding: 15px;
+    border-radius: 15px;
+}
+.form-flex-Medadmin{
+    display: flex;
+    justify-content: space-around;
+}
+.upload-btn-wrapper-medicine {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    height: 250px;
+    width: 250px;
+    background-color: black;
+    text-align: center;
+    margin-top: 35px;
+  }
+  .btn-admin-medicine{
+    border:none;
+    color: gray;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 50px;
+    font-weight: bold;
+  
+  }
+  .upload-btn-wrapper-medicine input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left:0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+  }
+  .upload-image-button-medicine{
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    height: 45px;
+    width: 250px;
+    background-color: black;
+    text-align: center;
+   
+}
+
+  .btn2-admin-medicine{
+      background-color: black;
+      border: none;
+      color: white;
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 5px;
+  }
+  .largeCheckbov-medicine-admin{
+    height: 17px;
+    width: 17px;
+    margin-top: 5px;
+}
+.border-tr-medicine{
+    border-bottom: 1px solid #ddd;
+    background-color: black;
+    border: 3px solid rgb(56,182,255);
+    color:white
+}
+.table-title-medicine{
+    background-color: rgb(56,182,255);
+}
+.btn-updateDelte-medicine{
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 20px;
 }

@@ -31,7 +31,6 @@ import Carousel, {
   autoplayPlugin,
 } from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
-// import Feedback from "./Feedback";?
 
 const Home = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -282,6 +281,7 @@ const Home = () => {
       </div>
 
       <Footer />
+
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => setModalIsOpen(false)}

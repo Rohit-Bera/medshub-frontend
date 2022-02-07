@@ -2,13 +2,12 @@ import React, { useState } from "react";
 // import himalaya from "../images/himalya.jpg";
 import "../style/signin.css";
 import signin from "../images/signin.png";
-
 import { Link, useHistory } from "react-router-dom";
 import Navbar from "./Navbar";
-
 import { loginUserService } from "../Data/Services/Oneforall";
 import { useDispatch } from "react-redux";
 import { userData } from "../Data/Reducers/userData.reducer";
+import { adminData } from "../Data/Reducers/adminData.reducer";
 
 const Signin = () => {
   // ---------------states
@@ -41,11 +40,20 @@ const Signin = () => {
 
       const { user, token } = response.receive.data.loguser;
 
-      const { name, email, address, phoneNumber } = user;
+      const { name, email, address, phoneNumber, usertype } = user;
       const signupUser = { name, email, phoneNumber, address };
       const theUser = { signupUser, token };
-
-      dispatch(userData({ theUser }));
+      if (usertype === "admin") {
+        dispatch(adminData({ theUser }));
+        if (response.receive.data.loguser) {
+          return history.push("/ADmIn/adminHome");
+        }
+      } else {
+        dispatch(userData({ theUser }));
+        if (response.receive.data.loguser) {
+          return history.push("/yourAccount/AccountDetails");
+        }
+      }
 
       if (response.receive.data.loguser) {
         return history.push("/yourAccount/AccountDetails");

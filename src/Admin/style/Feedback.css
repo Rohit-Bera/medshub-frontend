@@ -1,0 +1,16 @@
+.box-feedback{
+    padding: 10px;
+    height: 150px;
+    width: 190px;
+    border: 2px solid rgb(56, 182, 255);
+    text-align: center;    
+    font-size: 35px;
+    margin-top: 25px;
+}
+.link-feedback{
+    color:rgb(56, 182, 255);
+}
+.feedback-flex{
+    display: flex;
+    justify-content: space-around;
+}

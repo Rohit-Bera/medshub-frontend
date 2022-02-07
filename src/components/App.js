@@ -39,9 +39,10 @@ import Viewmed from "./Viewmed";
 import Ourbrands from "./Ourbrands";
 import admin from "../Admin/Admin.Home";
 import ManageProduct from "../Admin/Products";
-import ManageOrder from "../Admin/Order";
+
+import ManageOrder from "../Admin/Admin.Order";
 import ManagePrescription from "../Admin/Prescription";
-import ManageMedicine from "../Admin/Medicine";
+import ManageMedicine from "../Admin/Admin.Medicine";
 import CheckUser from "./CheckUser";
 import Cart from "./Cart";
 import Uploadprescription from "./Uploadprescription";
