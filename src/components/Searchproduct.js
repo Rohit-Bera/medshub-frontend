@@ -1,13 +1,12 @@
 import { React, useState, useEffect } from "react";
 import CategoryNav from "./Category.nav";
 import "../style/searchprod.css";
-import { Link } from "react-router-dom";
-import Navbar from "./Navbar";
+import { Link, useHistory } from "react-router-dom";
 import Modal from "react-modal/lib/components/Modal";
 import {
-  searchProductbyBrand,
   addToCartProduct,
   postprodWishlistApi,
+  getSearchProductApi,
 } from "../Data/Services/Oneforall";
 import { Triangle, Rings, Oval } from "react-loader-spinner";
 
@@ -17,29 +16,35 @@ import { productData } from "../Data/Reducers/product.reducer";
 Modal.setAppElement("#root");
 
 const Searchproduct = () => {
-  useEffect(() => {
-    getProduct();
-  }, []);
-
+  // ========================================================states
+  const [searchProd, setSearchProd] = useState("");
+  const [length, setLength] = useState();
   const [Products, setProducts] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const token = useSelector((state) => state.userReducer).token;
 
+  // ====================================================functions
+  const takeInput = (e) => {
+    setSearchProd(e.target.value);
+  };
   //
-  const getProduct = async () => {
-    try {
-      setModalIsOpen(true);
-      const brand = "dabur";
-      const response = await searchProductbyBrand(brand);
-      console.log("response: ", response);
-      if (response) {
-        setModalIsOpen(false);
-      }
-      setProducts(response.data);
-    } catch (error) {
-      console.log("error: ", error);
+  const getSearchProduct = async () => {
+    setModalIsOpen(true);
+    console.log("searchProd: ", searchProd);
+    const response = await getSearchProductApi(searchProd);
+    console.log("response: ", response);
+
+    console.log("length : ", response.data.found.searchpro.length);
+
+    if (response) {
+      setProducts(response.data.found.searchpro);
+      setModalIsOpen(false);
+      setLength(response.data.found.searchpro.length);
+
+      setSearchProd("");
     }
   };
 
@@ -52,21 +57,43 @@ const Searchproduct = () => {
 
   //
   const addToWishlist = async (item) => {
+    setModalIsOpen(true);
     console.log("item id: ", item._id);
     const _id = item._id;
 
     const response = await postprodWishlistApi(_id, item, token);
+    console.log("response: ", response);
+
+    if (response) {
+      setModalIsOpen(false);
+    }
   };
 
   const addToCartProd = async (item) => {
+    setModalIsOpen(true);
     console.log("product: ", item._id);
 
-    if (!token) {
+    if (token === "") {
+      history.push("/signin");
     }
 
     const prod = { item, token };
     const response = await addToCartProduct(prod);
     console.log("response: ", response);
+    if (response) {
+      setModalIsOpen(false);
+    }
+  };
+
+  const dispatchProd = (item) => {
+    console.log("product: ", item);
+    const product = item;
+
+    dispatch(productData({ product }));
+  };
+
+  const refresh = (e) => {
+    e.preventDefault();
   };
 
   const customStyles = {
@@ -86,39 +113,65 @@ const Searchproduct = () => {
         <CategoryNav />
         <div className="search-container">
           <div className="search-form">
-            <form>
-              <input type="text" />
-              <button>
+            <form onSubmit={refresh}>
+              <input
+                type="text"
+                placeholder="search product..."
+                value={searchProd}
+                onChange={takeInput}
+              />
+              <button onClick={getSearchProduct}>
                 <i class="fas fa-search"></i>
               </button>
             </form>
           </div>
           <div className="searched">
-            <div className="item">
-              <div className="item-like">
-                <i class="fas fa-heart"></i>
-              </div>
-              <div className="item-img">
-                <img />
-              </div>
-              <div className="item-disc">
-                <p>item name</p>
-                <p>item price</p>
-              </div>
-              <div className="item-btn">
-                <section>
-                  <i class="far fa-eye"></i>view
-                </section>
-                <section>
-                  <i class="fas fa-money-check-alt"></i>
-                  <label>buy now</label>
-                </section>
-                <section>
-                  <i class="fas fa-shopping-cart"></i>
-                  <label>add to cart</label>
-                </section>
-              </div>
-            </div>
+            {/* array of items */}
+            {length !== 0 ? (
+              Products.map((item) => {
+                // console.log("item: ", item);
+                return (
+                  <div className="item">
+                    <div className="item-like">
+                      <button onClick={() => addToWishlist(item)}>
+                        <i class="fas fa-heart"></i>
+                      </button>
+                    </div>
+                    <div className="item-img">
+                      <img src={item.productImage[0]} alt="_img" />
+                    </div>
+                    <div className="item-disc">
+                      <p>{item.productName}</p>
+                      <label>{item.productPrice}</label>
+                    </div>
+                    <div className="item-btn">
+                      <Link to="/viewproduct">
+                        <button onClick={() => dispatchProd(item)}>
+                          <i class="far fa-eye"></i>view
+                        </button>
+                      </Link>
+
+                      <Link>
+                        <button>
+                          <i class="fas fa-money-check-alt"></i>
+                          <label>buy now</label>
+                        </button>
+                        <Modal></Modal>
+                      </Link>
+
+                      <Link>
+                        <button onClick={() => addToCartProd(item)}>
+                          <i class="fas fa-shopping-cart"></i>
+                          <label>add to cart</label>
+                        </button>
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })
+            ) : (
+              <div style={{ color: "white" }}>Product not found</div>
+            )}
           </div>
         </div>
       </div>

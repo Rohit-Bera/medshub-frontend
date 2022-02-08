@@ -12,7 +12,6 @@ import bodycare from "../images/bodycare.jpg";
 const Beautyprod = () => {
   return (
     <>
-      <Navbar />
       <div className="our-brands">
         <CategoryNav />
         <div className="brand-body">

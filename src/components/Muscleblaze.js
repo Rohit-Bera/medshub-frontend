@@ -1,41 +1,159 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import CategoryNav from "./Category.nav";
 import "../style/category.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Navbar from "./Navbar";
+import Modal from "react-modal/lib/components/Modal";
+import {
+  searchProductbyBrand,
+  addToCartProduct,
+  postprodWishlistApi,
+} from "../Data/Services/Oneforall";
+import { Triangle, Rings, Oval } from "react-loader-spinner";
+
+import { useDispatch, useSelector } from "react-redux";
+import { productData } from "../Data/Reducers/product.reducer";
+
+Modal.setAppElement("#root");
 
 const Muscleblaze = () => {
+  useEffect(() => {
+    getProduct();
+  }, []);
+
+  // ========================================================states
+  const [Products, setProducts] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const token = useSelector((state) => state.userReducer).token;
+
+  const getProduct = async () => {
+    try {
+      setModalIsOpen(true);
+      const brand = "muscleblaze";
+      const response = await searchProductbyBrand(brand);
+      console.log("response: ", response);
+      if (response) {
+        setModalIsOpen(false);
+      }
+      setProducts(response.data);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  };
+
+  const dispatchProd = (product) => {
+    console.log("product: ", product);
+
+    dispatch(productData({ product }));
+  };
+
+  const addToWishlist = async (item) => {
+    console.log("item id: ", item._id);
+    const _id = item._id;
+
+    const response = await postprodWishlistApi(_id, item, token);
+  };
+
+  const addToCartProd = async (item) => {
+    console.log("product: ", item._id);
+
+    if (token === "") {
+      history.push("/signin");
+    }
+
+    const prod = { item, token };
+    const response = await addToCartProduct(prod);
+    console.log("response: ", response);
+  };
+
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      border: "1px solid black",
+    },
+  };
   return (
     <>
-      <Navbar />
-      <div className="our-brands">
+      <div className="search-prod">
         <CategoryNav />
-        <div className="brand-body">
-          <div className="brand-child">
-            {/* array of prod */}
-            <div className="product">
-              <img src="" alt="_img" />
-              <div className="prod-details">
-                <p>product name -hbfcjdcdcdszbncvsu</p>
-                <p>price</p>
-                <p>
-                  <button>
-                    <i class="fas fa-shopping-cart"></i>
-                  </button>
-                </p>
-                <p>
-                  <button>
-                    <i class="fas fa-heart"></i>
-                  </button>
-                </p>
-              </div>
-              <Link to="/viewproduct">
-                <button className="view">view</button>
-              </Link>
-            </div>
+        <div className="search-container">
+          <p>musclebalze Products</p>
+          <div className="searched">
+            {/* array of items */}
+            {Products.map((item) => {
+              // console.log("item: ", item);
+              return (
+                <div className="item">
+                  <div className="item-like">
+                    <button onClick={() => addToWishlist(item)}>
+                      <i class="fas fa-heart"></i>
+                    </button>
+                  </div>
+                  <div className="item-img">
+                    <img src={item.productImage[0]} alt="_img" />
+                  </div>
+                  <div className="item-disc">
+                    <p>{item.productName}</p>
+                    <label>{item.productPrice}</label>
+                  </div>
+                  <div className="item-btn">
+                    <Link to="/viewproduct">
+                      <button onClick={() => dispatchProd(item)}>
+                        <i class="far fa-eye"></i>view
+                      </button>
+                    </Link>
+
+                    <Link>
+                      <button>
+                        <i class="fas fa-money-check-alt"></i>
+                        <label>buy now</label>
+                      </button>
+                      <Modal></Modal>
+                    </Link>
+
+                    <Link>
+                      <button onClick={() => addToCartProd(item)}>
+                        <i class="fas fa-shopping-cart"></i>
+                        <label>add to cart</label>
+                      </button>
+                    </Link>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
+      <Modal
+        isOpen={modalIsOpen}
+        // onRequestClose={() => setModalIsOpen(false)}
+        style={customStyles}
+      >
+        <div
+          style={{
+            width: "7vw",
+            height: "13vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Triangle
+            color="black
+          "
+            height={100}
+            width={100}
+          />
+        </div>
+      </Modal>
     </>
   );
 };

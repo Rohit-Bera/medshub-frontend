@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import CategoryNav from "./Category.nav";
 import "../style/category.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Navbar from "./Navbar";
 import Modal from "react-modal/lib/components/Modal";
 import {
@@ -21,9 +21,11 @@ const Dabur = () => {
     getProduct();
   }, []);
 
+  // ========================================================states
   const [Products, setProducts] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const token = useSelector((state) => state.userReducer).token;
 
@@ -42,7 +44,7 @@ const Dabur = () => {
     }
   };
 
-  const getProductName = (product) => {
+  const dispatchProd = (product) => {
     console.log("product: ", product);
 
     dispatch(productData({ product }));
@@ -58,7 +60,8 @@ const Dabur = () => {
   const addToCartProd = async (item) => {
     console.log("product: ", item._id);
 
-    if (!token) {
+    if (token === "") {
+      history.push("/signin");
     }
 
     const prod = { item, token };
@@ -79,39 +82,50 @@ const Dabur = () => {
   };
   return (
     <>
-      {/* <Navbar /> */}
-      <div className="our-brands">
+      <div className="search-prod">
         <CategoryNav />
-        <div className="brand-body">
-          <div className="brand-child">
-            {/* array of prod */}
+        <div className="search-container">
+          <p>Dabur Products</p>
+          <div className="searched">
+            {/* array of items */}
             {Products.map((item) => {
+              // console.log("item: ", item);
               return (
-                <div className="product">
-                  <img src={item.productImage[0]} alt="_img" />
-                  <div className="prod-details">
+                <div className="item">
+                  <div className="item-like">
+                    <button onClick={() => addToWishlist(item)}>
+                      <i class="fas fa-heart"></i>
+                    </button>
+                  </div>
+                  <div className="item-img">
+                    <img src={item.productImage[0]} alt="_img" />
+                  </div>
+                  <div className="item-disc">
                     <p>{item.productName}</p>
+                    <label>{item.productPrice}</label>
+                  </div>
+                  <div className="item-btn">
+                    <Link to="/viewproduct">
+                      <button onClick={() => dispatchProd(item)}>
+                        <i class="far fa-eye"></i>view
+                      </button>
+                    </Link>
 
-                    <p>{item.productPrice}</p>
-                    <p>
+                    <Link>
+                      <button>
+                        <i class="fas fa-money-check-alt"></i>
+                        <label>buy now</label>
+                      </button>
+                      <Modal></Modal>
+                    </Link>
+
+                    <Link>
                       <button onClick={() => addToCartProd(item)}>
                         <i class="fas fa-shopping-cart"></i>
+                        <label>add to cart</label>
                       </button>
-                    </p>
-                    <p>
-                      <button onClick={() => addToWishlist(item)}>
-                        <i class="fas fa-heart"></i>
-                      </button>
-                    </p>
+                    </Link>
                   </div>
-                  <Link to="/viewproduct">
-                    <button
-                      className="view"
-                      onClick={() => getProductName(item)}
-                    >
-                      view
-                    </button>
-                  </Link>
                 </div>
               );
             })}

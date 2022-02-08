@@ -53,7 +53,7 @@ const Medicine = () => {
     }
   };
 
-  const viewMeds = (item) => {
+  const dispatchMed = (item) => {
     console.log("item: ", item);
 
     dispatch(medicineData({ item }));
@@ -86,54 +86,53 @@ const Medicine = () => {
 
   return (
     <>
-      <Navbar />
-      <div className="meds">
+      <div className="search-prod">
         <CategoryNav />
-        <div className="med-container">
-          {/* all medicines */}
-          <div>
-            <div className="our-brands">
-              <div className="brand-body">
-                <div className="brand-child">
-                  {console.log("meds : ", medicines)}
-                  {medicines.map((item) => {
-                    console.log("item: ", item.medicineImage[0]);
+        <div className="search-container">
+          <div className="searched">
+            {/* array of items */}
+            {medicines.map((item) => {
+              console.log("item: ", item);
+              return (
+                <div className="item">
+                  <div className="item-like">
+                    <button onClick={() => addMedtoWishlist(item)}>
+                      <i class="fas fa-heart"></i>
+                    </button>
+                  </div>
+                  <div className="item-img">
+                    <img src={item.medicineImage[0]} alt="_img" />
+                  </div>
+                  <div className="item-disc">
+                    <p>{item.medicineName}</p>
+                    <label>{item.medicinePrice}</label>
+                  </div>
+                  <div className="item-btn">
+                    <Link to="/medicines/viewmedcines">
+                      <button onClick={() => dispatchMed(item)}>
+                        <i class="far fa-eye"></i>view
+                      </button>
+                    </Link>
 
-                    return (
-                      <div className="product">
-                        <img src={item.medicineImage[0]} alt="_img" />
-                        <div className="prod-details">
-                          <p>{item.medicineName}</p>
-                          <p>{item.medicinePrice}</p>
-                          <p>
-                            <button onClick={() => addToCartMed(item)}>
-                              <i class="fas fa-shopping-cart"></i>
-                            </button>
-                          </p>
-                          <p>
-                            <button onClick={() => addMedtoWishlist(item)}>
-                              <i class="fas fa-heart"></i>
-                            </button>
-                          </p>
-                        </div>
-                        <Link to="/medicines/viewmedcines">
-                          <button
-                            className="view"
-                            onClick={() => viewMeds(item)}
-                          >
-                            view
-                          </button>
-                        </Link>
-                      </div>
-                    );
-                  })}
+                    <Link>
+                      <button>
+                        <i class="fas fa-money-check-alt"></i>
+                        <label>buy now</label>
+                      </button>
+                      <Modal></Modal>
+                    </Link>
+
+                    <button onClick={() => addToCartMed(item)}>
+                      <i class="fas fa-shopping-cart"></i>
+                      <label>add to cart</label>
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
       </div>
-
       <Modal
         isOpen={modalIsOpen}
         // onRequestClose={() => setModalIsOpen(false)}

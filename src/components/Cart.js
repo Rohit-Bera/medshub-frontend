@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import "../style/mycart.css";
 import img from "../images/dabur.jpg";
-import { deleteFromCart, getMyCart } from "../Data/Services/Oneforall";
+import {
+  deleteFromCart,
+  getMyCart,
+  placeOrderApi,
+} from "../Data/Services/Oneforall";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { medicineData } from "../Data/Reducers/medicine.reducer";
@@ -11,6 +15,8 @@ import { Triangle, Rings, Oval } from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Modal from "react-modal/lib/components/Modal";
 import Youraccount from "./Youraccount";
+import StripCheckout from "react-stripe-checkout";
+
 Modal.setAppElement("#root");
 
 const Cart = () => {
@@ -22,6 +28,8 @@ const Cart = () => {
   const [myCart, setMyCart] = useState([]);
   const history = useHistory();
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [buyModal, setBuyModal] = useState(false);
+  const [buyNowItem, setBuyNowItem] = useState();
   const dispatch = useDispatch();
 
   const token = useSelector((state) => state.userReducer).token;
@@ -80,6 +88,22 @@ const Cart = () => {
     MyCart();
   };
 
+  const takeItem = async (item) => {
+    setBuyNowItem(item);
+  };
+
+  const placeOrder = async () => {
+    setModalIsOpen(true);
+    console.log("order item : ", buyNowItem);
+
+    const response = await placeOrderApi(buyNowItem, token);
+    console.log("response: ", response);
+
+    if (response) {
+      setModalIsOpen(false);
+    }
+  };
+
   const viewProduct = (item) => {
     console.log("item: ", item);
 
@@ -130,7 +154,47 @@ const Cart = () => {
                   <button onClick={() => removeFromCart(item._id)}>
                     <i class="fas fa-times"></i>
                   </button>
-                  <button className="buynow">Buy Now</button>
+                  <button
+                    className="buynow"
+                    onClick={() => {
+                      setBuyModal(true);
+                      takeItem(item);
+                    }}
+                  >
+                    Buy Now
+                  </button>
+                  <Modal isOpen={buyModal} style={customStyles}>
+                    <div className="buy-modal-conatiner">
+                      <div className="buy-modal-cancel">
+                        <button onClick={() => setBuyModal(false)}>
+                          <i class="fas fa-times"></i>
+                        </button>
+                      </div>
+                      <div className="buy-modal-body">
+                        <p>
+                          Are you sure <br />
+                          you want to buy now?
+                        </p>
+                      </div>
+                      <div className="buy-modal-btn">
+                        <button
+                          className="no"
+                          onClick={() => setBuyModal(false)}
+                        >
+                          cancel
+                        </button>
+                        <button
+                          className="yes"
+                          onClick={() => {
+                            setBuyModal(false);
+                            placeOrder();
+                          }}
+                        >
+                          proceed
+                        </button>
+                      </div>
+                    </div>
+                  </Modal>
                 </div>
               );
             } else if (item.medicine) {

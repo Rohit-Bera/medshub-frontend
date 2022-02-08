@@ -55,6 +55,21 @@ export const searchProductbyBrand = async (brand) => {
   }
 };
 
+export const searchProductbyCategory = async (category) => {
+  const url = `/searchProductbyCategory/${category}`;
+  const link = host + url;
+  console.log("link: ", link);
+  try {
+    const receive = await axios.get(link);
+
+    return receive;
+  } catch (error) {
+    console.log("error: ", error);
+
+    return { error };
+  }
+};
+
 export const addToCartProduct = async (prod) => {
   console.log("prod: ", prod);
   const { item, token } = prod;
@@ -489,6 +504,46 @@ export const uploadPrescriptionApi = async (fd, token) => {
     return receive;
   } catch (error) {
     console.log("error: ", error);
+    return error;
+  }
+};
+
+export const getSearchProductApi = async (search) => {
+  console.log("search: ", search);
+  const url = `/getSearchProduct/${search}`;
+  const link = host + url;
+  try {
+    const receive = await axios.get(link);
+
+    return receive;
+  } catch (error) {
+    console.log("error: ", error);
+
+    return error;
+  }
+};
+
+export const getSearchMedicineApi = async (search) => {
+  console.log("search: ", search);
+  const url = `/getSearchMedicine/${search}`;
+  const link = host + url;
+  try {
+    const receive = await axios.get(link);
+
+    return receive;
+  } catch (error) {
+    console.log("error: ", error);
+
+    return error;
+  }
+};
+
+//place order
+export const placeOrderApi = async (item, token) => {
+  try {
+  } catch (error) {
+    console.log("error: ", error);
+
     return error;
   }
 };
