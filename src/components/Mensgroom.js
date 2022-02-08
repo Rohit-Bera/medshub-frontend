@@ -12,7 +12,6 @@ import mendeo from "../images/mendeodrant.jfif";
 const Mensgroom = () => {
   return (
     <>
-      <Navbar />
       <div className="our-brands">
         <CategoryNav />
         <div className="brand-body">

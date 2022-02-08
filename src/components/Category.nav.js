@@ -23,12 +23,12 @@ const CategoryNav = () => {
               </Link>
             </li>
             <li>
-              <Link to="/">
+              <Link to="/searchproducts">
                 <i class="fas fa-search"></i>Search Product
               </Link>
             </li>
             <li>
-              <Link to="/">
+              <Link to="/searchmedicines">
                 <i class="fas fa-search-plus"></i>Search Medicine
               </Link>
             </li>

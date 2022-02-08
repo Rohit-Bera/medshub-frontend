@@ -72,14 +72,14 @@ const Home = () => {
                   <p>search product</p>
                 </div>
               </Link>
-              <Link to="">
+              <Link to="/productCategories/ourBrands">
                 <div className="card-prod">
                   <i class="fas fa-truck-loading"></i>
                   <p>health product</p>
                 </div>
               </Link>
 
-              <Link to="">
+              <Link to="/medicines">
                 <div className="card-med">
                   <i class="fas fa-prescription-bottle-alt"></i>
                   <p>medicines</p>
