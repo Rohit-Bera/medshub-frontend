@@ -47,6 +47,11 @@ import Cart from "./Cart";
 import Uploadprescription from "./Uploadprescription";
 import Searchproduct from "./Searchproduct";
 import Searchmedicine from "./Searchmedicine";
+import AboutViz from "./AboutViz";
+import HelpViz from "./HelpViz";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
@@ -213,6 +218,8 @@ const App = () => {
           />
           <Route path="/searchproducts" exaact component={Searchproduct} />
           <Route path="/searchmedicines" exaact component={Searchmedicine} />
+          <Route path="/about" exact component={AboutViz} />
+          <Route path="/help" exact component={HelpViz} />
 
           {/* test */}
           <Route path="/checkuser" exact component={CheckUser} />
@@ -220,6 +227,17 @@ const App = () => {
           {/* error route */}
           <Route exact component={Error404} />
         </Switch>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </Router>
     </>
   );

@@ -1,23 +1,77 @@
-.footer {
-  /* position:absolute; */
-  bottom: 0;
-  text-align: center;
-  width: 100%;
-  background-color: skyblue;
-  padding: 70px, 0;
-}
-.container {
-  max-width: 1170px;
-  margin: auto;
-}
-ul {
-  list-style: none;
-}
-.row {
+/* footer */
+
+/* feedback */
+.footer-container {
+  margin-top: 2%;
+  border-top: 3px solid rgb(56, 182, 255);
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  height: 50vh;
+  color: rgb(56, 182, 255);
 }
-.col {
-  width: 25%;
-  padding: 0 15px;
+
+.footer-container .footer-elements {
+  /* background-color: green; */
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  width: 90vw;
+  height: 40vh;
+}
+
+.footer-container .footer-elements .footer-column {
+  /* width: 20vw; */
+}
+
+.footer-container .footer-elements .footer-column a {
+  color: rgb(56, 182, 255);
+}
+
+.footer-container .footer-elements .footer-column .feedback {
+  width: 30vw;
+  /* background-color: crimson; */
+  height: 34vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+.footer-container .footer-elements .footer-column .feedback form {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  height: 50vh;
+
+  /* background-color: aliceblue; */
+}
+
+.footer-container .footer-elements .footer-column .feedback form textarea,
+.footer-container .footer-elements .footer-column .feedback form button {
+  box-shadow: 0px 0px 10px rgb(56, 182, 255);
+}
+
+.footer-container .footer-elements .footer-column .feedback form button {
+  width: 20vw;
+  border: 3px solid rgb(56, 182, 255);
+  background-color: black;
+  color: rgb(56, 182, 255);
+  border-radius: 8px;
+  height: 7vh;
+  outline: none;
+  font-size: 20px;
+}
+
+.footer-container .footer-elements .footer-column .feedback textarea {
+  height: 15vh;
+  width: 20vw;
+  font-size: 18px;
+
+  border: 3px solid rgb(56, 182, 255);
+  background-color: black;
+  color: rgb(56, 182, 255);
+  border-radius: 8px;
+  outline: none;
 }

@@ -1,3 +1,17 @@
+.green {
+  background-color: green;
+  height: 2vh;
+  width: 1vw;
+  border-radius: 50%;
+}
+
+.red {
+  background-color: red;
+  height: 2vh;
+  width: 1vw;
+  border-radius: 50%;
+}
+
 .view {
   /* width: 80vw;
   height: 70vh; */
@@ -5,7 +19,7 @@
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
-  margin-top: 2%;
+  margin-top: 2.5%;
 
   /* background-color: crimson; */
 }
@@ -14,11 +28,9 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background: linear-gradient(
-    to right bottom,
-    rgba(56, 182, 255, 0.7),
-    rgba(56, 182, 255, 0.3)
-  );
+  background-color: black;
+  border: 3px solid rgb(56, 182, 255);
+  box-shadow: 0px 0px 25px rgb(56, 182, 255);
   width: 90vw;
   height: 80vh;
   border-radius: 8px;
@@ -72,18 +84,21 @@
 }
 
 .view .view-prod .prod-detail {
-  height: 55vh;
+  height: 64vh;
   width: 43vw;
-  background-color: rgb(56, 182, 255);
+  background-color: black;
+  color: white;
+  border: 4px solid white;
+  box-shadow: 0px 0px 20px white;
 
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
-  font-size: 25px;
+  flex-wrap: wrap;
+  font-size: 19px;
 
   border-radius: 8px;
-  color: white;
 }
 
 .view .view-prod .prod-detail .btn {
@@ -101,7 +116,7 @@
   outline: none;
   border: none;
   background-color: white;
-  color: rgb(56, 182, 255);
+  color: black;
   font-weight: bold;
 
   border-radius: 5px;
@@ -116,7 +131,10 @@
 }
 
 .view .view-prod-feedback {
-  background-color: rgb(56, 182, 255);
+  background-color: black;
+  border: 3px solid rgb(56, 182, 255);
+  box-shadow: 0px 0px 25px rgb(56, 182, 255);
+
   height: 30vh;
   width: 90vw;
   margin-top: 1%;
@@ -125,14 +143,44 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+
+  border-radius: 8px;
+}
+
+.view .view-prod-feedback form {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* flex-direction: column; */
+  /* background-color: aqua; */
+  height: 30vh;
+  width: 44vw;
 }
 
 .view .view-prod-feedback textarea {
   border: none;
   outline: none;
   font-size: 15px;
-  border: 2px soli white;
-  color: rgb(56, 182, 255);
+  border: 2px solid white;
+  color: white;
+  border: 4px solid white;
+  height: 20vh;
+  width: 20vw;
+  border-radius: 5px;
+  box-shadow: 0px 0px 15px white;
+  background-color: black;
+}
+
+.view .view-prod-feedback form button {
+  width: 8vw;
+  height: 4vh;
+  border-radius: 5px;
+  font-weight: bold;
+
+  background-color: white;
+  border: none;
+  outline: none;
+  color: black;
 }
 
 /* modal - popup*/

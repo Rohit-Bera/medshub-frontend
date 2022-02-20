@@ -8,9 +8,10 @@ import {
   searchProductbyBrand,
   addToCartProduct,
   postprodWishlistApi,
+  placeOrderProductApi,
 } from "../Data/Services/Oneforall";
 import { Triangle, Rings, Oval } from "react-loader-spinner";
-
+import StripCheckout from "react-stripe-checkout";
 import { useDispatch, useSelector } from "react-redux";
 import { productData } from "../Data/Reducers/product.reducer";
 
@@ -24,6 +25,11 @@ const Dettol = () => {
   // ========================================================states
   const [Products, setProducts] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const [prodBuyModal, setProdBuyModal] = useState(false); // product buy modal
+  const [productItem, setProductItem] = useState(null); // product item state
+  const [amount, setAmount] = useState(); // price state
+
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -51,13 +57,19 @@ const Dettol = () => {
   };
 
   const addToWishlist = async (item) => {
+    setModalIsOpen(true);
     console.log("item id: ", item._id);
     const _id = item._id;
 
     const response = await postprodWishlistApi(_id, item, token);
+
+    if (response) {
+      setModalIsOpen(false);
+    }
   };
 
   const addToCartProd = async (item) => {
+    setModalIsOpen(true);
     console.log("product: ", item._id);
 
     if (token === "") {
@@ -67,6 +79,66 @@ const Dettol = () => {
     const prod = { item, token };
     const response = await addToCartProduct(prod);
     console.log("response: ", response);
+
+    if (response) {
+      setModalIsOpen(false);
+    }
+  };
+
+  // take item state of product
+  const takeProductItem = (item) => {
+    console.log("product item: ", item);
+    setProductItem(item);
+    setAmount(item.productPrice);
+  };
+
+  // place order for product
+  const placeOrderProduct = async () => {
+    setModalIsOpen(true);
+    console.log("productItem : ", productItem);
+
+    const response = await placeOrderProductApi(productItem, token);
+    console.log("response place order: ", response);
+
+    if (response) {
+      setModalIsOpen(false);
+    }
+  };
+
+  // payment for product
+  const makePaymentProduct = async (token) => {
+    console.log("product Item : ", productItem);
+
+    const { productName, productPrice } = productItem;
+    const price = productPrice;
+    const name = productName;
+
+    const item = { name, price };
+
+    const body = {
+      token,
+      item,
+    };
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    return await fetch(`http://localhost:5500/paymentStripe`, {
+      method: "Post",
+      headers,
+      body: JSON.stringify(body),
+    })
+      .then((response) => {
+        console.log("Response", response);
+        const { status } = response;
+        console.log("Status", status);
+        if (status === 200) {
+          placeOrderProduct();
+        }
+      })
+      .catch((error) => {
+        console.log("error: ", error);
+      });
   };
 
   const customStyles = {
@@ -112,20 +184,62 @@ const Dettol = () => {
                       </button>
                     </Link>
 
-                    <Link>
-                      <button>
-                        <i class="fas fa-money-check-alt"></i>
-                        <label>buy now</label>
-                      </button>
-                      <Modal></Modal>
-                    </Link>
+                    <button
+                      onClick={() => {
+                        setProdBuyModal(true);
+                        takeProductItem(item);
+                      }}
+                    >
+                      <i class="fas fa-money-check-alt"></i>
+                      Buy Now
+                    </button>
+                    <Modal isOpen={prodBuyModal} style={customStyles}>
+                      <div className="buy-modal-conatiner">
+                        <div className="buy-modal-cancel">
+                          <button onClick={() => setProdBuyModal(false)}>
+                            <i class="fas fa-times"></i>
+                          </button>
+                        </div>
+                        <div className="buy-modal-body">
+                          <p>
+                            Are you sure <br />
+                            you want to buy now?
+                          </p>
+                        </div>
+                        <div className="buy-modal-btn">
+                          <button
+                            className="no"
+                            onClick={() => setProdBuyModal(false)}
+                          >
+                            cancel
+                          </button>
 
-                    <Link>
-                      <button onClick={() => addToCartProd(item)}>
-                        <i class="fas fa-shopping-cart"></i>
-                        <label>add to cart</label>
-                      </button>
-                    </Link>
+                          <StripCheckout
+                            stripeKey="pk_test_51K9BzESJxF1xgWl3VLpG7easuHbz7arQhPME9rZtGqeQYeFDNH1Ve7eiyy3AsVypNWubsegfT78trvTOHGK9kocL00S3gYD1gS"
+                            token={makePaymentProduct}
+                            name="Make Payment"
+                            shippingAddress
+                            billingAddress
+                          >
+                            <button
+                              class="btn btn-md bg-warning"
+                              className="yes"
+                              onClick={() => {
+                                setProdBuyModal(false);
+                                // makePayment();
+                              }}
+                            >
+                              pay ₹{amount}
+                            </button>
+                          </StripCheckout>
+                        </div>
+                      </div>
+                    </Modal>
+
+                    <button onClick={() => addToCartProd(item)}>
+                      <i class="fas fa-shopping-cart"></i>
+                      <label>add to cart</label>
+                    </button>
                   </div>
                 </div>
               );

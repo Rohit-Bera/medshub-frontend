@@ -7,6 +7,8 @@ import { useDispatch } from "react-redux";
 import { userData } from "../Data/Reducers/userData.reducer";
 import { useHistory } from "react-router-dom";
 
+import { toast } from "react-toastify";
+
 Modal.setAppElement("#root");
 
 const Youraccount = () => {
@@ -35,6 +37,7 @@ const Youraccount = () => {
     dispatch(userData({ theUser }));
 
     setModalIsOpen(false);
+    toast.success("logout successfull");
     history.push("/");
   };
 

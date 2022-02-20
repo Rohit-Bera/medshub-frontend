@@ -9,6 +9,8 @@ import { useDispatch } from "react-redux";
 import { userData } from "../Data/Reducers/userData.reducer";
 import { adminData } from "../Data/Reducers/adminData.reducer";
 
+import { toast } from "react-toastify";
+
 const Signin = () => {
   // ---------------states
 
@@ -38,6 +40,12 @@ const Signin = () => {
       const response = await loginUserService(logUser);
       console.log("response: ", response.receive.data);
 
+      if (response.receive.data.status === "404") {
+        toast.error("invalid password");
+      } else {
+        toast.success("login successfull");
+      }
+
       const { user, token } = response.receive.data.loguser;
 
       const { name, email, address, phoneNumber, usertype } = user;
@@ -53,10 +61,6 @@ const Signin = () => {
         if (response.receive.data.loguser) {
           return history.push("/yourAccount/AccountDetails");
         }
-      }
-
-      if (response.receive.data.loguser) {
-        return history.push("/yourAccount/AccountDetails");
       }
     } catch (error) {
       console.log("error: ", error);

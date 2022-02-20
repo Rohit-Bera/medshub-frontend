@@ -5,7 +5,8 @@ import img from "../images/dabur.jpg";
 import {
   deleteFromCart,
   getMyCart,
-  placeOrderApi,
+  placeOrderMedicineApi,
+  placeOrderProductApi,
 } from "../Data/Services/Oneforall";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
@@ -27,9 +28,18 @@ const Cart = () => {
   // -------------------------------------------------------states
   const [myCart, setMyCart] = useState([]);
   const history = useHistory();
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [buyModal, setBuyModal] = useState(false);
-  const [buyNowItem, setBuyNowItem] = useState();
+  const [modalIsOpen, setModalIsOpen] = useState(false); // loader modal
+
+  const [prodBuyModal, setProdBuyModal] = useState(false); // product buy modal
+  const [medBuyModal, setMedBuyModal] = useState(false); // medicine buy modal
+
+  const [productItem, setProductItem] = useState(null); // product item state
+  const [medicineItem, setMedicineItem] = useState(null); // mediicne item state
+
+  const [prodId, setProdId] = useState(); // remove from cart ID after placing order product
+  const [medId, setMedId] = useState(); // remove from cart ID after placing order product
+
+  const [amount, setAmount] = useState(); // price state
   const dispatch = useDispatch();
 
   const token = useSelector((state) => state.userReducer).token;
@@ -88,20 +98,117 @@ const Cart = () => {
     MyCart();
   };
 
-  const takeItem = async (item) => {
-    setBuyNowItem(item);
+  // take item state of product
+  const takeProductItem = (item) => {
+    console.log("product item: ", item);
+    setProductItem(item);
+    setAmount(item.productPrice);
   };
 
-  const placeOrder = async () => {
-    setModalIsOpen(true);
-    console.log("order item : ", buyNowItem);
+  // take item state of medicine
+  const takeMedicineItem = (item) => {
+    console.log("medicine item: ", item);
 
-    const response = await placeOrderApi(buyNowItem, token);
-    console.log("response: ", response);
+    setMedicineItem(item);
+    setAmount(item.medicinePrice);
+  };
+
+  // place order for product
+  const placeOrderProduct = async () => {
+    setModalIsOpen(true);
+    console.log("productItem : ", productItem);
+
+    const response = await placeOrderProductApi(productItem, token);
+    console.log("response place order: ", response);
 
     if (response) {
       setModalIsOpen(false);
     }
+  };
+  // payment for product
+  const makePaymentProduct = async (token) => {
+    console.log("product Item : ", productItem);
+
+    const { productName, productPrice } = productItem;
+    const price = productPrice;
+    const name = productName;
+
+    const item = { name, price };
+
+    const body = {
+      token,
+      item,
+    };
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    return await fetch(`http://localhost:5500/paymentStripe`, {
+      method: "Post",
+      headers,
+      body: JSON.stringify(body),
+    })
+      .then((response) => {
+        console.log("Response", response);
+        const { status } = response;
+        console.log("Status", status);
+        if (status === 200) {
+          placeOrderProduct();
+          removeFromCart(prodId);
+        }
+      })
+      .catch((error) => {
+        console.log("error: ", error);
+      });
+  };
+  // place order for medicine
+  const placeOrderMedicine = async () => {
+    setModalIsOpen(true);
+    console.log(" medicineItem : ", medicineItem);
+
+    const response = await placeOrderMedicineApi(medicineItem, token);
+    console.log("response place order: ", response);
+
+    if (response) {
+      setModalIsOpen(false);
+    }
+  };
+
+  // place order for medicine
+  const makePaymentMedicine = async (token) => {
+    console.log("medicine Item : ", medicineItem);
+
+    const { medicineName, medicinePrice } = medicineItem;
+    const price = medicinePrice;
+    const name = medicineName;
+
+    const item = { name, price };
+
+    const body = {
+      token,
+      item,
+    };
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    return await fetch(`http://localhost:5500/paymentStripe`, {
+      method: "Post",
+      headers,
+      body: JSON.stringify(body),
+    })
+      .then((response) => {
+        console.log("Response", response);
+        const { status } = response;
+        console.log("Status", status);
+        if (status === 200) {
+          placeOrderMedicine();
+          removeFromCart(medId);
+        }
+      })
+      .catch((error) => {
+        console.log("error: ", error);
+      });
   };
 
   const viewProduct = (item) => {
@@ -143,7 +250,7 @@ const Cart = () => {
                 <div className="item">
                   <img src={item.product.productImage[0]} alt="product_img" />
                   <p>{item.product.productName}</p>
-                  <p>{item.product.productPrice}</p>
+                  <p>₹{item.product.productPrice}</p>
 
                   <button onClick={() => viewProduct(item.product)}>
                     <Link to="/viewproduct">
@@ -157,16 +264,17 @@ const Cart = () => {
                   <button
                     className="buynow"
                     onClick={() => {
-                      setBuyModal(true);
-                      takeItem(item);
+                      setProdBuyModal(true);
+                      takeProductItem(item.product);
+                      setProdId(item._id);
                     }}
                   >
                     Buy Now
                   </button>
-                  <Modal isOpen={buyModal} style={customStyles}>
+                  <Modal isOpen={prodBuyModal} style={customStyles}>
                     <div className="buy-modal-conatiner">
                       <div className="buy-modal-cancel">
-                        <button onClick={() => setBuyModal(false)}>
+                        <button onClick={() => setProdBuyModal(false)}>
                           <i class="fas fa-times"></i>
                         </button>
                       </div>
@@ -179,19 +287,29 @@ const Cart = () => {
                       <div className="buy-modal-btn">
                         <button
                           className="no"
-                          onClick={() => setBuyModal(false)}
+                          onClick={() => setProdBuyModal(false)}
                         >
                           cancel
                         </button>
-                        <button
-                          className="yes"
-                          onClick={() => {
-                            setBuyModal(false);
-                            placeOrder();
-                          }}
+
+                        <StripCheckout
+                          stripeKey="pk_test_51K9BzESJxF1xgWl3VLpG7easuHbz7arQhPME9rZtGqeQYeFDNH1Ve7eiyy3AsVypNWubsegfT78trvTOHGK9kocL00S3gYD1gS"
+                          token={makePaymentProduct}
+                          name="Make Payment"
+                          shippingAddress
+                          billingAddress
                         >
-                          proceed
-                        </button>
+                          <button
+                            class="btn btn-md bg-warning"
+                            className="yes"
+                            onClick={() => {
+                              setProdBuyModal(false);
+                              // makePayment();
+                            }}
+                          >
+                            pay ₹{amount}
+                          </button>
+                        </StripCheckout>
                       </div>
                     </div>
                   </Modal>
@@ -202,7 +320,7 @@ const Cart = () => {
                 <div className="item">
                   <img src={item.medicine[0]} alt="product_img" />
                   <p>{item.medicine.medicineName}</p>
-                  <p>{item.medicine.medicinePrice}</p>
+                  <p>₹{item.medicine.medicinePrice}</p>
 
                   <button onClick={() => viewProduct(item.medicine)}>
                     <Link to="/medicines/viewmedcines">
@@ -213,7 +331,58 @@ const Cart = () => {
                   <button onClick={() => removeFromCart(item._id)}>
                     <i class="fas fa-times"></i>
                   </button>
-                  <button className="buynow">Buy Now</button>
+                  <button
+                    className="buynow"
+                    onClick={() => {
+                      setMedBuyModal(true);
+                      takeMedicineItem(item.medicine);
+                      setMedId(item._id);
+                    }}
+                  >
+                    Buy Now
+                  </button>
+                  <Modal isOpen={medBuyModal} style={customStyles}>
+                    <div className="buy-modal-conatiner">
+                      <div className="buy-modal-cancel">
+                        <button onClick={() => setMedBuyModal(false)}>
+                          <i class="fas fa-times"></i>
+                        </button>
+                      </div>
+                      <div className="buy-modal-body">
+                        <p>
+                          Are you sure <br />
+                          you want to buy now?
+                        </p>
+                      </div>
+                      <div className="buy-modal-btn">
+                        <button
+                          className="no"
+                          onClick={() => setMedBuyModal(false)}
+                        >
+                          cancel
+                        </button>
+
+                        <StripCheckout
+                          stripeKey="pk_test_51K9BzESJxF1xgWl3VLpG7easuHbz7arQhPME9rZtGqeQYeFDNH1Ve7eiyy3AsVypNWubsegfT78trvTOHGK9kocL00S3gYD1gS"
+                          token={makePaymentMedicine}
+                          name="Make Payment"
+                          shippingAddress
+                          billingAddress
+                        >
+                          <button
+                            class="btn btn-md bg-warning"
+                            className="yes"
+                            onClick={() => {
+                              setMedBuyModal(false);
+                              // makePayment();
+                            }}
+                          >
+                            pay ₹{amount}
+                          </button>
+                        </StripCheckout>
+                      </div>
+                    </div>
+                  </Modal>
                 </div>
               );
             }

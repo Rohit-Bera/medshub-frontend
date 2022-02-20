@@ -34,6 +34,7 @@ const Mynotification = () => {
   };
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [myorders, setMyOrders] = useState([]);
+  const [length, setOrderLentgh] = useState();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.userReducer).token;
 
@@ -47,6 +48,7 @@ const Mynotification = () => {
     if (response) {
       setModalIsOpen(false);
       setMyOrders(response.data.myOrder);
+      setOrderLentgh(response.data.myOrder.length);
     }
   };
 
@@ -79,45 +81,51 @@ const Mynotification = () => {
       <div className="your-wishlist">
         <div className="wishlist-items">
           <p style={{ fontSize: "20px" }}>My Notifications</p>
-          {myorders.map((item) => {
-            if (item.product && item.deliverystatus == false) {
-              return (
-                <div className="item">
-                  <img src={item.product.productImage[0]} alt="product_img" />
-                  <p>{item.product.productName}</p>
-                  <p>{item.product.productPrice}</p>
+          {length !== 0 ? (
+            myorders.map((item) => {
+              if (item.product && item.deliverystatus == false) {
+                return (
+                  <div className="item">
+                    <img src={item.product.productImage[0]} alt="product_img" />
+                    <p>{item.product.productName}</p>
+                    <p>{item.product.productPrice}</p>
 
-                  <button onClick={() => dispatchProd(item.product)}>
-                    <Link to="/viewproduct">
-                      <i class="fas fa-eye"></i>
-                    </Link>
-                  </button>
+                    <button onClick={() => dispatchProd(item.product)}>
+                      <Link to="/viewproduct">
+                        <i class="fas fa-eye"></i>
+                      </Link>
+                    </button>
 
-                  <button onClick={() => deleteOrder(item)}>
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              );
-            } else if (item.medicine && item.deliverystatus == false) {
-              return (
-                <div className="item">
-                  <img src={item.medicine[0]} alt="product_img" />
-                  <p>{item.medicine.medicineName}</p>
-                  <p>{item.medicine.medicinePrice}</p>
+                    <button onClick={() => deleteOrder(item)}>
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                );
+              } else if (item.medicine && item.deliverystatus == false) {
+                return (
+                  <div className="item">
+                    <img src={item.medicine[0]} alt="product_img" />
+                    <p>{item.medicine.medicineName}</p>
+                    <p>{item.medicine.medicinePrice}</p>
 
-                  <button onClick={() => dispatchMed(item.medicine)}>
-                    <Link to="/medicines/viewmedcines">
-                      <i class="fas fa-eye"></i>
-                    </Link>
-                  </button>
+                    <button onClick={() => dispatchMed(item.medicine)}>
+                      <Link to="/medicines/viewmedcines">
+                        <i class="fas fa-eye"></i>
+                      </Link>
+                    </button>
 
-                  <button onClick={() => deleteOrder(item)}>
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              );
-            }
-          })}
+                    <button onClick={() => deleteOrder(item)}>
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                );
+              }
+            })
+          ) : (
+            <div>
+              <p>no orders added</p>
+            </div>
+          )}
         </div>
         <div className="account-details-nav">
           <div className="details-nav">

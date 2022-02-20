@@ -10,6 +10,7 @@ const productSlice = createSlice({
     productBrand: "",
     productCategory: "",
     availableStatus: "",
+    productDescription: "",
   },
   reducers: {
     // actions
@@ -25,6 +26,7 @@ const productSlice = createSlice({
       state.productImage = payload.product.productImage;
       state.productName = payload.product.productName;
       state.productPrice = payload.product.productPrice;
+      state.productDescription = payload.product.productDescription;
     },
   },
 });

@@ -8,6 +8,7 @@ import { Triangle, Rings, Oval } from "react-loader-spinner";
 // import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Modal from "react-modal/lib/components/Modal";
 import { uploadPrescriptionApi } from "../Data/Services/Oneforall";
+import Footer from "./Footer";
 Modal.setAppElement("#root");
 
 const Uploadprescription = () => {
@@ -81,29 +82,33 @@ const Uploadprescription = () => {
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
       ></link>
 
-      <div className="background">
-        <p>Attach Prescription</p>
+      <div className="upload-prescription">
+        <div className="background">
+          <p>Attach Prescription</p>
 
-        <div className="upload">
-          <p>Upload</p>
+          <div className="upload">
+            <p>Upload</p>
 
-          <p>Please Attach a valid Prescription.</p>
-          <div className="file">
-            <i class="fa fa-cloud-upload fa-3x"></i>
-
+            <p>Please Attach a valid Prescription.</p>
             <div className="file">
-              <form onSubmit={refresh}>
-                <input
-                  type="file"
-                  onChange={(e) => takeInput(e)}
-                  className="img"
-                />
-                <button onClick={upload}>Upload</button>
-              </form>
+              <i class="fa fa-cloud-upload fa-3x"></i>
+
+              <div className="file">
+                <form onSubmit={refresh}>
+                  <input
+                    type="file"
+                    onChange={(e) => takeInput(e)}
+                    className="img"
+                  />
+                  <button onClick={upload}>Upload</button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      <Footer />
 
       <Modal
         isOpen={modalIsOpen}
