@@ -3,7 +3,7 @@ import "../style/youraccount.css";
 import { Link } from "react-router-dom";
 // import Navbar from "./Navbar"
 import Modal from "react-modal/lib/components/Modal";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userData } from "../Data/Reducers/userData.reducer";
 import { useHistory } from "react-router-dom";
 
@@ -37,8 +37,18 @@ const Youraccount = () => {
     dispatch(userData({ theUser }));
 
     setModalIsOpen(false);
-    toast.success("logout successfull");
+
     history.push("/");
+
+    toast.success("logout successfull", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   };
 
   return (

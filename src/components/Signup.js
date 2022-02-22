@@ -6,6 +6,7 @@ import Navbar from "./Navbar";
 import { postUserService } from "../Data/Services/Oneforall";
 import { useDispatch } from "react-redux";
 import { userData } from "../Data/Reducers/userData.reducer";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   // -----------------------------------------------------------states
@@ -35,22 +36,41 @@ const Signup = () => {
 
   const postUser = async () => {
     console.log("user: ", user);
-    try {
-      const response = await postUserService(user);
-      console.log("response: ", response);
+    if (
+      user.address !== "" &&
+      user.email !== "" &&
+      user.name !== "" &&
+      user.password !== null &&
+      user.phoneNumber !== ""
+    ) {
+      try {
+        const response = await postUserService(user);
+        console.log("response: ", response);
 
-      const theUser = await response.receive.data.signupuser;
-      console.log("signupuser: ", theUser);
-      dispatch(userData({ theUser }));
+        const theUser = await response.receive.data.signupuser;
+        console.log("signupuser: ", theUser);
+        dispatch(userData({ theUser }));
 
-      if (response.receive) {
-        return history.push("/yourAccount/AccountDetails");
+        if (response.receive) {
+          return history.push("/yourAccount/AccountDetails");
+        }
+        if (response.error) {
+          console.log("error occured", response.error);
+        }
+      } catch (error) {
+        console.log("error: ", error);
       }
-      if (response.error) {
-        console.log("error occured", response.error);
-      }
-    } catch (error) {
-      console.log("error: ", error);
+    } else {
+      toast.info("please enter details", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
 
     setUser({
@@ -69,7 +89,11 @@ const Signup = () => {
       <form onSubmit={(e) => refresh(e)}>
         <div style={{ display: "flex", marginTop: "1%" }}>
           <div style={{ flex: "50%" }}>
-            <img src={signup} alt="crashed" style={{ height: "700px" }}></img>
+            <img
+              src={signup}
+              alt="crashed"
+              style={{ height: "700px", width: "40vw", marginLeft: "10%" }}
+            ></img>
           </div>
           <hr className="hr-signup"></hr>
           <div style={{ flex: "50%" }}>

@@ -17,6 +17,7 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Modal from "react-modal/lib/components/Modal";
 import Youraccount from "./Youraccount";
 import StripCheckout from "react-stripe-checkout";
+import { toast } from "react-toastify";
 
 Modal.setAppElement("#root");
 
@@ -57,6 +58,16 @@ const Cart = () => {
     token === ""
   ) {
     history.push("/signin");
+    toast.info("please login first! ", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
   }
 
   const customStyles = {
