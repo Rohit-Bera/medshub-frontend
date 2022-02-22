@@ -101,16 +101,16 @@
 }
 .border-tr-medicine{
     border-bottom: 1px solid #ddd;
-    background-color: black;
+    background-color: white;
     border: 3px solid rgb(56,182,255);
-    color:white
+    color:black
 }
 .table-title-medicine{
     background-color: rgb(56,182,255);
 }
 .btn-updateDelte-medicine{
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     border: none;
     padding: 10px;
     font-size: 20px;

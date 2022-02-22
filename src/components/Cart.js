@@ -42,9 +42,7 @@ const Cart = () => {
 
   const [amount, setAmount] = useState(); // price state
   const dispatch = useDispatch();
-
   const token = useSelector((state) => state.userReducer).token;
-
   const name = useSelector((state) => state.userReducer).name;
   const email = useSelector((state) => state.userReducer).email;
   const address = useSelector((state) => state.userReducer).address;

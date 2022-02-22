@@ -6,6 +6,12 @@ import { useSelector } from "react-redux";
 import {getallProductApi,addProductApi,deleteProductApi,updateProductsApi} from "../Data/Services/Oneforall";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import Modal from "react-modal/lib/components/Modal";
+import { Triangle, Rings, Oval } from "react-loader-spinner";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import { toast } from 'react-toastify';
+Modal.setAppElement("#root");
+
 
 const Product = () =>{
     //add product state
@@ -16,6 +22,18 @@ const Product = () =>{
         productCategory:"",
         productId:"",
     });
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      border: "1px solid black",
+    },
+  };
     // add img state
     const[Img,setImg] = useState({
         productImage:[],
@@ -54,9 +72,15 @@ const Product = () =>{
     };
     //get all products
     const getProduct = async()=>{
+        setModalIsOpen(true);
+
         try {
         const headers = {headers:{Authorization: `Bearer ${token}` }}
             const response = await getallProductApi(headers);
+            if(response){
+        setModalIsOpen(false);
+
+            }
             console.log('response: ', response);
             setAllProducts(response.data);
         } catch (error) {
@@ -66,6 +90,7 @@ const Product = () =>{
     }
     //add products 
     const addProduct = async()=>{
+        setModalIsOpen(true);
         try {
             const {productName,productPrice,productBrand,productCategory} = products;
             const {productImage} = Img;
@@ -95,6 +120,17 @@ const Product = () =>{
             const headers = {headers:{Authorization: `Bearer ${token}` }}
             const result = await addProductApi(fd,headers);
             console.log('result: ', result);
+           
+            if(result){
+                setModalIsOpen(false);
+                
+            }
+            if(result.status === 200){
+                toast.success("Product added Succesfully!")
+            }
+            else{
+                toast.error("Product is not added!")
+            }
             getProduct();
             setStatus({availableStatus:false});
             setProducts({
@@ -116,11 +152,21 @@ const Product = () =>{
     };
     //delete prodcts api
     const deleteProducts = async(item)=>{
+        setModalIsOpen(true);
         try {
             const {_id} = item ;
             const headers = {headers:{Authorization: `Bearer ${token}` }}
             const response = await deleteProductApi(headers,_id);
             console.log('response: ', response);
+            if(response){
+                setModalIsOpen(false);
+            }
+            if(response.status === 200){
+                toast.success("Product deleted successfully!")
+            }
+            else{
+                toast.error("Product is not deleted")
+            }
             getProduct();
         } catch (error) {
             console.log('error: ', error);
@@ -150,6 +196,8 @@ const Product = () =>{
         })
     }
     const updateProducts = async()=>{
+        setModalIsOpen(true);
+
         try{
             console.log('products: ', products);
             console.log('status: ', status);
@@ -176,6 +224,15 @@ const Product = () =>{
             const headers = {headers:{Authorization: `Bearer ${token}` }}
             const response = await updateProductsApi(_id,fd,headers)
             console.log('response: ', response);
+            if(response){
+                setModalIsOpen(false);
+            }
+            if(response.status === 200){
+                toast.success("Product updated succesfully!")
+            }
+            else{
+                toast.error("Product is not updated!")
+            }
             getProduct();
 
         }
@@ -258,7 +315,7 @@ const Product = () =>{
         </div>
 
             
-             <table cellPadding="20px"  className="table-product ">
+             <table cellPadding="10px"  className="table-product ">
              <tr className="border-tr table-title" >
                     <td>Product Image</td>
                     <td>Product Name</td>
@@ -276,7 +333,7 @@ const Product = () =>{
    
                    <tr className="border-tr" data-aos="zoom-in-down">
                                 <td >
-                                    <img src={item.productImage[0]} alt="noImage"/>
+                                    <img src={item.productImage[0]} style={{height:"15vh",width:"10vw"}} alt="noImage"/>
                                  </td>
                                 <td>
                                  <p>{item.productName}</p>
@@ -341,6 +398,27 @@ const Product = () =>{
            )
        }
              </table>
+             <Modal
+        isOpen={modalIsOpen}
+        // onRequestClose={() => setModalIsOpen(false)}
+        style={customStyles}
+      >
+        <div
+          style={{
+            width: "7vw",
+            height: "13vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Triangle
+            color="black"
+            height={100}
+            width={100}
+          />
+        </div>
+      </Modal> 
       
     </div>
 }

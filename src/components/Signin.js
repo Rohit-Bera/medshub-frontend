@@ -9,11 +9,12 @@ import { useDispatch } from "react-redux";
 import { userData } from "../Data/Reducers/userData.reducer";
 import { adminData } from "../Data/Reducers/adminData.reducer";
 import Modal from "react-modal/lib/components/Modal";
-import { Triangle, Rings, Oval } from "react-loader-spinner";
-
-import { toast } from "react-toastify";
-
+import { Triangle } from "react-loader-spinner";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 Modal.setAppElement("#root");
+
+
 
 const Signin = () => {
   // ---------------states
@@ -43,11 +44,13 @@ const Signin = () => {
     setModalIsOpen(true);
     console.log("logUser: ", logUser);
 
+
     if (logUser.email !== "" && logUser.password !== null) {
       try {
         const response = await loginUserService(logUser);
         if (response) {
           setModalIsOpen(false);
+
         }
         console.log("response: ", response.receive.data);
 

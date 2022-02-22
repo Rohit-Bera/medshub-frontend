@@ -1,0 +1,19 @@
+.User-Profile-admin{
+    height: 39vh;
+    width: 17vw;
+    padding: 10px;
+    background-color: white;
+    color: black;
+    margin-top: 20px;
+    margin-left: 25px;
+    box-shadow: 0px 0px 10px white;
+    
+}
+.flex-users-admin{
+    display: flex;
+    justify-content: space-around;
+}
+.icon-user{
+    font-size: 50px;
+    text-align: center;
+}

@@ -43,7 +43,6 @@ const Searchproduct = () => {
     console.log("searchProd: ", searchProd);
     const response = await getSearchProductApi(searchProd);
     console.log("response: ", response);
-
     console.log("length : ", response.data.found.searchpro.length);
 
     if (response) {
