@@ -37,9 +37,9 @@
 }
 .border-tr{
     border-bottom: 1px solid #ddd;
-    background-color: black;
+    background-color: white;
     border: 3px solid rgb(56,182,255);
-    color:white
+    color:black
 }
 .table-title{
     background-color: rgb(56,182,255);

@@ -8,6 +8,9 @@ import { loginUserService } from "../Data/Services/Oneforall";
 import { useDispatch } from "react-redux";
 import { userData } from "../Data/Reducers/userData.reducer";
 import { adminData } from "../Data/Reducers/adminData.reducer";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Signin = () => {
   // ---------------states
@@ -37,7 +40,12 @@ const Signin = () => {
     try {
       const response = await loginUserService(logUser);
       console.log("response: ", response.receive.data);
-
+      if(response.receive.data.status === "404"){
+        toast.error("invalid password or email");
+      }
+      else{
+        toast.success("Signedin Successfully"); 
+      }
       const { user, token } = response.receive.data.loguser;
 
       const { name, email, address, phoneNumber, usertype } = user;

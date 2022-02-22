@@ -39,9 +39,9 @@ const Accountdetails = () => {
             <section>{phone} </section>
             <section>{email}</section>
           </div>
-          <div className="account-update">
+         <Link to="/updateProfile"> <div className="account-update">
             <section>Update profile</section>
-          </div>
+          </div></Link>
         </div>
         <div className="profile-card">
           <Link to="/yourAccount/AccountDetails">

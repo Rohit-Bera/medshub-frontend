@@ -62,17 +62,37 @@ border-radius: 34px;
 }
 .border-tr-order{
     border-bottom: 1px solid #ddd;
-    background-color: black;
+    background-color: white;
     border: 3px solid rgb(56,182,255);
-    color:white
+    color:black
 }
 .table-title-order{
     background-color: rgb(56,182,255);
 }
 .button-admin-order{
     padding: 10px;
-    border: 2px solid rgb(56,182,255);
+    border: 3px solid rgb(56,182,255);
     background-color: black;
     color: white;
     font-size: 20px;
+}
+.main-order-flex{
+    display: flex;
+    justify-content: space-around;
+}
+.card-order-main{
+    height: 20vh;
+    width: 25vw;
+    border: 2px white solid;
+    box-shadow: 0px 0px 10px white;
+    margin-top: 30px;
+    text-align: center;
+}
+.card-order-main h3{
+    margin-top: 40px;
+    font-size: 30px;
+}
+.filter-span{
+    padding: 10px;
+    margin-top: 5px;
 }

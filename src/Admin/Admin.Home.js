@@ -20,16 +20,22 @@ const Adminhome = () => {
           Medicine
         </div>
       </Link>
-    </div>
-    <br></br>
-    <div className="admin-flex "> 
       <Link to="/ADmIn/AdminFeedback">
         <div className="box-admin link-admin" >
         <i class="fas fa-clipboard" style={{marginTop:"20px"}}></i><br></br>
           Feedback
         </div>
-      </Link></div>
-    <div className="admin-flex ">
+      </Link>
+    </div>
+    <br></br><br></br><br></br>
+    <div className="admin-flex "> 
+      
+      <Link to="/ADmIn/allUSers">
+        <div className="box-admin link-admin" >
+        <i class="fas fa-clipboard" style={{marginTop:"20px"}}></i><br></br>
+          Users
+        </div>
+      </Link>
       <Link to="/ADmIn/ManageOrder">
         <div className="box-admin link-admin">
         <i class="fas fa-clipboard" style={{marginTop:"20px"}}></i><br></br>
@@ -42,7 +48,9 @@ const Adminhome = () => {
           Prescription
         </div>
       </Link>
-    </div>
+      </div>
+      <br></br>
+    
   </div>
   </div>;
 };

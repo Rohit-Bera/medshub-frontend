@@ -6,6 +6,13 @@ import { useSelector } from "react-redux";
 import {addMedicineApi,getallMedicineApi,deleteMedicineApi,updateMedicineApi} from "../Data/Services/Oneforall";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import Modal from "react-modal/lib/components/Modal";
+import { Triangle } from "react-loader-spinner";
+import { toast } from 'react-toastify';
+
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+Modal.setAppElement("#root");
+
 
 
 
@@ -26,6 +33,18 @@ const Medicine = () =>{
     const[status,setStatus]=useState({
         availableStatus:"",
     });
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      border: "1px solid black",
+    },
+  };
     
     //effect
     useEffect(() => {
@@ -59,12 +78,18 @@ const Medicine = () =>{
     };
     //get all medicine
    const getMedicine = async ()=>{
+    setModalIsOpen(true);
     try {
+        
+
         // const url = "https://medshub-backend.herokuapp.com/getMedicine";
         const headers = {headers:{Authorization: `Bearer ${token}` }}
 
         const response = await getallMedicineApi(headers);
         console.log('response: ', response);
+        if(response){
+            setModalIsOpen(false);
+        }
         setAllMedicine(response.data.medicines);
 
     } catch (error) {
@@ -74,7 +99,7 @@ const Medicine = () =>{
     };
     //add medicine api
     const addMedicine = async()=>{
-      
+        setModalIsOpen(true);
         try {
             const {medicineName,medicinePrice,manufacturerName,medicineCategory}=meds;
             // console.log('meds: ', meds);
@@ -107,6 +132,17 @@ const Medicine = () =>{
             const headers = {headers:{Authorization: `Bearer ${token}` }}
             const result = await addMedicineApi(fd,headers);
             console.log('result: ', result);
+            if(result){
+                setModalIsOpen(false);
+            }
+            if(result.data.errors){
+                toast.error("Medicine is not added!")
+                
+            }
+            else{
+                toast.success("Medicine added Succesfully!")
+
+            }
             getMedicine();
             setStatus({availableStatus:false});
         setMeds({
@@ -127,14 +163,17 @@ const Medicine = () =>{
     };
     //delete medicine api
     const deleteMedicine = async(item)=>{
+        setModalIsOpen(true);
         try{
             const {_id} = item;
             const headers = {headers:{Authorization: `Bearer ${token}` }}
 
             const response = await deleteMedicineApi(headers,_id);
             console.log('response: ', response);       
-            
-                getMedicine()
+            if(response){
+                setModalIsOpen(false);
+            }
+            getMedicine();
             
         }
         catch(error)
@@ -164,7 +203,9 @@ const Medicine = () =>{
         
         
     }
+    //upadte medicine
     const updateMedicine = async()=>{
+        setModalIsOpen(true);
         console.log('meds: ', meds);
         console.log('status: ', status);
         console.log('Img: ', Img);
@@ -193,6 +234,15 @@ const Medicine = () =>{
             const headers = {headers:{Authorization: `Bearer ${token}` }}
             const response = await updateMedicineApi(_id,fd,headers)
             console.log('response: ', response);
+            if(response){
+                setModalIsOpen(false);
+            }
+            if(response.data.status === "200"){
+                toast.success("Medicne Updated Successfully!")
+            }
+            else{
+                toast.error("Medicine is not Updated!")
+            }
             getMedicine()
             
             
@@ -264,7 +314,7 @@ const Medicine = () =>{
 
                     </form>
                     </div>   
-                        <table cellPadding="20px"  className="table-medicine ">
+                        <table cellPadding="10px"  className="table-medicine ">
                         <tr className="border-tr-medicine table-title-medicine" >
                             <td>Medicine Image</td>
                             <td>Medicine Name</td>
@@ -282,7 +332,7 @@ const Medicine = () =>{
                                  
                                          <tr className="border-tr-medicine" data-aos="zoom-in-down">
                                              <td>
-                                                 <img src={item.medicineImage[0]} alt="noImage"/>
+                                                 <img src={item.medicineImage[0]} style={{height:"15vh",width:"10vw"}} alt="noImage"/>
                                              </td>
                                              <td>
                                                  <p>{item.medicineName}</p>
@@ -316,7 +366,27 @@ const Medicine = () =>{
                      )}
                      </table>
 
-                   
+                     <Modal
+        isOpen={modalIsOpen}
+        // onRequestClose={() => setModalIsOpen(false)}
+        style={customStyles}
+      >
+        <div
+          style={{
+            width: "7vw",
+            height: "13vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Triangle
+            color="black"
+            height={100}
+            width={100}
+          />
+        </div>
+      </Modal>   
     </div>; 
 
     }

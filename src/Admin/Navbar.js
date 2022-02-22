@@ -55,7 +55,7 @@ const Navbar = ()=>{
                 X
               </button>
             </div>
-            <div className="body">
+            <div className="body" style={{color:"black"}}>
               Are You Sure <br />
               You Want to Log out ?
             </div>

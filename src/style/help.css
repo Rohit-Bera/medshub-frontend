@@ -13,7 +13,6 @@
   width: 40vw;
   margin-left: 70%;
   margin-bottom: 1%;
-
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -33,7 +32,9 @@
 
 /* modal style */
 .help-modal {
-  color: black;
-  background-color: aqua;
-  width: 30vw;
+  color: white;
+  background-color: black;
+  width: 35vw;
+  padding: 10px;
+  text-align: justify;
 }

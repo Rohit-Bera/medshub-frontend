@@ -1,26 +1,29 @@
 import React from "react";
-import "./style/Prescription.css";
+import "./style/Order.css";
 import Navbar from "./Navbar";
-import {  useEffect,useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import Modal from "react-modal/lib/components/Modal";
-import {getPrescriptionApi,updatePrescriptionApi} from "../Data/Services/Oneforall";
+import { useSelector } from "react-redux";
+import {getOrderApi,updateOrderApi} from "../Data/Services/Oneforall";
 import cx from "classnames";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import { Link } from "react-router-dom";
 import { Triangle, Rings, Oval } from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 Modal.setAppElement("#root");
 
 
-const Prescription = ({rounded = false}) =>{
-    const [ordermodalIsOpen, setOrederModel] = useState(false);
-    const [allPrescription,setAllPrescription]=useState([]);
-    const[status,setStatus]=useState({
-        prescriptionStatus:false,
-        prescriptionId:""
-    });
-    const [modalIsOpen, setModalIsOpen] = useState(false);
+
+
+const AdminOrder = ({rounded = false}) =>{
+    useEffect(() => {
+        getOrder();
+      }, []);
+      useEffect(()=>{
+        Aos.init({duration:1000});
+      },[]);
+      const [modalIsOpen, setModalIsOpen] = useState(false);
       const customStyles2 = {
         content: {
           top: "50%",
@@ -33,12 +36,14 @@ const Prescription = ({rounded = false}) =>{
         },
       };
 
-    useEffect(() => {
-        getPrescription();
-      }, []);
-      useEffect(()=>{
-        Aos.init({duration:1000});
-      },[]);
+    const [ordermodalIsOpen, setOrederModel] = useState(false);
+    const [allOrders,setallOrder]=useState([]);
+    const[status,setStatus]=useState({
+        deliverystatus:false,
+        orderId:""
+    })
+    
+    //style
     const customStyles = {
       content: {
         top: "50%",
@@ -52,49 +57,49 @@ const Prescription = ({rounded = false}) =>{
     };
     const token =  useSelector((state)=>state.adminReducer).token;
 
-    const getPrescription = async()=>{
-        setModalIsOpen(true);
+    //get allorder
+    const getOrder = async()=>{
+    setModalIsOpen(true);
         try {
             const headers = {headers:{Authorization: `Bearer ${token}` }}
-            const response = await getPrescriptionApi(headers);
+            const response = await getOrderApi(headers);
             console.log('response: ', response);
             if(response){
                 setModalIsOpen(false);
             }
-            setAllPrescription(response.data.allPrescription)
-            
+
+            console.log('response.data.allOrder: ', response.data.allOrder);
+            setallOrder(response.data.allOrder);  
         } catch (error) {
-            console.log('error: ', error);
-            
+            console.log('error: ', error);    
         }
-    }
-    //edit prescription
-    const acceptPrescription = async(item)=>{
+    };
+    //edit order
+    const acceptOrder = async(item)=>{
         console.log('item: ', item);
         setStatus({
             ...status,
-            
-            "prescriptionStatus":true,
-            "prescriptionId":item._id
+            "deliverystatus":true,
+            "orderId":item._id
         })
         console.log('status: ', status);
-
     }
-    //update Prescription
-    const updatePrescription = async()=>{
-        setModalIsOpen(true);
+    //update
+    const updateOrder = async()=>{
+    setModalIsOpen(true);
+
         try {
-            const{prescriptionStatus,prescriptionId}=status;
+            const{deliverystatus,orderId}=status;
             console.log('status: ', status);
-            const _id = prescriptionId;
+            const _id = orderId;
+            
             const headers = {headers:{Authorization: `Bearer ${token}` }}
-            const response = await updatePrescriptionApi(_id,status,headers)
+            const response = await updateOrderApi(_id,status,headers)
             console.log('response: ', response);
             if(response){
                 setModalIsOpen(false);
             }
-            getPrescription();
-
+            getOrder();
         } catch (error) {
             console.log('error: ', error);
             
@@ -105,54 +110,67 @@ const Prescription = ({rounded = false}) =>{
     })
     return <div>
         <Navbar />
-        <p className="p-prescription-admin">All Prescription</p>
-        <table cellPadding="10px" className="table-order">
-            <tr className="border-tr-prescription table-title-prescription">
-                <td>prescription Image</td>
+        <div className="filter-span"><Link to="/ADmIn/ProductOrder"><span className="filter-span" style={{borderBottom:"2px white solid"}}>Deliverd</span></Link> 
+            <Link to="/ADmIn/ProductOrder/NotDeliverdProd"><span>Not Deliverd</span></Link></div>
+        <div>
+        <p className="p-order-admin">Product Orders</p>
+        <table cellPadding="10px" className="table-prescription ">
+            <tr className="border-tr-order table-title-order">
+                <td>Product Image</td>
+                <td>Product Name</td>
+                <td>Product Price</td>
                 <td>Owner Name</td>
                 <td>Owner Email</td>
                 <td>Owner Address</td>
                 <td>Owner Phone No.</td>
                 <td></td>
-                <td></td>
+                
             </tr>
         {
-           allPrescription.map((item)=>{
-               if(item.prescriptionStatus === false){
+           allOrders.map((item)=>{
+            //    console.log('item: ', item);
+            
+               if(item.product && item.deliverystatus===true){
                 return(
-                  
-                       
-                       <tr className="border-tr-prescription" data-aos="zoom-in-down">
+                       <tr className="border-tr-order" data-aos="zoom-in-down">
+                           
                             <td>
-                                <div> <img src={item.prescriptionImage} style={{height:"15vh",width:"10vw"}} alt="noImage"/></div>
+                                 <img src={item.product.productImage[0]} style={{height:"15vh",width:"10vw"}} alt="noImage"/>
                                  
                             </td>
                             <td>
-                                 <p>{item.owner.name}</p> 
+                                 <p>{item.product.productName}</p> 
                             </td>
                             <td>
-                                 <p>{item.owner.email}</p> 
+                                 <p>{item.product.productPrice}</p> 
                             </td>
-                            <td>
-                                 <p>{item.owner.address}</p> 
-                            </td>
-                            <td>
-                                 <p>{item.owner.phoneNumber}</p> 
-                            </td>
-                            <td> <label className="switch"><input type="checkbox" name="deliverystatus" className="input-admin-order" onClick={()=>acceptPrescription(item)}></input>
-                            <span className={sildercx}></span></label></td>
-                            
                              <td>
-                             <button className="button-admin-prescription" onClick={()=>updatePrescription()}><i class="fas fa-check"></i></button>
-
+                                 <p>{item.owner.name}</p>
                              </td>
-                         </tr>
-                 
+                            <td>
+                                 <p>{item.owner.email}</p>
+                            </td>
+                            <td>
+                                <p>{item.owner.address}</p>
+                            </td>
+                            <td>
+                                <p>{item.owner.phoneNumber}</p>
+                            </td>
+                            <td>
+                     {item.deliverystatus ? (
+                           <p style={{backgroundColor:"green",color:"white",padding:"5px"}}>Deliverd</p>
+                         ):(<p style={{backgroundColor:"red",color:"white",padding:"5px"}}>Out of stock</p>)}
+                             </td>
+                         </tr>    
                )
                }
+               
            })
        }
        </table>
+        </div>
+        
+        
                 <Modal
                     isOpen={ordermodalIsOpen}
                     onRequestClose={() => setOrederModel(false)}
@@ -167,7 +185,7 @@ const Prescription = ({rounded = false}) =>{
                             </div>
                             <div className="body">
                             Are You Sure <br />
-                            You Want to accept prescription ?
+                            You Want to Deliver Order ?
                             </div>
                             <div className="modalbutton">
                             <button className="no" onClick={() => setOrederModel(false)}>
@@ -199,8 +217,7 @@ const Prescription = ({rounded = false}) =>{
           />
         </div>
       </Modal>   
-                
                
     </div>;
 }
-export default Prescription;
+export default AdminOrder;

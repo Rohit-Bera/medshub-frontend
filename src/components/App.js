@@ -47,6 +47,14 @@ import Cart from "./Cart";
 import Uploadprescription from "./Uploadprescription";
 import Searchproduct from "./Searchproduct";
 import Searchmedicine from "./Searchmedicine";
+import ProductOrder from "../Admin/Admin-product-order";
+import MedicineOrder from "../Admin/Admin-medicine-order"; 
+import NotDeliverMedicine from "../Admin/NotDeliverMedicineOrder";
+import NotDeliberProduct from "../Admin/NotDeliverProductOrder";
+import AllUsers from "../Admin/Users";
+import updateProfile from "../components/updateProfile";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
@@ -157,6 +165,15 @@ const App = () => {
           <Route path="/ADmIn/adminHome" exact component={admin} />
           <Route path="/ADmIn/ManageProducts" exact component={ManageProduct} />
           <Route path="/ADmIn/ManageOrder" exact component={ManageOrder} />
+          <Route path="/ADmIn/ProductOrder" exact component={ProductOrder} />
+          <Route path="/ADmIn/ProductOrder/NotDeliverdProd" exact component={NotDeliberProduct} />
+          <Route path="/ADmIn/medicineOrder" exact component={MedicineOrder} />
+          <Route path="/ADmIn/medicineOrder/NotDeliverdMed" exact component={NotDeliverMedicine} />
+          <Route path="/ADmIn/allUSers" exact component={AllUsers} />
+
+
+
+
           <Route
             path="/ADmIn/ManageMedicine"
             exact
@@ -177,6 +194,8 @@ const App = () => {
           <Route path="/yourAccount/myOrders" exact component={Myorders} />
           <Route path="/yourAccount/MyWishlist" exact component={mywishlist} />
           <Route path="/yourAccount/myCart" exact component={Cart} />
+          
+
 
           <Route
             path="/yourAccount/notification"
@@ -185,6 +204,7 @@ const App = () => {
           />
           <Route path="/signin" exact component={Signin} />
           <Route path="/signup" exact component={Signup} />
+          <Route path="/updateProfile" exact component={updateProfile} />
 
           <Route
             path="/productCategories/covid-essentials"
@@ -220,6 +240,17 @@ const App = () => {
           {/* error route */}
           <Route exact component={Error404} />
         </Switch>
+        <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       </Router>
     </>
   );

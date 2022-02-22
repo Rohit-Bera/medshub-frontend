@@ -492,3 +492,43 @@ export const uploadPrescriptionApi = async (fd, token) => {
     return error;
   }
 };
+
+export const getUserApi = async(headers)=>{
+  console.log('headers: ', headers);
+  // const host = "http://localhost:5500";
+  const url = "/getAllUsers";
+  const link = host+ url;
+  try {
+    const result = await axios.get(link,headers);
+    return result ;
+  } catch (error) {
+    console.log('error: ', error);
+    return error;
+    
+  }
+};
+
+export const deleteUserApi = async (headers,_id)=>{
+try {
+  const url = `/deleteUser/${_id}`;
+const link = host+url;
+const response = await axios.delete(link,headers);
+return response;
+} catch (error) {
+  console.log('error: ', error);
+  return error;
+}
+} 
+
+export const updateUserApi = async(_id, data, headers)=>{
+  try {
+    const url = `/editUser/${_id}`;
+    const link = host+url;
+    const result = await axios.put(link, data, headers);
+    console.log('result: ', result);
+
+  } catch (error) {
+    console.log('error: ', error);
+    
+  }
+}
