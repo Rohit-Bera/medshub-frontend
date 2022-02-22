@@ -14,6 +14,7 @@ import {
 } from "../Data/Services/Oneforall";
 import { medicineData } from "../Data/Reducers/medicine.reducer";
 import { productData } from "../Data/Reducers/product.reducer";
+import { toast } from "react-toastify";
 Modal.setAppElement("#root");
 
 const Myorder = () => {
@@ -101,6 +102,17 @@ const Myorder = () => {
     if (response) {
       setModalIsOpen(false);
     }
+    if (response.status === 200 && response.data.status === "200") {
+      toast.success("problem reported successfully", {
+        theme: "colored",
+        position: "top-right",
+      });
+    } else {
+      toast.error("something went wrong , Try again later!", {
+        theme: "colored",
+        position: "top-right",
+      });
+    }
   };
 
   const dispatchProd = (product) => {
@@ -125,7 +137,7 @@ const Myorder = () => {
                 <div className="item">
                   <img src={item.product.productImage[0]} alt="product_img" />
                   <p>{item.product.productName}</p>
-                  <p>{item.product.productPrice}</p>
+                  <p>₹{item.product.productPrice}</p>
 
                   <button
                     title="view"
@@ -179,7 +191,7 @@ const Myorder = () => {
                 <div className="item">
                   <img src={item.medicine[0]} alt="product_img" />
                   <p>{item.medicine.medicineName}</p>
-                  <p>{item.medicine.medicinePrice}</p>
+                  <p>₹{item.medicine.medicinePrice}</p>
 
                   <button
                     title="view"

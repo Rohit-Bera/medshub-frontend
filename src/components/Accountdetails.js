@@ -4,6 +4,7 @@ import YourAccount from "./Youraccount";
 import Navbar from "./Navbar";
 import { useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Accountdetails = () => {
   const history = useHistory();
@@ -21,6 +22,16 @@ const Accountdetails = () => {
     token === ""
   ) {
     history.push("/signin");
+    toast.info("please login first! ", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
   }
 
   return (

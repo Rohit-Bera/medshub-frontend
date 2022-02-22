@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import "../style/category.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Modal from "react-modal/lib/components/Modal";
 import "../style/viewmeds.css";
 
@@ -10,23 +10,28 @@ import Carousel, {
   autoplayPlugin,
 } from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Triangle, Rings, Oval } from "react-loader-spinner";
-
+import StripCheckout from "react-stripe-checkout";
 import Navbar from "./Navbar";
 import {
   postMedFeedbackApi,
   postMedWishlistApi,
+  placeOrderMedicineApi,
 } from "../Data/Services/Oneforall";
 Modal.setAppElement("#root");
 
 const Viewmed = () => {
+  // ======================================================== states
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [feedback, setFeedback] = useState("");
+  const [medBuyModal, setMedBuyModal] = useState(false); // medicine buy modal
+  const [medicineItem, setMedicineItem] = useState(null); // mediicne item state
+  const [amount, setAmount] = useState(); // price state
 
   const token = useSelector((state) => state.userReducer).token;
 
-  const med_id = useSelector((state) => state.medicineReducer)._id;
+  const _id = useSelector((state) => state.medicineReducer)._id;
   const medicineName = useSelector(
     (state) => state.medicineReducer
   ).medicineName;
@@ -42,7 +47,11 @@ const Viewmed = () => {
   const availableStatus = useSelector(
     (state) => state.medicineReducer
   ).availableStatus;
+  const medicineDescription = useSelector(
+    (state) => state.medicineReducer
+  ).medicineDescription;
 
+  // =========================================================== functions
   const customStyles = {
     content: {
       top: "50%",
@@ -58,7 +67,7 @@ const Viewmed = () => {
   const addMedtoWishlist = async () => {
     setModalIsOpen(true);
     const item = {
-      med_id,
+      _id,
       medicineName,
       medicineImage,
       medicinePrice,
@@ -66,7 +75,7 @@ const Viewmed = () => {
       availableStatus,
     };
 
-    const response = await postMedWishlistApi(med_id, item, token);
+    const response = await postMedWishlistApi(_id, item, token);
     console.log("response: ", response);
 
     if (response) {
@@ -86,7 +95,7 @@ const Viewmed = () => {
     setModalIsOpen(true);
     console.log("feed : ", feedback);
 
-    const medicineId = med_id;
+    const medicineId = _id;
 
     const data = { feedback, medicineId, medicineName };
 
@@ -97,6 +106,71 @@ const Viewmed = () => {
       setModalIsOpen(false);
       setFeedback("");
     }
+  };
+
+  // take item state of medicine
+  const takeMedicineItem = () => {
+    const medicine = {
+      _id,
+      medicineName,
+      medicinePrice,
+      medicineImage,
+      manufacturerName,
+      availableStatus,
+    };
+    console.log("medicine item: ", medicine);
+
+    setMedicineItem(medicine);
+    setAmount(medicinePrice);
+  };
+
+  // place order for medicine
+  const placeOrderMedicine = async () => {
+    setModalIsOpen(true);
+    console.log(" medicineItem : ", medicineItem);
+
+    const response = await placeOrderMedicineApi(medicineItem, token);
+    console.log("response place order: ", response);
+
+    if (response) {
+      setModalIsOpen(false);
+    }
+  };
+
+  // place order for medicine
+  const makePaymentMedicine = async (token) => {
+    console.log("medicine Item : ", medicineItem);
+
+    const { medicineName, medicinePrice } = medicineItem;
+    const price = medicinePrice;
+    const name = medicineName;
+
+    const item = { name, price };
+
+    const body = {
+      token,
+      item,
+    };
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    return await fetch(`http://localhost:5500/paymentStripe`, {
+      method: "Post",
+      headers,
+      body: JSON.stringify(body),
+    })
+      .then((response) => {
+        console.log("Response", response);
+        const { status } = response;
+        console.log("Status", status);
+        if (status === 200) {
+          placeOrderMedicine();
+        }
+      })
+      .catch((error) => {
+        console.log("error: ", error);
+      });
   };
 
   return (
@@ -140,35 +214,89 @@ const Viewmed = () => {
             </Carousel>
           </div>
           <div className="prod-detail">
-            <section>Medicine name : {medicineName}</section>
-            <section>Medicine Price : {medicinePrice}</section>
+            <section>{medicineName}</section>
+            <section> ₹{medicinePrice}</section>
             <section>
               {availableStatus ? (
                 <p
                   style={{
-                    backgroundColor: "green",
-                    color: "white",
+                    display: "flex",
+                    justifyContent: "space-around",
+                    alignItems: "center",
                   }}
                 >
+                  <p className="green"></p>
                   In Stock
                 </p>
               ) : (
                 <p
                   style={{
-                    backgroundColor: "red",
-                    color: "white",
+                    display: "flex",
+                    justifyContent: "space-around",
+                    alignItems: "center",
                   }}
                 >
+                  <p className="red"></p>
                   Out of Stock
                 </p>
               )}
             </section>
-            <section>manufacturerName : {manufacturerName}</section>
+            <section>{manufacturerName}</section>
+            <section style={{ width: "40vw" }}>{medicineDescription}</section>
             <section className="btn">
               <button onClick={() => addMedtoWishlist()}>
                 Add to Wishlist
               </button>
-              <button>Buy now</button>
+              <button
+                onClick={() => {
+                  setMedBuyModal(true);
+                  takeMedicineItem();
+                }}
+              >
+                Buy Now
+              </button>
+              <Modal isOpen={medBuyModal} style={customStyles}>
+                <div className="buy-modal-conatiner">
+                  <div className="buy-modal-cancel">
+                    <button onClick={() => setMedBuyModal(false)}>
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                  <div className="buy-modal-body">
+                    <p>
+                      Are you sure <br />
+                      you want to buy now?
+                    </p>
+                  </div>
+                  <div className="buy-modal-btn">
+                    <button
+                      className="no"
+                      onClick={() => setMedBuyModal(false)}
+                    >
+                      cancel
+                    </button>
+
+                    <StripCheckout
+                      stripeKey="pk_test_51K9BzESJxF1xgWl3VLpG7easuHbz7arQhPME9rZtGqeQYeFDNH1Ve7eiyy3AsVypNWubsegfT78trvTOHGK9kocL00S3gYD1gS"
+                      token={makePaymentMedicine}
+                      name="Make Payment"
+                      shippingAddress
+                      billingAddress
+                    >
+                      <button
+                        class="btn btn-md bg-warning"
+                        className="yes"
+                        onClick={() => {
+                          setMedBuyModal(false);
+                          // makePayment();
+                        }}
+                      >
+                        pay ₹{amount}
+                      </button>
+                    </StripCheckout>
+                  </div>
+                </div>
+              </Modal>
             </section>
           </div>
         </div>
@@ -178,8 +306,6 @@ const Viewmed = () => {
             <textarea
               className=""
               placeholder="write a review"
-              rows="10"
-              cols="40"
               name="feedback"
               onChange={takeInput}
             ></textarea>

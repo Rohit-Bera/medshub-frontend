@@ -8,6 +8,8 @@ import { Triangle, Rings, Oval } from "react-loader-spinner";
 // import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Modal from "react-modal/lib/components/Modal";
 import { uploadPrescriptionApi } from "../Data/Services/Oneforall";
+import Footer from "./Footer";
+import { toast } from "react-toastify";
 Modal.setAppElement("#root");
 
 const Uploadprescription = () => {
@@ -31,6 +33,16 @@ const Uploadprescription = () => {
     token === ""
   ) {
     history.push("/signin");
+    toast.info("please login first! ", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
   }
 
   const customStyles = {
@@ -51,21 +63,39 @@ const Uploadprescription = () => {
   };
 
   const upload = async () => {
-    setModalIsOpen(true);
-
     console.log("img: ", img);
 
-    const fd = new FormData();
+    if (img !== "") {
+      setModalIsOpen(true);
+      const fd = new FormData();
 
-    for (const key of Object.keys(img)) {
-      fd.append("prescriptionImage", img[key]);
-    }
+      for (const key of Object.keys(img)) {
+        fd.append("prescriptionImage", img[key]);
+      }
 
-    const response = await uploadPrescriptionApi(fd, token);
-    console.log("response: ", response);
+      const response = await uploadPrescriptionApi(fd, token);
+      console.log("response: ", response);
 
-    if (response) {
-      setModalIsOpen(false);
+      if (response) {
+        setModalIsOpen(false);
+      }
+
+      if (response.status === 200) {
+        toast.success("uploaded successfully!", { theme: "colored" });
+      } else {
+        toast.error("error occured , upload in next 5 seconds");
+      }
+    } else {
+      toast.info("no prescription selected! ", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
   };
 
@@ -81,29 +111,33 @@ const Uploadprescription = () => {
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
       ></link>
 
-      <div className="background">
-        <p>Attach Prescription</p>
+      <div className="upload-prescription">
+        <div className="background">
+          <p>Attach Prescription</p>
 
-        <div className="upload">
-          <p>Upload</p>
+          <div className="upload">
+            <p>Upload</p>
 
-          <p>Please Attach a valid Prescription.</p>
-          <div className="file">
-            <i class="fa fa-cloud-upload fa-3x"></i>
-
+            <p>Please Attach a valid Prescription.</p>
             <div className="file">
-              <form onSubmit={refresh}>
-                <input
-                  type="file"
-                  onChange={(e) => takeInput(e)}
-                  className="img"
-                />
-                <button onClick={upload}>Upload</button>
-              </form>
+              <i class="fa fa-cloud-upload fa-3x"></i>
+
+              <div className="file">
+                <form onSubmit={refresh}>
+                  <input
+                    type="file"
+                    onChange={(e) => takeInput(e)}
+                    className="img"
+                  />
+                  <button onClick={upload}>Upload</button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      <Footer />
 
       <Modal
         isOpen={modalIsOpen}

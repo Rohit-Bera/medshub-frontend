@@ -539,8 +539,41 @@ export const getSearchMedicineApi = async (search) => {
 };
 
 //place order
-export const placeOrderApi = async (item, token) => {
+export const placeOrderProductApi = async (product, token) => {
+  console.log("token: ", token);
+  console.log("product: ", product);
+
+  const headers = { headers: { Authorization: `Bearer ${token}` } };
+
   try {
+    const url = `/placeOrder?productId=${product._id}`;
+
+    const link = host + url;
+
+    const receive = await axios.post(link, product, headers);
+
+    return receive;
+  } catch (error) {
+    console.log("error: ", error);
+
+    return error;
+  }
+};
+
+export const placeOrderMedicineApi = async (medicine, token) => {
+  console.log("token: ", token);
+  console.log("medicine: ", medicine);
+
+  const headers = { headers: { Authorization: `Bearer ${token}` } };
+
+  try {
+    const url = `/placeOrder?medicineId=${medicine._id}`;
+
+    const link = host + url;
+
+    const receive = await axios.post(link, medicine, headers);
+
+    return receive;
   } catch (error) {
     console.log("error: ", error);
 

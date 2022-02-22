@@ -15,6 +15,7 @@ import {
 } from "../Data/Services/Oneforall";
 import { Link } from "react-router-dom";
 import { medicineData } from "../Data/Reducers/medicine.reducer";
+import { toast } from "react-toastify";
 
 Modal.setAppElement("#root");
 
@@ -27,6 +28,7 @@ const Mywishlist = () => {
   const token = useSelector((state) => state.userReducer).token;
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [myList, setMyList] = useState([]);
+  const [listLength, setListLength] = useState();
 
   const dispatch = useDispatch();
 
@@ -52,6 +54,9 @@ const Mywishlist = () => {
     if (response) {
       setModalIsOpen(false);
       setMyList(response.data.list);
+      response.data.list
+        ? setListLength(response.data.list.length)
+        : setListLength();
     }
   };
 
@@ -61,6 +66,18 @@ const Mywishlist = () => {
     const { _id } = item;
     const response = await deleteWishlistApi(_id, token);
     console.log("response: ", response);
+
+    if (response.status === 200 && response.data.status === "200") {
+      toast.success("item removed successfully!", {
+        theme: "colored",
+        position: "top-right",
+      });
+    } else {
+      toast.error("something went wrong!", {
+        theme: "colored",
+        position: "top-right",
+      });
+    }
 
     getmyWishlist();
   };
@@ -81,45 +98,51 @@ const Mywishlist = () => {
       <div className="your-wishlist">
         <div className="wishlist-items">
           <p style={{ fontSize: "20px" }}>My Wishlist</p>
-          {myList.map((item) => {
-            if (item.product) {
-              return (
-                <div className="item">
-                  <img src={item.product.productImage[0]} alt="product_img" />
-                  <p>{item.product.productName}</p>
-                  <p>{item.product.productPrice}</p>
+          {listLength !== 0 ? (
+            myList.map((item) => {
+              if (item.product) {
+                return (
+                  <div className="item">
+                    <img src={item.product.productImage[0]} alt="product_img" />
+                    <p>{item.product.productName}</p>
+                    <p>{item.product.productPrice}</p>
 
-                  <button onClick={() => dispatchProd(item.product)}>
-                    <Link to="/viewproduct">
-                      <i class="fas fa-eye"></i>
-                    </Link>
-                  </button>
+                    <button onClick={() => dispatchProd(item.product)}>
+                      <Link to="/viewproduct">
+                        <i class="fas fa-eye"></i>
+                      </Link>
+                    </button>
 
-                  <button onClick={() => removeFromWishlist(item)}>
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              );
-            } else if (item.medicine) {
-              return (
-                <div className="item">
-                  <img src={item.medicine[0]} alt="product_img" />
-                  <p>{item.medicine.medicineName}</p>
-                  <p>{item.medicine.medicinePrice}</p>
+                    <button onClick={() => removeFromWishlist(item)}>
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                );
+              } else if (item.medicine) {
+                return (
+                  <div className="item">
+                    <img src={item.medicine[0]} alt="product_img" />
+                    <p>{item.medicine.medicineName}</p>
+                    <p>{item.medicine.medicinePrice}</p>
 
-                  <button onClick={() => dispatchMed(item.medicine)}>
-                    <Link to="/medicines/viewmedcines">
-                      <i class="fas fa-eye"></i>
-                    </Link>
-                  </button>
+                    <button onClick={() => dispatchMed(item.medicine)}>
+                      <Link to="/medicines/viewmedcines">
+                        <i class="fas fa-eye"></i>
+                      </Link>
+                    </button>
 
-                  <button onClick={() => removeFromWishlist(item)}>
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              );
-            }
-          })}
+                    <button onClick={() => removeFromWishlist(item)}>
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </div>
+                );
+              }
+            })
+          ) : (
+            <div>
+              <p>no items added into wishlist</p>
+            </div>
+          )}
         </div>
         <div className="account-details-nav">
           <div className="details-nav">

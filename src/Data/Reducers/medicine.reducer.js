@@ -8,6 +8,7 @@ const medicineSlice = createSlice({
     medicineImage: "",
     medicinePrice: "",
     availableStatus: "",
+    medicineDescription: "",
     manufacturerName: "",
   },
   reducers: {
@@ -20,6 +21,7 @@ const medicineSlice = createSlice({
       state.manufacturerName = payload.item.manufacturerName;
       state.medicineImage = payload.item.medicineImage;
       state.medicineName = payload.item.medicineName;
+      state.medicineDescription = payload.item.medicineDescription;
       state.medicinePrice = payload.item.medicinePrice;
     },
   },

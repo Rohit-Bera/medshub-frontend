@@ -8,6 +8,12 @@ import { loginUserService } from "../Data/Services/Oneforall";
 import { useDispatch } from "react-redux";
 import { userData } from "../Data/Reducers/userData.reducer";
 import { adminData } from "../Data/Reducers/adminData.reducer";
+import Modal from "react-modal/lib/components/Modal";
+import { Triangle, Rings, Oval } from "react-loader-spinner";
+
+import { toast } from "react-toastify";
+
+Modal.setAppElement("#root");
 
 const Signin = () => {
   // ---------------states
@@ -16,6 +22,7 @@ const Signin = () => {
     email: "",
     password: null,
   });
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -33,34 +40,66 @@ const Signin = () => {
   };
 
   const LoginUser = async () => {
+    setModalIsOpen(true);
     console.log("logUser: ", logUser);
-    try {
-      const response = await loginUserService(logUser);
-      console.log("response: ", response.receive.data);
 
-      const { user, token } = response.receive.data.loguser;
-
-      const { name, email, address, phoneNumber, usertype } = user;
-      const signupUser = { name, email, phoneNumber, address };
-      const theUser = { signupUser, token };
-      if (usertype === "admin") {
-        dispatch(adminData({ theUser }));
-        if (response.receive.data.loguser) {
-          return history.push("/ADmIn/adminHome");
+    if (logUser.email !== "" && logUser.password !== null) {
+      try {
+        const response = await loginUserService(logUser);
+        if (response) {
+          setModalIsOpen(false);
         }
-      } else {
-        dispatch(userData({ theUser }));
-        if (response.receive.data.loguser) {
-          return history.push("/yourAccount/AccountDetails");
-        }
-      }
+        console.log("response: ", response.receive.data);
 
-      if (response.receive.data.loguser) {
-        return history.push("/yourAccount/AccountDetails");
+        if (response.receive.data.status === "404") {
+          toast.error("invalid details");
+        } else {
+          toast.success("login successfull");
+        }
+
+        const { user, token } = response.receive.data.loguser;
+
+        const { name, email, address, phoneNumber, usertype } = user;
+        const signupUser = { name, email, phoneNumber, address };
+        const theUser = { signupUser, token };
+        if (usertype === "admin") {
+          dispatch(adminData({ theUser }));
+          if (response.receive.data.loguser) {
+            return history.push("/ADmIn/adminHome");
+          }
+        } else {
+          dispatch(userData({ theUser }));
+          if (response.receive.data.loguser) {
+            return history.push("/yourAccount/AccountDetails");
+          }
+        }
+      } catch (error) {
+        console.log("error: ", error);
       }
-    } catch (error) {
-      console.log("error: ", error);
+    } else {
+      toast.info("please enter details", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
+  };
+
+  const customStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      border: "1px solid black",
+    },
   };
 
   return (
@@ -115,10 +154,37 @@ const Signin = () => {
           </div>
           <hr className="hr-signin"></hr>
           <div style={{ flex: "50%" }}>
-            <img src={signin} alt="crashed" style={{ height: "700px" }}></img>
+            <img
+              src={signin}
+              alt="crashed"
+              style={{ height: "700px", width: "40vw" }}
+            ></img>
           </div>
         </div>
       </form>
+
+      <Modal
+        isOpen={modalIsOpen}
+        // onRequestClose={() => setModalIsOpen(false)}
+        style={customStyles}
+      >
+        <div
+          style={{
+            width: "7vw",
+            height: "13vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Triangle
+            color="black
+          "
+            height={100}
+            width={100}
+          />
+        </div>
+      </Modal>
     </>
   );
 };
