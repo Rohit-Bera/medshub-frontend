@@ -6,6 +6,7 @@ import { postWebFeedback } from "../Data/Services/Oneforall";
 import { useDispatch, useSelector } from "react-redux";
 import "../style/footer.css";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Footer = () => {
   const [input, setInput] = useState({
@@ -44,6 +45,18 @@ const Footer = () => {
       setModalIsOpen(false);
 
       setInput({ feedback: "" });
+    }
+
+    if (response.status === 200) {
+      toast.success("feedback send!", {
+        theme: "colored",
+        position: "bottom-right",
+      });
+    } else {
+      toast.error("error occured! try sometime later.", {
+        theme: "colored",
+        position: "bottom-right",
+      });
     }
   };
 

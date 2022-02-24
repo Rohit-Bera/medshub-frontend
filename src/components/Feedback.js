@@ -46,6 +46,18 @@ const Feedback = () => {
 
       setInput({ feedback: "" });
     }
+
+    if (response.status === 200) {
+      toast.success("feedback send!", {
+        theme: "colored",
+        position: "bottom-right",
+      });
+    } else {
+      toast.error("error occured! try sometime later.", {
+        theme: "colored",
+        position: "bottom-right",
+      });
+    }
   };
 
   const refresh = (e) => {

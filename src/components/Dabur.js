@@ -139,6 +139,18 @@ const Dabur = () => {
     if (response) {
       setModalIsOpen(false);
     }
+
+    if (response.status === 200 && response.data.status === "200") {
+      toast.success("order placed!", {
+        position: "top-right",
+        theme: "dark",
+      });
+    } else {
+      toast.error("error occured! try again later", {
+        position: "top-right",
+        theme: "dark",
+      });
+    }
   };
 
   // payment for product

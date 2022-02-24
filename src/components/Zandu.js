@@ -14,6 +14,7 @@ import { Triangle, Rings, Oval } from "react-loader-spinner";
 import StripCheckout from "react-stripe-checkout";
 import { useDispatch, useSelector } from "react-redux";
 import { productData } from "../Data/Reducers/product.reducer";
+import { toast } from "react-toastify";
 
 Modal.setAppElement("#root");
 const Zandu = () => {
@@ -65,6 +66,23 @@ const Zandu = () => {
     if (response) {
       setModalIsOpen(false);
     }
+
+    if (response.status === 200 && response.data.status === "200") {
+      toast.success("added to wishlist!", {
+        position: "bottom-right",
+        theme: "dark",
+      });
+    } else if (response.data.error.code === 400) {
+      toast.info("already exist in wishlist!", {
+        position: "bottom-right",
+        theme: "dark",
+      });
+    } else {
+      toast.error("error occured! try again later", {
+        position: "bottom-right",
+        theme: "dark",
+      });
+    }
   };
 
   const addToCartProd = async (item) => {
@@ -81,6 +99,23 @@ const Zandu = () => {
 
     if (response) {
       setModalIsOpen(false);
+    }
+
+    if (response.status === 200 && response.data.status === "200") {
+      toast.success("added to cart!", {
+        position: "top-right",
+        theme: "dark",
+      });
+    } else if (response.data.error.code === 400) {
+      toast.info("already exist in cart!", {
+        position: "bottom-right",
+        theme: "dark",
+      });
+    } else {
+      toast.error("error occured! try again later", {
+        position: "top-right",
+        theme: "dark",
+      });
     }
   };
 
@@ -101,6 +136,18 @@ const Zandu = () => {
 
     if (response) {
       setModalIsOpen(false);
+    }
+
+    if (response.status === 200 && response.data.status === "200") {
+      toast.success("order placed!", {
+        position: "top-right",
+        theme: "dark",
+      });
+    } else {
+      toast.error("error occured! try again later", {
+        position: "top-right",
+        theme: "dark",
+      });
     }
   };
 

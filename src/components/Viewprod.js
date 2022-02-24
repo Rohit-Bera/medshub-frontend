@@ -17,6 +17,7 @@ import Carousel, {
 } from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 Modal.setAppElement("#root");
 
 const Viewprod = () => {
@@ -74,7 +75,7 @@ const Viewprod = () => {
   };
 
   // ===========================================functions
-  const addMedtoWishlist = async () => {
+  const addProdtoWishlist = async () => {
     setModalIsOpen(true);
 
     const item = {
@@ -95,6 +96,23 @@ const Viewprod = () => {
     if (response) {
       setModalIsOpen(false);
       setFeedback("");
+    }
+
+    if (response.status === 200 && response.data.status === "200") {
+      toast.success("added to wishlist!", {
+        position: "bottom-right",
+        theme: "dark",
+      });
+    } else if (response.data.error.code === 400) {
+      toast.info("already exist in wishlist!", {
+        position: "bottom-right",
+        theme: "dark",
+      });
+    } else {
+      toast.error("error occured! try again later", {
+        position: "bottom-right",
+        theme: "dark",
+      });
     }
   };
 
@@ -119,6 +137,18 @@ const Viewprod = () => {
       setModalIsOpen(false);
       setFeedback("");
     }
+
+    if (response.status === 200) {
+      toast.success("feedback send!", {
+        theme: "colored",
+        position: "bottom-right",
+      });
+    } else {
+      toast.error("error occured! try sometime later.", {
+        theme: "colored",
+        position: "bottom-right",
+      });
+    }
   };
 
   // take item state of product
@@ -138,6 +168,18 @@ const Viewprod = () => {
 
     if (response) {
       setModalIsOpen(false);
+    }
+
+    if (response.status === 200 && response.data.status === "200") {
+      toast.success("order placed!", {
+        position: "top-right",
+        theme: "dark",
+      });
+    } else {
+      toast.error("error occured! try again later", {
+        position: "top-right",
+        theme: "dark",
+      });
     }
   };
 
@@ -260,7 +302,7 @@ const Viewprod = () => {
               {productDescription}
             </section>
             <section className="btn">
-              <button onClick={() => addMedtoWishlist()}>
+              <button onClick={() => addProdtoWishlist()}>
                 Add to Wishlist
               </button>
               <button
