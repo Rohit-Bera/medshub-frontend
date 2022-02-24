@@ -21,6 +21,7 @@ const Product = () =>{
         productBrand:"",
         productCategory:"",
         productId:"",
+        productDescription:"",
     });
     const [modalIsOpen, setModalIsOpen] = useState(false);
   const customStyles = {
@@ -92,7 +93,7 @@ const Product = () =>{
     const addProduct = async()=>{
         setModalIsOpen(true);
         try {
-            const {productName,productPrice,productBrand,productCategory} = products;
+            const {productName,productPrice,productBrand,productCategory,productDescription} = products;
             const {productImage} = Img;
             const {availableStatus}= status;
 
@@ -103,7 +104,8 @@ const Product = () =>{
                 productBrand,
                 productCategory,
                 productImage,
-                availableStatus
+                availableStatus,
+                productDescription
             }
             console.log('data: ', data);
             const fd = new FormData();
@@ -111,6 +113,7 @@ const Product = () =>{
             fd.append("productPrice",productPrice);
             fd.append("productBrand",productBrand);
             fd.append("productCategory",productCategory);
+            fd.append("productDescription",productDescription);
             fd.append("availableStatus",availableStatus);
 
 
@@ -134,10 +137,11 @@ const Product = () =>{
             getProduct();
             setStatus({availableStatus:false});
             setProducts({
-                productName:"",
+            productName:"",
             productPrice:"",
             productBrand:"",
             productCategory:"",
+            productDescription:"",
             });
             
             
@@ -183,6 +187,7 @@ const Product = () =>{
             "productPrice":item.productPrice,
             "productBrand":item.productBrand,
             "productCategory":item.productCategory,
+            "productDescription":item.productDescription,
             "productId":item._id,
         });
         console.log('products: ', products);
@@ -195,6 +200,7 @@ const Product = () =>{
             "productImage":item.productImage,
         })
     }
+    //updateProducts
     const updateProducts = async()=>{
         setModalIsOpen(true);
 
@@ -207,6 +213,7 @@ const Product = () =>{
                 productPrice,
                 productBrand,
                 productCategory,
+                productDescription,
             }=products;
             const {availableStatus} = status;
             const {productImage} = Img
@@ -217,6 +224,7 @@ const Product = () =>{
             fd.append("productBrand",productBrand);
             fd.append("productCategory",productCategory);
             fd.append("availableStatus",availableStatus);
+            fd.append("productDescription",productDescription);
 
             for(const key of Object.keys(productImage)){
                 fd.append("productImage",productImage[key]);
@@ -280,6 +288,13 @@ const Product = () =>{
                 className="input-product-admin"
                 name="productCategory"
                 value={products.productCategory}
+                onChange={inputData} /><br></br>
+                 <p>Product Description</p>
+                <input type="text"
+                placeholder="Enter Product Description"
+                className="input-product-admin"
+                name="productDescription"
+                value={products.productDescription}
                 onChange={inputData} /><br></br><br></br>
                     </div>
                 <div>
@@ -322,6 +337,7 @@ const Product = () =>{
                     <td>Prodct Price</td>
                     <td>Prodct Brand</td>
                     <td>Prodct Category</td>
+                    <td >Prodct Description</td>
                     <td>Status</td>
                     <td></td>
                     <td></td>
@@ -346,6 +362,9 @@ const Product = () =>{
                             </td>
                              <td>
                               <p>{item.productCategory}</p>
+                            </td>
+                            <td >
+                             <p>{item.productDescription}</p>
                             </td>
                               <td>
                                 {item.availableStatus ? (

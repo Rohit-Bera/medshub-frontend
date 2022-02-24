@@ -55,7 +55,7 @@ import NotDeliverMedicine from "../Admin/NotDeliverMedicineOrder";
 import NotDeliberProduct from "../Admin/NotDeliverProductOrder";
 import AllUsers from "../Admin/Users";
 import updateProfile from "../components/updateProfile";
-
+import AdminFeedback from "../Admin/Admin.Feedback";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -173,6 +173,8 @@ const App = () => {
           <Route path="/ADmIn/medicineOrder" exact component={MedicineOrder} />
           <Route path="/ADmIn/medicineOrder/NotDeliverdMed" exact component={NotDeliverMedicine} />
           <Route path="/ADmIn/allUSers" exact component={AllUsers} />
+          <Route path="/ADmIn/AdminFeedback" exact component={AdminFeedback} />
+
 
 
 

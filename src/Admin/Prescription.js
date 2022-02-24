@@ -8,8 +8,10 @@ import {getPrescriptionApi,updatePrescriptionApi} from "../Data/Services/Onefora
 import cx from "classnames";
 import Aos from "aos";
 import "aos/dist/aos.css";
-import { Triangle, Rings, Oval } from "react-loader-spinner";
+import { Triangle } from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import { toast } from "react-toastify";
+
 Modal.setAppElement("#root");
 
 
@@ -92,6 +94,12 @@ const Prescription = ({rounded = false}) =>{
             console.log('response: ', response);
             if(response){
                 setModalIsOpen(false);
+            }
+            if(response === undefined){
+              toast.success("Accepted!")
+            }
+            else{
+              toast.error("something went wrong")
             }
             getPrescription();
 

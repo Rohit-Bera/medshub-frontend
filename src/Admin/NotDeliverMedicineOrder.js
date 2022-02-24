@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import "aos/dist/aos.css";
 import { Triangle } from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import { toast } from "react-toastify";
 Modal.setAppElement("#root");
 
 
@@ -98,6 +99,12 @@ const AdminOrder = ({rounded = false}) =>{
             console.log('response: ', response);
             if(response){
                 setModalIsOpen(false);
+            }
+            if(response.data.status === "200"){
+               toast.success("Deliverd Successfully!");
+            }
+            else{
+                toast.error("Something went Wrong!")
             }
             getOrder();
         } catch (error) {

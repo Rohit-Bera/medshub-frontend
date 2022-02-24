@@ -1,6 +1,5 @@
 .main-admin-product{
     margin-top: 35px;
-   
     font-family: "Trirong", serif;
     font-size: 20px;
 }
@@ -45,7 +44,7 @@
     background-color: rgb(56,182,255);
 }
 .form-main{
-    height: 600px;
+    height: 680px;
     width: 650px;
     background-color: rgb(56,182,255);
     margin-top: 25px;
@@ -114,8 +113,8 @@
   }
 
   .btn-updateDelte-product{
-      background-color: black;
-      color: white;
+      background-color: white;
+      color: black;
       border: none;
       padding: 10px;
       font-size: 20px;

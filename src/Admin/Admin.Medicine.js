@@ -9,7 +9,6 @@ import "aos/dist/aos.css";
 import Modal from "react-modal/lib/components/Modal";
 import { Triangle } from "react-loader-spinner";
 import { toast } from 'react-toastify';
-
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 Modal.setAppElement("#root");
 
@@ -24,6 +23,7 @@ const Medicine = () =>{
         manufacturerName:"",
         medicineCategory:"",
         medicineId:"",
+        medicineDescription:"",
     });
    //add image state
     const[Img,setImg] = useState({
@@ -101,7 +101,7 @@ const Medicine = () =>{
     const addMedicine = async()=>{
         setModalIsOpen(true);
         try {
-            const {medicineName,medicinePrice,manufacturerName,medicineCategory}=meds;
+            const {medicineName,medicinePrice,manufacturerName,medicineCategory,medicineDescription}=meds;
             // console.log('meds: ', meds);
             const {medicineImage}=Img;
             // console.log('Img: ', Img);
@@ -114,7 +114,8 @@ const Medicine = () =>{
                 manufacturerName,
                 medicineImage,
                 availableStatus,
-                medicineCategory
+                medicineCategory,
+                medicineDescription,
             };
             console.log('data: ', data);
 
@@ -124,6 +125,8 @@ const Medicine = () =>{
             fd.append("manufacturerName",manufacturerName);
             fd.append("availableStatus",availableStatus);
             fd.append("medicineCategory",medicineCategory);
+            fd.append("medicineDescription",medicineDescription);
+
             
             for(const key of Object.keys(medicineImage)){
                 fd.append("medicineImage",medicineImage[key]);
@@ -150,6 +153,7 @@ const Medicine = () =>{
             medicinePrice:"",
             manufacturerName:"",
             medicineCategory:"",
+            medicineDescription:""
         });
           
         } catch (error) {
@@ -173,6 +177,13 @@ const Medicine = () =>{
             if(response){
                 setModalIsOpen(false);
             }
+            if(response.data.status === "200"){
+                toast.success("Medicne Deleted Successfully!")
+            }
+            else{
+                toast.error("Medicine is not Deleted!")
+            }
+
             getMedicine();
             
         }
@@ -188,6 +199,7 @@ const Medicine = () =>{
             "medicinePrice":item.medicinePrice , 
             "manufacturerName":item.manufacturerName,
             "medicineCategory":item.medicineCategory,
+            "medicineDescription":item.medicineDescription,
             "medicineId":item._id,
         });
         setStatus({
@@ -216,6 +228,7 @@ const Medicine = () =>{
                 medicinePrice,
                 manufacturerName,                
                 medicineCategory,
+                medicineDescription,
   
             } = meds
             const {availableStatus} = status;
@@ -227,6 +240,8 @@ const Medicine = () =>{
             fd.append("manufacturerName",manufacturerName);
             fd.append("availableStatus",availableStatus);
             fd.append("medicineCategory",medicineCategory);
+            fd.append("medicineDescription",medicineDescription);
+
             
             for(const key of Object.keys(medicineImage)){
                 fd.append("medicineImage",medicineImage[key]);
@@ -288,6 +303,13 @@ const Medicine = () =>{
                         name="medicineCategory"
                         value={meds.medicineCategory}
                         onChange={inputData}/><br></br>
+                         <p>Medicine Description</p>
+                        <input type="text" 
+                        placeholder="Medicine Description"  
+                        className="input-medicine-admin"
+                        name="medicineDescription"
+                        value={meds.medicineDescription}
+                        onChange={inputData}/><br></br>
                         </div>
                         <div>
                         <div className="upload-btn-wrapper-medicine">
@@ -321,6 +343,7 @@ const Medicine = () =>{
                             <td>Medicine Price</td>
                             <td>Manufacturer Name</td>
                             <td>Medicine Category</td>
+                            <td>Medicine Description</td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -345,6 +368,9 @@ const Medicine = () =>{
                                              </td>
                                              <td>
                                                  <p>{item.medicineCategory}</p>
+                                             </td>
+                                             <td>
+                                                 <p>{item.medicineDescription}</p>
                                              </td>
                                              <td>
                                                     {item.availableStatus ? (

@@ -9,7 +9,7 @@ import cx from "classnames";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { Link } from "react-router-dom";
-
+import { toast } from "react-toastify";
 import { Triangle, Rings, Oval } from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 Modal.setAppElement("#root");
@@ -100,6 +100,12 @@ const AdminOrder = ({rounded = false}) =>{
             if(response){
                 setModalIsOpen(false);
             }
+            if(response.data.status === "200"){
+                toast.success("Deliverd Successfully!");
+             }
+             else{
+                 toast.error("Something went Wrong!")
+             }
             getOrder();
         } catch (error) {
             console.log('error: ', error);
@@ -111,8 +117,8 @@ const AdminOrder = ({rounded = false}) =>{
     })
     return <div>
         <Navbar />
-        <div className="filter-span"><Link to="/ADmIn/medicineOrder"><span>Deliverd</span></Link> 
-            <Link to="/ADmIn/medicineOrder/NotDeliverdMed"><span className="filter-span" style={{borderBottom:"2px white solid"}}> Not Deliverd</span></Link></div>
+        <div className="filter-span"><Link to="/ADmIn/ProductOrder"><span>Deliverd</span></Link> 
+            <Link to="/ADmIn/ProductOrder/NotDeliverdProd"><span className="filter-span" style={{borderBottom:"2px white solid"}}> Not Deliverd</span></Link></div>
        
         <div>
         <p className="p-order-admin">Product Orders</p>

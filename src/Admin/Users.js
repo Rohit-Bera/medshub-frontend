@@ -59,7 +59,7 @@ const Users = ()=>{
             if(response){
                 setModalIsOpen(false);
             }
-            if(response.data.status === 200){
+            if(response.data.status === "200"){
               toast.success("User deleted Succesfully!")
             }
             else{
@@ -74,21 +74,30 @@ const Users = ()=>{
     }
     return <div>
           <Navbar/>
+          <div className="flex-users-admin">
           {
               allUsers.map((item)=>{
-                  console.log('item: ', item);
+                  // console.log('item: ', item);
                   return(
-                     <div className="flex-users-admin"> 
-                        <div className="User-Profile-admin">
-                        <sapn title="delete" onClick={()=>deleteUser(item)}><i class="fas fa-trash-alt"></i></sapn>
-                        <div className="icon-user"><i class="far fa-user-circle " /></div>
-                         <p><span><i class="fas fa-user"></i></span> <span>{item.name}</span></p>
-                         <p><span><i class="fas fa-envelope"></i></span> <span>{item.email}</span></p>
-                         <p><span><i class="fas fa-map-marker-alt"></i></span> <span>{item.address}</span></p>
-                         <p><span><i class="fas fa-phone-alt"></i></span> <sapn>{item.phoneNumber}</sapn></p>
+                     
+                        
+                          <div>
+                          <div className="User-Profile-admin">
+                          <sapn title="delete" onClick={()=>deleteUser(item)}><i class="fas fa-times-circle"></i></sapn>
+                          <div className="icon-user"><i class="far fa-user-circle " /></div>
+                          <p><span><i class="fas fa-user"></i></span> <span>{item.name}</span></p>
+                          <p><span><i class="fas fa-envelope"></i></span> <span>{item.email}</span></p>
+                          <p><span><i class="fas fa-map-marker-alt"></i></span> <span>{item.address}</span></p>
+                          <p><span><i class="fas fa-phone-alt"></i></span> <sapn>{item.phoneNumber}</sapn></p>
+                         </div>
+                            </div>
                          
-                      </div>
-                      <Modal isOpen={modalIsOpen}
+                   
+                  )
+              })
+          }
+           </div>
+          <Modal isOpen={modalIsOpen}
         // onRequestClose={() => setModalIsOpen(false)}
         style={customStyles}
       >
@@ -108,10 +117,6 @@ const Users = ()=>{
           />
         </div>
       </Modal>  
-                    </div>
-                  )
-              })
-          }
     </div>;
 }
 

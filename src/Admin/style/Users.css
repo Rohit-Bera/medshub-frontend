@@ -12,6 +12,7 @@
 .flex-users-admin{
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
 }
 .icon-user{
     font-size: 50px;

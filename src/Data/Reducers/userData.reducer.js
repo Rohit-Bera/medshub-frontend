@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const userDataSlice = createSlice({
   name: "Userdata-localStorage",
   initialState: {
+    _id:"",
     name: "",
     email: "",
     password: "",
@@ -10,6 +11,7 @@ const userDataSlice = createSlice({
     phoneNumber: "",
     userType: "user",
     token: "",
+   
   },
 
   reducers: {
@@ -22,6 +24,7 @@ const userDataSlice = createSlice({
       state.password = payload.theUser.signupUser.password;
       state.address = payload.theUser.signupUser.address;
       state.phoneNumber = payload.theUser.signupUser.phoneNumber;
+      state._id = payload.theUser.signupUser._id;
       state.token = payload.theUser.token;
     },
   },

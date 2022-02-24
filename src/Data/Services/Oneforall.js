@@ -206,6 +206,8 @@ export const deleteMedicineApi = async (headers, _id) => {
 
 export const updateMedicineApi = async (_id, data, headers) => {
   try {
+
+   const host= "http://localhost:5500";
     const url = `/updateMedicine/${_id}`;
     const link = host + url;
 
@@ -231,6 +233,7 @@ export const getallProductApi = async (headers) => {
 
 export const addProductApi = async (data, headers) => {
   const url = "/addProduct";
+  // const host = "http://localhost:5500"
   const link = host + url;
   try {
     const response = await axios.post(link, data, headers);
@@ -610,15 +613,18 @@ return response;
 } 
 
 export const updateUserApi = async(_id, data, headers)=>{
+  console.log('data: ', data);
+  console.log('_id: ', _id);
   try {
     const url = `/editUser/${_id}`;
+    const host = "http://localhost:5500"
     const link = host+url;
     const result = await axios.put(link, data, headers);
     console.log('result: ', result);
-
+    return result;
   } catch (error) {
     console.log('error: ', error);
-    
+    return error;
   }
 }
 
