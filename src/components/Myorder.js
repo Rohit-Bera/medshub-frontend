@@ -103,7 +103,7 @@ const Myorder = () => {
       setModalIsOpen(false);
     }
     if (response.status === 200 && response.data.status === "200") {
-      toast.success("problem reported successfully", {
+      toast.success("problem reported ", {
         theme: "colored",
         position: "top-right",
       });

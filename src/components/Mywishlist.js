@@ -69,7 +69,7 @@ const Mywishlist = () => {
     console.log("response: ", response);
 
     if (response.status === 200 && response.data.status === "200") {
-      toast.success("item removed successfully!", {
+      toast.success("item removed!", {
         theme: "colored",
         position: "top-right",
       });
