@@ -11,6 +11,7 @@ import Modal from "react-modal/lib/components/Modal";
 import { deleteOrderApi, getmyOrderApi } from "../Data/Services/Oneforall";
 import { medicineData } from "../Data/Reducers/medicine.reducer";
 import { productData } from "../Data/Reducers/product.reducer";
+import { toast } from "react-toastify";
 
 Modal.setAppElement("#root");
 
@@ -34,6 +35,8 @@ const Mynotification = () => {
   };
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [myorders, setMyOrders] = useState([]);
+  const [prodModal, setProdModal] = useState(false);
+  const [medModal, setMedModal] = useState(false);
   const [length, setOrderLentgh] = useState();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.userReducer).token;
@@ -72,6 +75,18 @@ const Mynotification = () => {
     if (response) {
       setModalIsOpen(false);
     }
+    if (response.status === 200 && response.data.status === "200") {
+      toast.success("order canceled", {
+        theme: "colored",
+        position: "top-right",
+      });
+    } else {
+      toast.error("something went wrong , Try again later!", {
+        theme: "colored",
+        position: "top-right",
+      });
+    }
+
     myOrder();
   };
 
@@ -92,13 +107,52 @@ const Mynotification = () => {
 
                     <button onClick={() => dispatchProd(item.product)}>
                       <Link to="/viewproduct">
-                        <i class="fas fa-eye"></i>
+                        <i class="fas fa-eye" title="view product"></i>
                       </Link>
                     </button>
 
-                    <button onClick={() => deleteOrder(item)}>
-                      <i class="fas fa-times"></i>
+                    <button
+                      onClick={() => setProdModal(true)}
+                      className="report"
+                      title="cancel order"
+                    >
+                      cancel
                     </button>
+                    <Modal isOpen={prodModal} style={customStyles}>
+                      <div className="modalbackground">
+                        <div className="modalcontainer">
+                          <div className="closebutton">
+                            <button
+                              className="cancel"
+                              onClick={() => setProdModal(false)}
+                            >
+                              X
+                            </button>
+                          </div>
+                          <div className="body" style={{ color: "black" }}>
+                            Are You Sure <br />
+                            You Want to Log out ?
+                          </div>
+                          <div className="modalbutton">
+                            <button
+                              className="no"
+                              onClick={() => setProdModal(false)}
+                            >
+                              Cancel
+                            </button>
+                            <button
+                              className="yes"
+                              onClick={() => {
+                                deleteOrder(item);
+                                setProdModal(false);
+                              }}
+                            >
+                              Yes
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </Modal>
                   </div>
                 );
               } else if (item.medicine && item.deliverystatus == false) {
@@ -114,9 +168,48 @@ const Mynotification = () => {
                       </Link>
                     </button>
 
-                    <button onClick={() => deleteOrder(item)}>
-                      <i class="fas fa-times"></i>
+                    <button
+                      onClick={() => setMedModal(true)}
+                      className="report"
+                      title="cancel order"
+                    >
+                      cancel
                     </button>
+                    <Modal isOpen={medModal} style={customStyles}>
+                      <div className="modalbackground">
+                        <div className="modalcontainer">
+                          <div className="closebutton">
+                            <button
+                              className="cancel"
+                              onClick={() => setMedModal(false)}
+                            >
+                              X
+                            </button>
+                          </div>
+                          <div className="body" style={{ color: "black" }}>
+                            Are You Sure <br />
+                            You Want to cancel Order ?
+                          </div>
+                          <div className="modalbutton">
+                            <button
+                              className="no"
+                              onClick={() => setMedModal(false)}
+                            >
+                              Cancel
+                            </button>
+                            <button
+                              className="yes"
+                              onClick={() => {
+                                deleteOrder(item);
+                                setMedModal(false);
+                              }}
+                            >
+                              Yes
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </Modal>
                   </div>
                 );
               }

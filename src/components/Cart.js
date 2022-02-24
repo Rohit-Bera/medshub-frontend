@@ -104,6 +104,18 @@ const Cart = () => {
       setModalIsOpen(false);
     }
 
+    if (response.status === 200 && response.data.status === "200") {
+      toast.success("item removed!", {
+        theme: "colored",
+        position: "top-right",
+      });
+    } else {
+      toast.error("something went wrong!", {
+        theme: "colored",
+        position: "top-right",
+      });
+    }
+
     MyCart();
   };
 
