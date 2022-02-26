@@ -209,8 +209,7 @@ export const deleteMedicineApi = async (headers, _id) => {
 
 export const updateMedicineApi = async (_id, data, headers) => {
   try {
-
-   const host= "http://localhost:5500";
+    const host = "http://localhost:5500";
     const url = `/updateMedicine/${_id}`;
     const link = host + url;
 
@@ -514,7 +513,6 @@ export const uploadPrescriptionApi = async (fd, token) => {
   }
 };
 
-
 export const getSearchProductApi = async (search) => {
   console.log("search: ", search);
   const url = `/getSearchProduct/${search}`;
@@ -588,46 +586,44 @@ export const placeOrderMedicineApi = async (medicine, token) => {
   }
 };
 
-export const getUserApi = async(headers)=>{
-  console.log('headers: ', headers);
+export const getUserApi = async (headers) => {
+  console.log("headers: ", headers);
   // const host = "http://localhost:5500";
   const url = "/getAllUsers";
-  const link = host+ url;
+  const link = host + url;
   try {
-    const result = await axios.get(link,headers);
-    return result ;
+    const result = await axios.get(link, headers);
+    return result;
   } catch (error) {
-    console.log('error: ', error);
+    console.log("error: ", error);
     return error;
-    
   }
 };
 
-export const deleteUserApi = async (headers,_id)=>{
-try {
-  const url = `/deleteUser/${_id}`;
-const link = host+url;
-const response = await axios.delete(link,headers);
-return response;
-} catch (error) {
-  console.log('error: ', error);
-  return error;
-}
-} 
-
-export const updateUserApi = async(_id, data, headers)=>{
-  console.log('data: ', data);
-  console.log('_id: ', _id);
+export const deleteUserApi = async (headers, _id) => {
   try {
-    const url = `/editUser/${_id}`;
-    const host = "http://localhost:5500"
-    const link = host+url;
-    const result = await axios.put(link, data, headers);
-    console.log('result: ', result);
-    return result;
+    const url = `/deleteUser/${_id}`;
+    const link = host + url;
+    const response = await axios.delete(link, headers);
+    return response;
   } catch (error) {
-    console.log('error: ', error);
+    console.log("error: ", error);
     return error;
   }
-}
+};
 
+export const updateUserApi = async (_id, data, headers) => {
+  console.log("data: ", data);
+  console.log("_id: ", _id);
+  try {
+    const url = `/editUser/${_id}`;
+    const host = "http://localhost:5500";
+    const link = host + url;
+    const result = await axios.put(link, data, headers);
+    console.log("result: ", result);
+    return result;
+  } catch (error) {
+    console.log("error: ", error);
+    return error;
+  }
+};

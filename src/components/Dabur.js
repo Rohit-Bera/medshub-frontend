@@ -212,89 +212,93 @@ const Dabur = () => {
           <p>Dabur Products</p>
           <div className="searched">
             {/* array of items */}
-            {Products.map((item) => {
-              // console.log("item: ", item);
-              return (
-                <div className="item">
-                  <div className="item-like">
-                    <button onClick={() => addToWishlist(item)}>
-                      <i class="fas fa-heart"></i>
-                    </button>
-                  </div>
-                  <div className="item-img">
-                    <img src={item.productImage[0]} alt="_img" />
-                  </div>
-                  <div className="item-disc">
-                    <p>{item.productName}</p>
-                    <label> ₹ {item.productPrice}</label>
-                  </div>
-                  <div className="item-btn">
-                    <Link to="/viewproduct">
-                      <button onClick={() => dispatchProd(item)}>
-                        <i class="far fa-eye"></i>view
+            {Products ? (
+              Products.map((item) => {
+                // console.log("item: ", item);
+                return (
+                  <div className="item">
+                    <div className="item-like">
+                      <button onClick={() => addToWishlist(item)}>
+                        <i class="fas fa-heart"></i>
                       </button>
-                    </Link>
+                    </div>
+                    <div className="item-img">
+                      <img src={item.productImage[0]} alt="_img" />
+                    </div>
+                    <div className="item-disc">
+                      <p>{item.productName}</p>
+                      <label> ₹ {item.productPrice}</label>
+                    </div>
+                    <div className="item-btn">
+                      <Link to="/viewproduct">
+                        <button onClick={() => dispatchProd(item)}>
+                          <i class="far fa-eye"></i>view
+                        </button>
+                      </Link>
 
-                    <button
-                      onClick={() => {
-                        setProdBuyModal(true);
-                        takeProductItem(item);
-                      }}
-                    >
-                      <i class="fas fa-money-check-alt"></i>
-                      Buy Now
-                    </button>
-                    <Modal isOpen={prodBuyModal} style={customStyles}>
-                      <div className="buy-modal-conatiner">
-                        <div className="buy-modal-cancel">
-                          <button onClick={() => setProdBuyModal(false)}>
-                            <i class="fas fa-times"></i>
-                          </button>
-                        </div>
-                        <div className="buy-modal-body">
-                          <p>
-                            Are you sure <br />
-                            you want to buy now?
-                          </p>
-                        </div>
-                        <div className="buy-modal-btn">
-                          <button
-                            className="no"
-                            onClick={() => setProdBuyModal(false)}
-                          >
-                            cancel
-                          </button>
-
-                          <StripCheckout
-                            stripeKey="pk_test_51K9BzESJxF1xgWl3hAPFSmTRUHtri2Vb2QmboXnSvvdcD0XaNuqwiUmdDJIwZ10VYHCdJskzHLJoERsFQS5mmUWD00leevPB9M"
-                            token={makePaymentProduct}
-                            name="Make Payment"
-                            shippingAddress
-                            billingAddress
-                          >
-                            <button
-                              class="btn btn-md bg-warning"
-                              className="yes"
-                              onClick={() => {
-                                setProdBuyModal(false);
-                                // makePayment();
-                              }}
-                            >
-                              pay ₹{amount}
+                      <button
+                        onClick={() => {
+                          setProdBuyModal(true);
+                          takeProductItem(item);
+                        }}
+                      >
+                        <i class="fas fa-money-check-alt"></i>
+                        Buy Now
+                      </button>
+                      <Modal isOpen={prodBuyModal} style={customStyles}>
+                        <div className="buy-modal-conatiner">
+                          <div className="buy-modal-cancel">
+                            <button onClick={() => setProdBuyModal(false)}>
+                              <i class="fas fa-times"></i>
                             </button>
-                          </StripCheckout>
-                        </div>
-                      </div>
-                    </Modal>
+                          </div>
+                          <div className="buy-modal-body">
+                            <p>
+                              Are you sure <br />
+                              you want to buy now?
+                            </p>
+                          </div>
+                          <div className="buy-modal-btn">
+                            <button
+                              className="no"
+                              onClick={() => setProdBuyModal(false)}
+                            >
+                              cancel
+                            </button>
 
-                    <button onClick={() => addToCartProd(item)}>
-                      <i class="fas fa-shopping-cart"></i>
-                      <label>add to cart</label>
-                    </button>
+                            <StripCheckout
+                              stripeKey="pk_test_51K9BzESJxF1xgWl3hAPFSmTRUHtri2Vb2QmboXnSvvdcD0XaNuqwiUmdDJIwZ10VYHCdJskzHLJoERsFQS5mmUWD00leevPB9M"
+                              token={makePaymentProduct}
+                              name="Make Payment"
+                              shippingAddress
+                              billingAddress
+                            >
+                              <button
+                                class="btn btn-md bg-warning"
+                                className="yes"
+                                onClick={() => {
+                                  setProdBuyModal(false);
+                                  // makePayment();
+                                }}
+                              >
+                                pay ₹{amount}
+                              </button>
+                            </StripCheckout>
+                          </div>
+                        </div>
+                      </Modal>
+
+                      <button onClick={() => addToCartProd(item)}>
+                        <i class="fas fa-shopping-cart"></i>
+                        <label>add to cart</label>
+                      </button>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })
+            ) : (
+              <div>{""}</div>
+            )}
           </div>
         </div>
       </div>

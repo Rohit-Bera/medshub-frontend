@@ -131,7 +131,7 @@ const Mynotification = () => {
                           </div>
                           <div className="body" style={{ color: "black" }}>
                             Are You Sure <br />
-                            You Want to Log out ?
+                            You Want to cancel order ?
                           </div>
                           <div className="modalbutton">
                             <button
