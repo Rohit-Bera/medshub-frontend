@@ -551,7 +551,7 @@ export const placeOrderProductApi = async (product, token) => {
 
   try {
     const url = `/placeOrder?productId=${product._id}`;
-
+    // const host = "http://localhost:5500";
     const link = host + url;
 
     const receive = await axios.post(link, product, headers);
