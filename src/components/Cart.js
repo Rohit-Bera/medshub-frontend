@@ -104,6 +104,18 @@ const Cart = () => {
       setModalIsOpen(false);
     }
 
+    if (response.status === 200 && response.data.status === "200") {
+      toast.success("item removed!", {
+        theme: "colored",
+        position: "top-right",
+      });
+    } else {
+      toast.error("something went wrong!", {
+        theme: "colored",
+        position: "top-right",
+      });
+    }
+
     MyCart();
   };
 
@@ -132,6 +144,18 @@ const Cart = () => {
 
     if (response) {
       setModalIsOpen(false);
+    }
+
+    if (response.status === 200 && response.data.status === "200") {
+      toast.success("order placed!", {
+        position: "top-right",
+        theme: "dark",
+      });
+    } else {
+      toast.error("error occured! try again later", {
+        position: "top-right",
+        theme: "dark",
+      });
     }
   };
   // payment for product
@@ -180,6 +204,18 @@ const Cart = () => {
 
     if (response) {
       setModalIsOpen(false);
+    }
+
+    if (response.status === 200 && response.data.status === "200") {
+      toast.success("order placed!", {
+        position: "top-right",
+        theme: "dark",
+      });
+    } else {
+      toast.error("error occured! try again later", {
+        position: "top-right",
+        theme: "dark",
+      });
     }
   };
 

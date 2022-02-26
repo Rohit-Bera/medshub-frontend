@@ -73,11 +73,14 @@ export const searchProductbyCategory = async (category) => {
 export const addToCartProduct = async (prod) => {
   console.log("prod: ", prod);
   const { item, token } = prod;
+  console.log("token: ", token);
   const url = `/addToCart?productId=${item._id}`;
   const headers = { headers: { Authorization: `Bearer ${token}` } };
   console.log("headers: ", headers);
 
   try {
+    // const host = "http://localhost:5500";
+
     const link = host + url;
     console.log("link: ", link);
 

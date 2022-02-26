@@ -19,6 +19,8 @@ import {
   postMedWishlistApi,
   placeOrderMedicineApi,
 } from "../Data/Services/Oneforall";
+import { toast } from "react-toastify";
+
 Modal.setAppElement("#root");
 
 const Viewmed = () => {
@@ -81,6 +83,23 @@ const Viewmed = () => {
     if (response) {
       setModalIsOpen(false);
     }
+
+    if (response.status === 200 && response.data.status === "200") {
+      toast.success("added to wishlist!", {
+        position: "bottom-right",
+        theme: "dark",
+      });
+    } else if (response.data.error.code === 400) {
+      toast.info("already exist in wishlist!", {
+        position: "bottom-right",
+        theme: "dark",
+      });
+    } else {
+      toast.error("error occured! try again later", {
+        position: "bottom-right",
+        theme: "dark",
+      });
+    }
   };
 
   const refresh = (e) => {
@@ -105,6 +124,18 @@ const Viewmed = () => {
     if (response) {
       setModalIsOpen(false);
       setFeedback("");
+    }
+
+    if (response.status === 200) {
+      toast.success("feedback send!", {
+        theme: "colored",
+        position: "bottom-right",
+      });
+    } else {
+      toast.error("error occured! try sometime later.", {
+        theme: "colored",
+        position: "bottom-right",
+      });
     }
   };
 
@@ -134,6 +165,18 @@ const Viewmed = () => {
 
     if (response) {
       setModalIsOpen(false);
+    }
+
+    if (response.status === 200 && response.data.status === "200") {
+      toast.success("order placed!", {
+        position: "top-right",
+        theme: "dark",
+      });
+    } else {
+      toast.error("error occured! try again later", {
+        position: "top-right",
+        theme: "dark",
+      });
     }
   };
 
