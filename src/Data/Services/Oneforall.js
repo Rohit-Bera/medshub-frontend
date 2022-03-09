@@ -12,7 +12,6 @@ export const postUserService = async (data) => {
 
   try {
     const link = host + url;
-
     const receive = await axios.post(link, data);
 
     return { receive };
@@ -620,7 +619,7 @@ export const updateUserApi = async(_id, data, headers)=>{
   console.log('_id: ', _id);
   try {
     const url = `/editUser/${_id}`;
-    const host = "http://localhost:5500"
+    // const host = "http://localhost:5500"
     const link = host+url;
     const result = await axios.put(link, data, headers);
     console.log('result: ', result);
