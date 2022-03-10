@@ -251,7 +251,7 @@ const Searchproduct = () => {
                     </div>
                     <div className="item-disc">
                       <p>{item.productName}</p>
-                      <label>{item.productPrice}</label>
+                      <label>₹{item.productPrice}</label>
                     </div>
                     <div className="item-btn">
                       <Link to="/viewproduct">
@@ -321,7 +321,15 @@ const Searchproduct = () => {
                 );
               })
             ) : (
-              <div style={{ color: "white" }}>Product not found</div>
+              <div
+                style={{
+                  color: "white",
+                  fontSize: "24px",
+                  textAlign: "center",
+                }}
+              >
+                no Product found!
+              </div>
             )}
           </div>
         </div>

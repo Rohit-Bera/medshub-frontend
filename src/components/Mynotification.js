@@ -38,6 +38,7 @@ const Mynotification = () => {
   const [prodModal, setProdModal] = useState(false);
   const [medModal, setMedModal] = useState(false);
   const [length, setOrderLentgh] = useState();
+  const [count, setCount] = useState();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.userReducer).token;
 
@@ -52,6 +53,15 @@ const Mynotification = () => {
       setModalIsOpen(false);
       setMyOrders(response.data.myOrder);
       setOrderLentgh(response.data.myOrder.length);
+
+      response.data.myOrder.forEach((i) => {
+        console.log("i: ", i);
+        if (i.deliverystatus === true) {
+          setCount(1);
+        } else {
+          setCount(0);
+        }
+      });
     }
   };
 
@@ -103,7 +113,7 @@ const Mynotification = () => {
                   <div className="item">
                     <img src={item.product.productImage[0]} alt="product_img" />
                     <p>{item.product.productName}</p>
-                    <p>{item.product.productPrice}</p>
+                    <p>₹{item.product.productPrice}</p>
 
                     <button onClick={() => dispatchProd(item.product)}>
                       <Link to="/viewproduct">
@@ -161,7 +171,7 @@ const Mynotification = () => {
                   <div className="item">
                     <img src={item.medicine[0]} alt="product_img" />
                     <p>{item.medicine.medicineName}</p>
-                    <p>{item.medicine.medicinePrice}</p>
+                    <p>₹{item.medicine.medicinePrice}</p>
 
                     <button onClick={() => dispatchMed(item.medicine)}>
                       <Link to="/medicines/viewmedcines">
@@ -216,9 +226,35 @@ const Mynotification = () => {
               }
             })
           ) : (
-            <div>
-              <p>no orders added</p>
+            <div
+              style={{
+                height: "80vh",
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center",
+              }}
+            >
+              <p style={{ fontSize: "24px", textAlign: "center" }}>
+                no orders added yet. <br /> place some orders!
+              </p>
             </div>
+          )}
+
+          {count !== 0 ? (
+            <div
+              style={{
+                height: "80vh",
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center",
+              }}
+            >
+              <p style={{ fontSize: "24px", textAlign: "center" }}>
+                no orders added yet. <br /> place some orders!
+              </p>
+            </div>
+          ) : (
+            ""
           )}
         </div>
         <div className="account-details-nav">

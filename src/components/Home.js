@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useEffect, useRef, useState } from "react";
 import "../style/home.css";
 import dabur from "../images/dabur-banner.jfif";
 import dettol from "../images/dettol-banner.jpg";
@@ -24,6 +24,9 @@ import Footer from "./Footer";
 //requirements
 import { Link } from "react-router-dom";
 import Modal from "react-modal/lib/components/Modal";
+import { Triangle, Rings, Oval, ThreeDots } from "react-loader-spinner";
+import { toast } from "react-toastify";
+import { chatBotData } from "../Data/Reducers/chatBot.reducer";
 
 //for slider
 import Carousel, {
@@ -31,9 +34,25 @@ import Carousel, {
   autoplayPlugin,
 } from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
+import { introQueryApi, textqueryApi } from "../Data/Services/Oneforall";
+import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {
+  const conversation = useSelector(
+    (state) => state.chatBotReducer
+  ).conversation;
+
+  useEffect(() => {
+    messageEndRef.current?.scrollIntoView();
+  }, [conversation]);
+
+  const messageEndRef = useRef(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [userMessage, setuserMessage] = useState("");
+  const [loader, setLoader] = useState(false);
+  const [start, setStart] = useState("");
+
+  const dispatch = useDispatch();
 
   const customStyles = {
     content: {
@@ -44,14 +63,75 @@ const Home = () => {
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
       border: "1px solid black",
-      backgroundColor: "rgb(56, 182, 255)",
+      backgroundColor: "black",
     },
+  };
+
+  const referesh = (e) => {
+    e.preventDefault();
+  };
+
+  const takeInput = (e) => {
+    setuserMessage(e.target.value);
+  };
+
+  const textQuery = async () => {
+    if (userMessage === "") {
+      toast.info("no input found!", {
+        position: "bottom-right",
+        theme: "dark",
+      });
+    } else {
+      setLoader(true);
+      console.log("userMessage: ", userMessage);
+
+      const response = await textqueryApi(userMessage);
+      console.log("response: ", response);
+
+      const user = response.result.data.query;
+      const bot = response.result.data.reply;
+
+      dispatch(chatBotData({ user }));
+      dispatch(chatBotData({ bot }));
+
+      if (response) {
+        setuserMessage("");
+        setLoader(false);
+      }
+    }
+  };
+
+  const intro = async () => {
+    try {
+      setLoader(true);
+      const response = await introQueryApi();
+      console.log("response: ", response);
+
+      if (response) {
+        setLoader(false);
+        setStart(response.result.data.reply);
+      }
+
+      const bot = response.result.data.reply;
+
+      if (conversation.length === 0) {
+        dispatch(chatBotData({ bot }));
+      }
+    } catch (error) {
+      console.log("error: ", error);
+    }
   };
 
   return (
     <>
       <Navbar />
-      <button className="nurse" onClick={() => setModalIsOpen(true)}>
+      <button
+        className="nurse"
+        onClick={() => {
+          setModalIsOpen(true);
+          intro();
+        }}
+      >
         <i class="fas fa-user-nurse"></i>
       </button>
 
@@ -296,20 +376,55 @@ const Home = () => {
               </button>
             </div>
             <div className="bot-body">
-              {/* <div className="chat">
-                <div className="sender">
-                  <p>Hello , Im sage Bot</p>
+              <div className="chat">
+                <div className="chat-bot">
+                  {/* chatbot */}
+
+                  {/* {console.log("conversation :", conversation)} */}
+                  {conversation !== []
+                    ? conversation.map((msg) => {
+                        if (msg.bot) {
+                          return (
+                            <div className="sender">
+                              <p>{msg.bot}</p>
+                            </div>
+                          );
+                        } else if (msg.user) {
+                          return (
+                            <div className="receiver">
+                              <p>{msg.user}</p>
+                            </div>
+                          );
+                        }
+                      })
+                    : ""}
+                  <div ref={messageEndRef} />
                 </div>
-                <div className="receiver">
-                  <p>hey im , rohit</p>
-                </div>
-              </div> */}
+              </div>
             </div>
             <div className="bot-button">
-              <form>
-                <input type="text" className="textbox" />
-                <button className="send">
-                  <i class="far fa-paper-plane"></i>
+              <form onSubmit={(e) => referesh(e)}>
+                <input
+                  type="text"
+                  className="textbox"
+                  name="userMessage"
+                  value={userMessage}
+                  onChange={takeInput}
+                />
+                <button className="send" onClick={textQuery}>
+                  {loader === true ? (
+                    <label
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-around",
+                        alignItems: "center",
+                      }}
+                    >
+                      <ThreeDots color="white" height={30} width={30} />
+                    </label>
+                  ) : (
+                    <i class="far fa-paper-plane"></i>
+                  )}
                 </button>
               </form>
             </div>
@@ -321,3 +436,18 @@ const Home = () => {
 };
 
 export default Home;
+
+// <div className="sender">
+//                   {start ? (
+//                     <p>{start}</p>
+//                   ) : loader ? (
+//                     <ThreeDots color="white" height={30} width={30} />
+//                   ) : (
+//                     ""
+//                   )}
+//                 </div>
+// {
+//   /* <div className="receiver">
+//                   <p>hey im , rohit</p>
+//                 </div> */
+// }

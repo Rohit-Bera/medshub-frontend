@@ -4,8 +4,12 @@ import "../style/signin.css";
 import signin from "../images/signin.png";
 import { Link, useHistory } from "react-router-dom";
 import Navbar from "./Navbar";
-import { forgotMailApi, loginUserService } from "../Data/Services/Oneforall";
-import { useDispatch } from "react-redux";
+import {
+  forgotMailApi,
+  loginUserService,
+  resetPasswordApi,
+} from "../Data/Services/Oneforall";
+import { useDispatch, useSelector } from "react-redux";
 import { userData } from "../Data/Reducers/userData.reducer";
 import { adminData } from "../Data/Reducers/adminData.reducer";
 import Modal from "react-modal/lib/components/Modal";
@@ -14,18 +18,29 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 Modal.setAppElement("#root");
 
-const Signin = () => {
+const ResetPassword = () => {
   // ---------------states
+
+  //   const token = useSelector((state) => state.userReducer).token;
+  //   console.log("token: ", token);
+  //   const name = useSelector((state) => state.userReducer).name;
+  //   console.log("name: ", name);
+  //   const email = useSelector((state) => state.userReducer).email;
+  //   console.log("email: ", email);
+  //   const address = useSelector((state) => state.userReducer).address;
+  //   console.log("address: ", address);
+  //   const phone = useSelector((state) => state.userReducer).phoneNumber;
+  //   console.log("phone: ", phone);
+  //   const password = useSelector((state) => state.userReducer).password;
+  //   console.log("password: ", password);
 
   const [logUser, setLoguser] = useState({
     email: "",
     password: null,
   });
 
-  const [forgotMail, setForgotEmail] = useState("");
-
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [forgotModal, setForgotModal] = useState(false);
+
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -42,39 +57,31 @@ const Signin = () => {
     setLoguser({ ...logUser, [name]: value });
   };
 
-  const LoginUser = async () => {
+  const resetPassword = async () => {
     setModalIsOpen(true);
     console.log("logUser: ", logUser);
 
     if (logUser.email !== "" && logUser.password !== null) {
       try {
-        const response = await loginUserService(logUser);
+        const response = await resetPasswordApi(logUser);
         if (response) {
           setModalIsOpen(false);
         }
-        console.log("response: ", response.receive.data);
+        console.log("response: ", response);
 
-        if (response.receive.data.status === "404") {
-          toast.error("invalid details");
-        } else {
-          toast.success("login successfull");
-        }
+        const { token, updatePass } = response.data.result;
+        const { address, email, name, phoneNumber, password } = updatePass;
 
-        const { user, token } = response.receive.data.loguser;
-
-        const { name, email, address, phoneNumber, usertype, _id } = user;
-        const signupUser = { name, email, phoneNumber, address, _id };
+        const signupUser = { address, email, name, phoneNumber, password };
         const theUser = { signupUser, token };
-        if (usertype === "admin") {
-          dispatch(adminData({ theUser }));
-          if (response.receive.data.loguser) {
-            return history.push("/ADmIn/adminHome");
-          }
+
+        dispatch(userData({ theUser }));
+
+        if (response.data.result) {
+          toast.success(" Password Updated ");
+          history.push("/yourAccount/AccountDetails");
         } else {
-          dispatch(userData({ theUser }));
-          if (response.receive.data.loguser) {
-            return history.push("/yourAccount/AccountDetails");
-          }
+          toast.error("user with this email doesnot exist ");
         }
       } catch (error) {
         console.log("error: ", error);
@@ -94,51 +101,7 @@ const Signin = () => {
     }
   };
 
-  const inputTaker = (e) => {
-    setForgotEmail(e.target.value);
-  };
-  const forgotMailCheck = async () => {
-    setModalIsOpen(true);
-    console.log("forgotMail: ", forgotMail);
-    if (forgotMail === "") {
-      toast.info("please enter details", {
-        position: "bottom-right",
-        theme: "light",
-      });
-    } else {
-      const response = await forgotMailApi(forgotMail);
-      console.log("response: ", response);
-      if (response) {
-        setModalIsOpen(false);
-        setForgotEmail("");
-      }
-
-      if (response.data.result) {
-        setForgotModal(false);
-
-        history.push("/reset-password");
-      } else if (response.data.error) {
-        toast.error("please enter a valid email! , user not found", {
-          position: "bottom-right",
-          theme: "dark",
-        });
-      }
-    }
-  };
-
   const customStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-      border: "1px solid black",
-    },
-  };
-
-  const forgotStyle = {
     content: {
       top: "50%",
       left: "50%",
@@ -156,12 +119,12 @@ const Signin = () => {
       <form onSubmit={(e) => referesh(e)}>
         <div style={{ display: "flex", marginTop: "1%" }}>
           <div style={{ flex: "50%" }}>
-            <h2 className="signin-title">Please Enter Your Login Details</h2>
+            <h2 className="signin-title">Reset Your Password</h2>
             <hr className="hr-signin"></hr>
             <div style={{ textAlign: "center" }}>
               <br></br>
               <p style={{ marginRight: "190px", marginBottom: "-1px" }}>
-                Email.
+                Existing Email.
               </p>
               <input
                 type="text"
@@ -174,7 +137,7 @@ const Signin = () => {
               <br></br>
               <br></br>
               <p style={{ marginRight: "180px", marginBottom: "-1px" }}>
-                Password
+                New Password
               </p>
               <input
                 type="password"
@@ -187,49 +150,9 @@ const Signin = () => {
               <br></br>
               <br></br>
               <br></br>
-              <button className="button" onClick={LoginUser}>
-                Log In
+              <button className="button" onClick={resetPassword}>
+                Reset Password
               </button>
-              <br></br>
-              <br></br>
-              <p className="p-signin">
-                You Have No Account?{" "}
-                <Link to="/signup" className="p-signin">
-                  Signup
-                </Link>
-              </p>
-
-              <button className="button" onClick={() => setForgotModal(true)}>
-                forgot password
-              </button>
-              <Modal isOpen={forgotModal} style={forgotStyle}>
-                <div className="forgot">
-                  <form onSubmit={(e) => referesh(e)}>
-                    <p>enter your existing email!</p>
-                    <div className="forgot-form">
-                      <p>Email : </p>
-                      <input
-                        type="text"
-                        required
-                        name="forgotEmail"
-                        value={forgotMail}
-                        onChange={inputTaker}
-                      />
-                    </div>
-                    <div className="forgot-btn">
-                      <button
-                        onClick={() => setForgotModal(false)}
-                        className="cancel"
-                      >
-                        cancel
-                      </button>
-                      <button className="send" onClick={forgotMailCheck}>
-                        check
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </Modal>
             </div>
           </div>
           <hr className="hr-signin"></hr>
@@ -269,4 +192,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default ResetPassword;

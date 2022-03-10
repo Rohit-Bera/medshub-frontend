@@ -139,8 +139,17 @@ const Mywishlist = () => {
               }
             })
           ) : (
-            <div>
-              <p>no items added into wishlist</p>
+            <div
+              style={{
+                height: "80vh",
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center",
+              }}
+            >
+              <p style={{ fontSize: "24px", textAlign: "center" }}>
+                no items added into wishlist
+              </p>
             </div>
           )}
         </div>

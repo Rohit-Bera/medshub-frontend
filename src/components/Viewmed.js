@@ -111,31 +111,38 @@ const Viewmed = () => {
   };
 
   const postMedFeedback = async () => {
-    setModalIsOpen(true);
-    console.log("feed : ", feedback);
-
-    const medicineId = _id;
-
-    const data = { feedback, medicineId, medicineName };
-
-    const response = await postMedFeedbackApi(data, token);
-    console.log("response: ", response);
-
-    if (response) {
-      setModalIsOpen(false);
-      setFeedback("");
-    }
-
-    if (response.status === 200) {
-      toast.success("feedback send!", {
-        theme: "colored",
+    if (feedback === "") {
+      toast.info("no input found! ", {
+        theme: "dark",
         position: "bottom-right",
       });
     } else {
-      toast.error("error occured! try sometime later.", {
-        theme: "colored",
-        position: "bottom-right",
-      });
+      setModalIsOpen(true);
+      console.log("feed : ", feedback);
+
+      const medicineId = _id;
+
+      const data = { feedback, medicineId, medicineName };
+
+      const response = await postMedFeedbackApi(data, token);
+      console.log("response: ", response);
+
+      if (response) {
+        setModalIsOpen(false);
+        setFeedback("");
+      }
+
+      if (response.status === 200) {
+        toast.success("feedback send!", {
+          theme: "colored",
+          position: "bottom-right",
+        });
+      } else {
+        toast.error("error occured! try sometime later.", {
+          theme: "colored",
+          position: "bottom-right",
+        });
+      }
     }
   };
 
@@ -239,21 +246,13 @@ const Viewmed = () => {
               ]}
               animationSpeed={1000}
             >
-              <div className="brand" id="img1">
-                <img src={medicineImage[0]} alt="_img" />
-              </div>
-              <div className="brand" id="img2">
-                <img src={medicineImage[1]} alt="_img" />
-              </div>
-              <div className="brand" id="img3">
-                <img src={medicineImage[2]} alt="_img" />
-              </div>
-              <div className="brand" id="img4">
-                <img src={medicineImage[4]} alt="_img" />
-              </div>
-              <div className="brand" id="img5">
-                <img src={medicineImage[5]} alt="_img" />
-              </div>
+              {medicineImage.map((img) => {
+                return (
+                  <div className="brand" id="img1">
+                    <img src={img} alt="_img" />
+                  </div>
+                );
+              })}
             </Carousel>
           </div>
           <div className="prod-detail">
