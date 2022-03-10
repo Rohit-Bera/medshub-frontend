@@ -18,13 +18,13 @@ const userDataSlice = createSlice({
     userData: (state, action) => {
       console.log("action: ", action);
       const { payload } = action;
-      state.name = payload.theUser.signupUser.name;
-      state.email = payload.theUser.signupUser.email;
-      state.password = payload.theUser.signupUser.password;
-      state.address = payload.theUser.signupUser.address;
-      state.phoneNumber = payload.theUser.signupUser.phoneNumber;
-      state._id = payload.theUser.signupUser._id;
-      state.token = payload.theUser.token;
+      state.name = payload?.theUser.signupUser.name;
+      state.email = payload?.theUser.signupUser.email;
+      state.password = payload?.theUser.signupUser.password;
+      state.address = payload?.theUser.signupUser.address;
+      state.phoneNumber = payload?.theUser.signupUser.phoneNumber;
+      state._id = payload?.theUser.signupUser._id;
+      state.token = payload?.theUser.token;
     },
   },
 });

@@ -50,12 +50,13 @@ import Searchmedicine from "./Searchmedicine";
 import AboutViz from "./AboutViz";
 import HelpViz from "./HelpViz";
 import ProductOrder from "../Admin/Admin-product-order";
-import MedicineOrder from "../Admin/Admin-medicine-order"; 
+import MedicineOrder from "../Admin/Admin-medicine-order";
 import NotDeliverMedicine from "../Admin/NotDeliverMedicineOrder";
 import NotDeliberProduct from "../Admin/NotDeliverProductOrder";
 import AllUsers from "../Admin/Users";
 import updateProfile from "../components/updateProfile";
 import AdminFeedback from "../Admin/Admin.Feedback";
+import ResetPassword from "./Resetpassword";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -169,15 +170,19 @@ const App = () => {
           <Route path="/ADmIn/ManageProducts" exact component={ManageProduct} />
           <Route path="/ADmIn/ManageOrder" exact component={ManageOrder} />
           <Route path="/ADmIn/ProductOrder" exact component={ProductOrder} />
-          <Route path="/ADmIn/ProductOrder/NotDeliverdProd" exact component={NotDeliberProduct} />
+          <Route
+            path="/ADmIn/ProductOrder/NotDeliverdProd"
+            exact
+            component={NotDeliberProduct}
+          />
           <Route path="/ADmIn/medicineOrder" exact component={MedicineOrder} />
-          <Route path="/ADmIn/medicineOrder/NotDeliverdMed" exact component={NotDeliverMedicine} />
+          <Route
+            path="/ADmIn/medicineOrder/NotDeliverdMed"
+            exact
+            component={NotDeliverMedicine}
+          />
           <Route path="/ADmIn/allUSers" exact component={AllUsers} />
           <Route path="/ADmIn/AdminFeedback" exact component={AdminFeedback} />
-
-
-
-
 
           <Route
             path="/ADmIn/ManageMedicine"
@@ -199,8 +204,6 @@ const App = () => {
           <Route path="/yourAccount/myOrders" exact component={Myorders} />
           <Route path="/yourAccount/MyWishlist" exact component={mywishlist} />
           <Route path="/yourAccount/myCart" exact component={Cart} />
-          
-
 
           <Route
             path="/yourAccount/notification"
@@ -208,6 +211,8 @@ const App = () => {
             component={notification}
           />
           <Route path="/signin" exact component={Signin} />
+          <Route path="/reset-password" exact component={ResetPassword} />
+
           <Route path="/signup" exact component={Signup} />
           <Route path="/updateProfile" exact component={updateProfile} />
 
@@ -258,7 +263,6 @@ const App = () => {
           draggable
           pauseOnHover
         />
-
       </Router>
     </>
   );

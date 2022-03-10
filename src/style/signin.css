@@ -29,3 +29,54 @@ a {
   color: white;
   text-decoration: none;
 }
+
+.forgot {
+  width: 20vw;
+  height: 12vw;
+  background-color: black;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.forgot .forgot-form {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.forgot .forgot-btn {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 8vh;
+}
+
+.forgot .forgot-form input {
+  height: 4vh;
+  width: 180px;
+  outline: none;
+  border: none;
+}
+
+.forgot .forgot-btn .send {
+  width: 5vw;
+  height: 4vh;
+  /* font-size: px; */
+
+  outline: none;
+  border: 2px solid white;
+  background-color: rgb(56, 182, 255);
+  color: white;
+}
+
+.forgot .forgot-btn .cancel {
+  width: 5vw;
+  height: 4vh;
+  /* font-size: px; */
+
+  outline: none;
+  border: 2px solid white;
+  background-color: red;
+  color: white;
+}

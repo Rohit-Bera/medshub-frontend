@@ -37,9 +37,11 @@ const Myorder = () => {
     },
   };
   const [modalIsOpen, setModalIsOpen] = useState(true);
+  const [count, setCount] = useState();
   const [myorders, setMyOrders] = useState([]);
   const [prodModal, setProdModal] = useState(false);
   const [medModal, setMedModal] = useState(false);
+  const [length, setOrderLentgh] = useState();
   const [reportItem, setReportitem] = useState({
     itemId: "",
     orderId: "",
@@ -61,7 +63,17 @@ const Myorder = () => {
     if (response) {
       setModalIsOpen(false);
       setMyOrders(response.data.myOrder);
+      setOrderLentgh(response.data.myOrder.length);
     }
+
+    response.data.myOrder.forEach((i) => {
+      console.log("i: ", i);
+      if (i.deliverystatus === false) {
+        setCount(1);
+      } else {
+        setCount(0);
+      }
+    });
   };
 
   const refresh = (e) => {
@@ -131,116 +143,147 @@ const Myorder = () => {
       <div className="your-wishlist">
         <div className="wishlist-items">
           <p style={{ fontSize: "20px" }}>My Orders</p>
-          {myorders.map((item) => {
-            if (item.product && item.deliverystatus == true) {
-              return (
-                <div className="item">
-                  <img src={item.product.productImage[0]} alt="product_img" />
-                  <p>{item.product.productName}</p>
-                  <p>₹{item.product.productPrice}</p>
+          {length !== 0 ? (
+            myorders.map((item) => {
+              if (item.product && item.deliverystatus == true) {
+                return (
+                  <div className="item">
+                    <img src={item.product.productImage[0]} alt="product_img" />
+                    <p>{item.product.productName}</p>
+                    <p>₹{item.product.productPrice}</p>
 
-                  <button
-                    title="view"
-                    onClick={() => dispatchProd(item.product)}
-                  >
-                    <Link to="/viewproduct">
-                      <i class="fas fa-eye"></i>
-                    </Link>
-                  </button>
+                    <button
+                      title="view"
+                      onClick={() => dispatchProd(item.product)}
+                    >
+                      <Link to="/viewproduct">
+                        <i class="fas fa-eye"></i>
+                      </Link>
+                    </button>
 
-                  <button
-                    title="cancel"
-                    className="report"
-                    onClick={() => {
-                      setProdModal(true);
-                      takeInput(item);
-                    }}
-                  >
-                    report problem
-                  </button>
-                  <Modal isOpen={prodModal} style={customStyles}>
-                    <div className="modal">
-                      <div className="modal-cancel">
-                        <button onClick={() => setProdModal(false)}>
-                          <i class="fas fa-times"></i>
-                        </button>
-                      </div>
-                      <div className="modal-body">
-                        <h3>
-                          report problem about <br /> product :{" "}
-                          {reportItem.itemId}
-                        </h3>
-                        <form onClick={refresh}>
-                          <input type="text" onChange={changeInput} />
-                          <button
-                            onClick={() => {
-                              setProdModal(false);
-                              reportProblem();
-                            }}
-                          >
-                            send
+                    <button
+                      title="cancel"
+                      className="report"
+                      onClick={() => {
+                        setProdModal(true);
+                        takeInput(item);
+                      }}
+                    >
+                      report problem
+                    </button>
+                    <Modal isOpen={prodModal} style={customStyles}>
+                      <div className="modal">
+                        <div className="modal-cancel">
+                          <button onClick={() => setProdModal(false)}>
+                            <i class="fas fa-times"></i>
                           </button>
-                        </form>
+                        </div>
+                        <div className="modal-body">
+                          <h3>
+                            report problem about <br /> product :{" "}
+                            {reportItem.itemId}
+                          </h3>
+                          <form onClick={refresh}>
+                            <input type="text" onChange={changeInput} />
+                            <button
+                              onClick={() => {
+                                setProdModal(false);
+                                reportProblem();
+                              }}
+                            >
+                              send
+                            </button>
+                          </form>
+                        </div>
                       </div>
-                    </div>
-                  </Modal>
-                </div>
-              );
-            } else if (item.medicine && item.deliverystatus == true) {
-              return (
-                <div className="item">
-                  <img src={item.medicine[0]} alt="product_img" />
-                  <p>{item.medicine.medicineName}</p>
-                  <p>₹{item.medicine.medicinePrice}</p>
+                    </Modal>
+                  </div>
+                );
+              } else if (item.medicine && item.deliverystatus == true) {
+                return (
+                  <div className="item">
+                    <img src={item.medicine[0]} alt="product_img" />
+                    <p>{item.medicine.medicineName}</p>
+                    <p>₹{item.medicine.medicinePrice}</p>
 
-                  <button
-                    title="view"
-                    onClick={() => dispatchMed(item.medicine)}
-                  >
-                    <Link to="/medicines/viewmedcines">
-                      <i class="fas fa-eye"></i>
-                    </Link>
-                  </button>
+                    <button
+                      title="view"
+                      onClick={() => dispatchMed(item.medicine)}
+                    >
+                      <Link to="/medicines/viewmedcines">
+                        <i class="fas fa-eye"></i>
+                      </Link>
+                    </button>
 
-                  <button
-                    title="cancel"
-                    className="report"
-                    onClick={() => {
-                      setMedModal(true);
-                      takeInput(item);
-                    }}
-                  >
-                    report problem
-                  </button>
-                  <Modal isOpen={medModal} style={customStyles}>
-                    <div className="modal">
-                      <div className="modal-cancel">
-                        <button onClick={() => setMedModal(false)}>
-                          <i class="fas fa-times"></i>
-                        </button>
-                      </div>
-                      <div className="modal-body">
-                        <h3>
-                          report problem about medicine : {reportItem.itemId}
-                        </h3>
-                        <form onClick={refresh}>
-                          <input type="text" onChange={changeInput} />
-                          <button
-                            onClick={() => {
-                              setMedModal(false);
-                              reportProblem();
-                            }}
-                          >
-                            send
+                    <button
+                      title="cancel"
+                      className="report"
+                      onClick={() => {
+                        setMedModal(true);
+                        takeInput(item);
+                      }}
+                    >
+                      report problem
+                    </button>
+                    <Modal isOpen={medModal} style={customStyles}>
+                      <div className="modal">
+                        <div className="modal-cancel">
+                          <button onClick={() => setMedModal(false)}>
+                            <i class="fas fa-times"></i>
                           </button>
-                        </form>
+                        </div>
+                        <div className="modal-body">
+                          <h3>
+                            report problem about medicine : {reportItem.itemId}
+                          </h3>
+                          <form onClick={refresh}>
+                            <input type="text" onChange={changeInput} />
+                            <button
+                              onClick={() => {
+                                setMedModal(false);
+                                reportProblem();
+                              }}
+                            >
+                              send
+                            </button>
+                          </form>
+                        </div>
                       </div>
-                    </div>
-                  </Modal>
-                </div>
-              );
-            }
-          })}
+                    </Modal>
+                  </div>
+                );
+              }
+            })
+          ) : (
+            <div
+              style={{
+                height: "80vh",
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center",
+              }}
+            >
+              <p style={{ fontSize: "24px", textAlign: "center" }}>
+                no orders placed yet. <br /> Order History is empty!
+              </p>
+            </div>
+          )}
+          {count !== 0 ? (
+            <div
+              style={{
+                height: "80vh",
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center",
+              }}
+            >
+              <p style={{ fontSize: "24px", textAlign: "center" }}>
+                Order is placed! <br /> But not Delievered yet.
+              </p>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
         <div className="account-details-nav">
           <div className="details-nav">

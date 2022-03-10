@@ -454,7 +454,9 @@ a {
   width: 2.5vw;
   height: 4vh;
   background-color: white;
-  color: rgb(56, 182, 255);
+  color: white;
+  border: 2px solid white;
+  background-color: rgb(56, 182, 255);
   font-weight: bold;
   font-size: 18px;
   display: flex;
@@ -463,11 +465,11 @@ a {
 }
 
 .bot-body .bot-container .bot-body {
-  background-color: white;
+  overflow: scroll;
 }
 
 .bot-body .bot-container .bot-body .chat {
-  background-color: aqua;
+  background-color: black;
   width: 69vw;
 }
 
@@ -482,6 +484,8 @@ a {
   background-color: white;
   border-radius: 5px;
   padding: 5px;
+  color: black;
+  text-align: justify;
 }
 
 .bot-body .bot-container .bot-body .chat .receiver {
@@ -499,6 +503,8 @@ a {
   background-color: white;
   border-radius: 5px;
   padding: 5px;
+  color: black;
+  text-align: justify;
 }
 
 .bot-body .bot-container .bot-button form {
@@ -512,7 +518,9 @@ a {
 
 .bot-body .bot-container .bot-button .textbox {
   outline: none;
-  border: 1px solid rgb(56, 182, 255);
+  border: 3px solid white;
+  background-color: rgb(56, 182, 255);
+  color: white;
   font-size: 20px;
   height: 5vh;
   width: 55vw;

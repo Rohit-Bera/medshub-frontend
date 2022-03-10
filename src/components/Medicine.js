@@ -82,7 +82,7 @@ const Medicine = () => {
         position: "bottom-right",
         theme: "dark",
       });
-    } else if (response.data.error.code === 400) {
+    } else if (response.data.code === 400) {
       toast.info("already exist in wishlist!", {
         position: "bottom-right",
         theme: "dark",
@@ -201,7 +201,6 @@ const Medicine = () => {
           <div className="searched">
             {/* array of items */}
             {medicines.map((item) => {
-              console.log("item: ", item);
               return (
                 <div className="item">
                   <div className="item-like">

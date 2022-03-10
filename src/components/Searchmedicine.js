@@ -242,7 +242,7 @@ const Searchmedicine = () => {
                     </div>
                     <div className="item-disc">
                       <p>{item.medicineName}</p>
-                      <label>{item.medicinePrice}</label>
+                      <label>₹{item.medicinePrice}</label>
                     </div>
                     <div className="item-btn">
                       <Link to="/medicines/viewmedcines">

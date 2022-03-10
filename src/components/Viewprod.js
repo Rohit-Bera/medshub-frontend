@@ -22,7 +22,7 @@ Modal.setAppElement("#root");
 
 const Viewprod = () => {
   // ==================================states
-  const productId = useSelector((state) => state.productReducer)._id;
+  const _id = useSelector((state) => state.productReducer)._id;
   const productName = useSelector((state) => state.productReducer).productName;
   const productImage = useSelector(
     (state) => state.productReducer
@@ -44,7 +44,7 @@ const Viewprod = () => {
   ).productDescription;
 
   const prodItem = {
-    productId,
+    _id,
     productName,
     productImage,
     productBrand,
@@ -79,7 +79,7 @@ const Viewprod = () => {
     setModalIsOpen(true);
 
     const item = {
-      productId,
+      _id,
       productName,
       productImage,
       productBrand,
@@ -90,7 +90,7 @@ const Viewprod = () => {
     };
     console.log("item :", item);
 
-    const response = await postprodWishlistApi(productId, item, token);
+    const response = await postprodWishlistApi(_id, item, token);
 
     console.log("response: ", response);
     if (response) {
@@ -125,29 +125,36 @@ const Viewprod = () => {
   };
 
   const sendProdFeedback = async () => {
-    setModalIsOpen(true);
-
-    console.log("feed : ", feedback);
-
-    const data = { feedback, productId, productName, productBrand };
-
-    const response = await postProdFeedbackApi(data, token);
-    console.log("response: ", response);
-    if (response) {
-      setModalIsOpen(false);
-      setFeedback("");
-    }
-
-    if (response.status === 200) {
-      toast.success("feedback send!", {
-        theme: "colored",
+    if (feedback === "") {
+      toast.info("no input found!", {
+        theme: "dark",
         position: "bottom-right",
       });
     } else {
-      toast.error("error occured! try sometime later.", {
-        theme: "colored",
-        position: "bottom-right",
-      });
+      setModalIsOpen(true);
+
+      console.log("feed : ", feedback);
+
+      const data = { feedback, _id, productName, productBrand };
+
+      const response = await postProdFeedbackApi(data, token);
+      console.log("response: ", response);
+      if (response) {
+        setModalIsOpen(false);
+        setFeedback("");
+      }
+
+      if (response.status === 200) {
+        toast.success("feedback send!", {
+          theme: "colored",
+          position: "bottom-right",
+        });
+      } else {
+        toast.error("error occured! try sometime later.", {
+          theme: "colored",
+          position: "bottom-right",
+        });
+      }
     }
   };
 
@@ -162,6 +169,8 @@ const Viewprod = () => {
   const placeOrderProduct = async () => {
     setModalIsOpen(true);
     console.log("productItem : ", productItem);
+
+    const {} = productItem;
 
     const response = await placeOrderProductApi(productItem, token);
     console.log("response place order: ", response);
@@ -242,21 +251,13 @@ const Viewprod = () => {
               ]}
               animationSpeed={1000}
             >
-              <div className="brand" id="img1">
-                <img src={productImage[0]} alt="_img" />
-              </div>
-              <div className="brand" id="img2">
-                <img src={productImage[1]} alt="_img" />
-              </div>
-              <div className="brand" id="img3">
-                <img src={productImage[2]} alt="_img" />
-              </div>
-              <div className="brand" id="img4">
-                <img src={productImage[4]} alt="_img" />
-              </div>
-              <div className="brand" id="img5">
-                <img src={productImage[5]} alt="_img" />
-              </div>
+              {productImage.map((img) => {
+                return (
+                  <div className="brand">
+                    <img src={img} alt="_img" />
+                  </div>
+                );
+              })}
             </Carousel>
           </div>
           <div className="prod-detail">

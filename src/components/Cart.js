@@ -27,6 +27,7 @@ const Cart = () => {
   }, []);
 
   // -------------------------------------------------------states
+  const [length, setCartLentgh] = useState();
   const [myCart, setMyCart] = useState([]);
   const history = useHistory();
   const [modalIsOpen, setModalIsOpen] = useState(false); // loader modal
@@ -91,6 +92,7 @@ const Cart = () => {
       setModalIsOpen(false);
     }
     setMyCart(response.data.myCart);
+    setCartLentgh(response.data.myCart.length);
   };
 
   const removeFromCart = async (_id) => {
@@ -289,149 +291,164 @@ const Cart = () => {
       <div className="your-wishlist">
         <div className="wishlist-items">
           <p style={{ fontSize: "20px" }}>My Cart</p>
-          {myCart.map((item) => {
-            if (item.product) {
-              return (
-                <div className="item">
-                  <img src={item.product.productImage[0]} alt="product_img" />
-                  <p>{item.product.productName}</p>
-                  <p>₹{item.product.productPrice}</p>
+          {length !== 0 ? (
+            myCart.map((item) => {
+              if (item.product) {
+                return (
+                  <div className="item">
+                    <img src={item.product.productImage[0]} alt="product_img" />
+                    <p>{item.product.productName}</p>
+                    <p>₹{item.product.productPrice}</p>
 
-                  <button onClick={() => viewProduct(item.product)}>
-                    <Link to="/viewproduct">
-                      <i class="fas fa-eye"></i>
-                    </Link>
-                  </button>
+                    <button onClick={() => viewProduct(item.product)}>
+                      <Link to="/viewproduct">
+                        <i class="fas fa-eye"></i>
+                      </Link>
+                    </button>
 
-                  <button onClick={() => removeFromCart(item._id)}>
-                    <i class="fas fa-times"></i>
-                  </button>
-                  <button
-                    className="buynow"
-                    onClick={() => {
-                      setProdBuyModal(true);
-                      takeProductItem(item.product);
-                      setProdId(item._id);
-                    }}
-                  >
-                    Buy Now
-                  </button>
-                  <Modal isOpen={prodBuyModal} style={customStyles}>
-                    <div className="buy-modal-conatiner">
-                      <div className="buy-modal-cancel">
-                        <button onClick={() => setProdBuyModal(false)}>
-                          <i class="fas fa-times"></i>
-                        </button>
-                      </div>
-                      <div className="buy-modal-body">
-                        <p>
-                          Are you sure <br />
-                          you want to buy now?
-                        </p>
-                      </div>
-                      <div className="buy-modal-btn">
-                        <button
-                          className="no"
-                          onClick={() => setProdBuyModal(false)}
-                        >
-                          cancel
-                        </button>
-
-                        <StripCheckout
-                          stripeKey="pk_test_51K9BzESJxF1xgWl3hAPFSmTRUHtri2Vb2QmboXnSvvdcD0XaNuqwiUmdDJIwZ10VYHCdJskzHLJoERsFQS5mmUWD00leevPB9M"
-                          token={makePaymentProduct}
-                          name="Make Payment"
-                          shippingAddress
-                          billingAddress
-                        >
-                          <button
-                            class="btn btn-md bg-warning"
-                            className="yes"
-                            onClick={() => {
-                              setProdBuyModal(false);
-                              // makePayment();
-                            }}
-                          >
-                            pay ₹{amount}
+                    <button onClick={() => removeFromCart(item._id)}>
+                      <i class="fas fa-times"></i>
+                    </button>
+                    <button
+                      className="buynow"
+                      onClick={() => {
+                        setProdBuyModal(true);
+                        takeProductItem(item.product);
+                        setProdId(item._id);
+                      }}
+                    >
+                      Buy Now
+                    </button>
+                    <Modal isOpen={prodBuyModal} style={customStyles}>
+                      <div className="buy-modal-conatiner">
+                        <div className="buy-modal-cancel">
+                          <button onClick={() => setProdBuyModal(false)}>
+                            <i class="fas fa-times"></i>
                           </button>
-                        </StripCheckout>
-                      </div>
-                    </div>
-                  </Modal>
-                </div>
-              );
-            } else if (item.medicine) {
-              return (
-                <div className="item">
-                  <img src={item.medicine[0]} alt="product_img" />
-                  <p>{item.medicine.medicineName}</p>
-                  <p>₹{item.medicine.medicinePrice}</p>
-
-                  <button onClick={() => viewProduct(item.medicine)}>
-                    <Link to="/medicines/viewmedcines">
-                      <i class="fas fa-eye"></i>
-                    </Link>
-                  </button>
-
-                  <button onClick={() => removeFromCart(item._id)}>
-                    <i class="fas fa-times"></i>
-                  </button>
-                  <button
-                    className="buynow"
-                    onClick={() => {
-                      setMedBuyModal(true);
-                      takeMedicineItem(item.medicine);
-                      setMedId(item._id);
-                    }}
-                  >
-                    Buy Now
-                  </button>
-                  <Modal isOpen={medBuyModal} style={customStyles}>
-                    <div className="buy-modal-conatiner">
-                      <div className="buy-modal-cancel">
-                        <button onClick={() => setMedBuyModal(false)}>
-                          <i class="fas fa-times"></i>
-                        </button>
-                      </div>
-                      <div className="buy-modal-body">
-                        <p>
-                          Are you sure <br />
-                          you want to buy now?
-                        </p>
-                      </div>
-                      <div className="buy-modal-btn">
-                        <button
-                          className="no"
-                          onClick={() => setMedBuyModal(false)}
-                        >
-                          cancel
-                        </button>
-
-                        <StripCheckout
-                          stripeKey="pk_test_51K9BzESJxF1xgWl3VLpG7easuHbz7arQhPME9rZtGqeQYeFDNH1Ve7eiyy3AsVypNWubsegfT78trvTOHGK9kocL00S3gYD1gS"
-                          token={makePaymentMedicine}
-                          name="Make Payment"
-                          shippingAddress
-                          billingAddress
-                        >
+                        </div>
+                        <div className="buy-modal-body">
+                          <p>
+                            Are you sure <br />
+                            you want to buy now?
+                          </p>
+                        </div>
+                        <div className="buy-modal-btn">
                           <button
-                            class="btn btn-md bg-warning"
-                            className="yes"
-                            onClick={() => {
-                              setMedBuyModal(false);
-                              // makePayment();
-                            }}
+                            className="no"
+                            onClick={() => setProdBuyModal(false)}
                           >
-                            pay ₹{amount}
+                            cancel
                           </button>
-                        </StripCheckout>
+
+                          <StripCheckout
+                            stripeKey="pk_test_51K9BzESJxF1xgWl3hAPFSmTRUHtri2Vb2QmboXnSvvdcD0XaNuqwiUmdDJIwZ10VYHCdJskzHLJoERsFQS5mmUWD00leevPB9M"
+                            token={makePaymentProduct}
+                            name="Make Payment"
+                            shippingAddress
+                            billingAddress
+                          >
+                            <button
+                              class="btn btn-md bg-warning"
+                              className="yes"
+                              onClick={() => {
+                                setProdBuyModal(false);
+                                // makePayment();
+                              }}
+                            >
+                              pay ₹{amount}
+                            </button>
+                          </StripCheckout>
+                        </div>
                       </div>
-                    </div>
-                  </Modal>
-                </div>
-              );
-            }
-          })}
+                    </Modal>
+                  </div>
+                );
+              } else if (item.medicine) {
+                return (
+                  <div className="item">
+                    <img src={item.medicine[0]} alt="product_img" />
+                    <p>{item.medicine.medicineName}</p>
+                    <p>₹{item.medicine.medicinePrice}</p>
+
+                    <button onClick={() => viewProduct(item.medicine)}>
+                      <Link to="/medicines/viewmedcines">
+                        <i class="fas fa-eye"></i>
+                      </Link>
+                    </button>
+
+                    <button onClick={() => removeFromCart(item._id)}>
+                      <i class="fas fa-times"></i>
+                    </button>
+                    <button
+                      className="buynow"
+                      onClick={() => {
+                        setMedBuyModal(true);
+                        takeMedicineItem(item.medicine);
+                        setMedId(item._id);
+                      }}
+                    >
+                      Buy Now
+                    </button>
+                    <Modal isOpen={medBuyModal} style={customStyles}>
+                      <div className="buy-modal-conatiner">
+                        <div className="buy-modal-cancel">
+                          <button onClick={() => setMedBuyModal(false)}>
+                            <i class="fas fa-times"></i>
+                          </button>
+                        </div>
+                        <div className="buy-modal-body">
+                          <p>
+                            Are you sure <br />
+                            you want to buy now?
+                          </p>
+                        </div>
+                        <div className="buy-modal-btn">
+                          <button
+                            className="no"
+                            onClick={() => setMedBuyModal(false)}
+                          >
+                            cancel
+                          </button>
+
+                          <StripCheckout
+                            stripeKey="pk_test_51K9BzESJxF1xgWl3VLpG7easuHbz7arQhPME9rZtGqeQYeFDNH1Ve7eiyy3AsVypNWubsegfT78trvTOHGK9kocL00S3gYD1gS"
+                            token={makePaymentMedicine}
+                            name="Make Payment"
+                            shippingAddress
+                            billingAddress
+                          >
+                            <button
+                              class="btn btn-md bg-warning"
+                              className="yes"
+                              onClick={() => {
+                                setMedBuyModal(false);
+                                // makePayment();
+                              }}
+                            >
+                              pay ₹{amount}
+                            </button>
+                          </StripCheckout>
+                        </div>
+                      </div>
+                    </Modal>
+                  </div>
+                );
+              }
+            })
+          ) : (
+            <div
+              style={{
+                height: "80vh",
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center",
+              }}
+            >
+              <p style={{ fontSize: "24px", textAlign: "center" }}>
+                no Items added in cart yet!
+              </p>
+            </div>
+          )}
         </div>
         <div className="account-details-nav">
           <div className="details-nav">

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Modal from "react-modal/lib/components/Modal";
-import { Triangle, Rings, Oval } from "react-loader-spinner";
+import { Triangle, Rings, Oval, ThreeDots } from "react-loader-spinner";
 import { postWebFeedback } from "../Data/Services/Oneforall";
 import { useDispatch, useSelector } from "react-redux";
 import "../style/footer.css";
@@ -34,29 +34,36 @@ const Footer = () => {
   };
 
   const sendWebFeedback = async () => {
-    setModalIsOpen(true);
-
-    console.log("feedback: ", input.feedback);
-
-    const response = await postWebFeedback(input, token);
-    console.log("response: ", response);
-
-    if (response) {
-      setModalIsOpen(false);
-
-      setInput({ feedback: "" });
-    }
-
-    if (response.status === 200) {
-      toast.success("feedback send!", {
-        theme: "colored",
+    if (input.feedback === "") {
+      toast.info("no input found!", {
+        theme: "dark",
         position: "bottom-right",
       });
     } else {
-      toast.error("error occured! try sometime later.", {
-        theme: "colored",
-        position: "bottom-right",
-      });
+      setModalIsOpen(true);
+
+      console.log("feedback: ", input.feedback);
+
+      const response = await postWebFeedback(input, token);
+      console.log("response: ", response);
+
+      if (response) {
+        setModalIsOpen(false);
+
+        setInput({ feedback: "" });
+      }
+
+      if (response.status === 200) {
+        toast.success("feedback send!", {
+          theme: "colored",
+          position: "bottom-right",
+        });
+      } else {
+        toast.error("error occured! try sometime later.", {
+          theme: "colored",
+          position: "bottom-right",
+        });
+      }
     }
   };
 
@@ -133,6 +140,28 @@ const Footer = () => {
           </Link>
         </div>
       </div>
+      <Modal
+        isOpen={modalIsOpen}
+        // onRequestClose={() => setModalIsOpen(false)}
+        style={customStyles}
+      >
+        <div
+          style={{
+            width: "7vw",
+            height: "13vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Triangle
+            color="black
+          "
+            height={100}
+            width={100}
+          />
+        </div>
+      </Modal>
     </div>
   );
 };

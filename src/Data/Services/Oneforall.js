@@ -209,7 +209,7 @@ export const deleteMedicineApi = async (headers, _id) => {
 
 export const updateMedicineApi = async (_id, data, headers) => {
   try {
-    const host = "http://localhost:5500";
+    // const host = "http://localhost:5500";
     const url = `/updateMedicine/${_id}`;
     const link = host + url;
 
@@ -617,7 +617,6 @@ export const updateUserApi = async (_id, data, headers) => {
   console.log("_id: ", _id);
   try {
     const url = `/editUser/${_id}`;
-    const host = "http://localhost:5500";
     const link = host + url;
     const result = await axios.put(link, data, headers);
     console.log("result: ", result);
@@ -625,5 +624,69 @@ export const updateUserApi = async (_id, data, headers) => {
   } catch (error) {
     console.log("error: ", error);
     return error;
+  }
+};
+
+export const textqueryApi = async (userMessage) => {
+  try {
+    const url = "/postChatbot";
+    // const host = "http://localhost:5500";
+    const link = host + url;
+
+    const result = await axios.post(link, { userMessage });
+    return { result };
+  } catch (error) {
+    console.log("error: ", error);
+
+    return { error };
+  }
+};
+
+export const introQueryApi = async () => {
+  try {
+    const url = `/ChatbotEventQuery/Introduce`;
+    const link = host + url;
+
+    const result = await axios.post(link);
+
+    return { result };
+  } catch (error) {
+    console.log("error: ", error);
+
+    return { error };
+  }
+};
+
+export const forgotMailApi = async (email) => {
+  console.log("email: ", email);
+  try {
+    const url = "/forgot-password";
+
+    const link = host + url;
+
+    const result = await axios.post(link, { email });
+
+    return result;
+  } catch (error) {
+    console.log("error: ", error);
+
+    return { error };
+  }
+};
+
+export const resetPasswordApi = async (data) => {
+  console.log("data: ", data);
+  try {
+    const url = "/reset-password";
+
+    const link = host + url;
+
+    const result = await axios.put(link, data);
+
+    return result;
+  } catch (error) {
+    console.log("error: ", error);
+
+    return { error };
   }
 };
