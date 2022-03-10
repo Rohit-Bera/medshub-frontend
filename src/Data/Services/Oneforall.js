@@ -12,7 +12,6 @@ export const postUserService = async (data) => {
 
   try {
     const link = host + url;
-
     const receive = await axios.post(link, data);
 
     return { receive };
@@ -74,13 +73,11 @@ export const addToCartProduct = async (prod) => {
   console.log("prod: ", prod);
   const { item, token } = prod;
   console.log("token: ", token);
-  const url = `/addToCart?productId=${item._id}`;
+  const url = `/addProdToCart?productId=${item._id}`;
   const headers = { headers: { Authorization: `Bearer ${token}` } };
   console.log("headers: ", headers);
 
   try {
-    // const host = "http://localhost:5500";
-
     const link = host + url;
     console.log("link: ", link);
 
@@ -99,7 +96,7 @@ export const addtoCartMedicine = async (med) => {
 
   const { item, token } = med;
 
-  const url = `/addToCart?medicineId=${item._id}`;
+  const url = `/addMedToCart?medicineId=${item._id}`;
 
   const headers = { headers: { Authorization: `Bearer ${token}` } };
 
@@ -320,6 +317,7 @@ export const postprodWishlistApi = async (_id, item, token) => {
   console.log("_id: ", _id);
 
   const url = `/addtoWishlistProduct?productId=${_id}`;
+  const host = "http://localhost:5500";
   const link = host + url;
 
   const headers = { headers: { Authorization: `Bearer ${token}` } };
@@ -552,7 +550,7 @@ export const placeOrderProductApi = async (product, token) => {
 
   try {
     const url = `/placeOrder?productId=${product._id}`;
-
+    // const host = "http://localhost:5500";
     const link = host + url;
 
     const receive = await axios.post(link, product, headers);
@@ -617,7 +615,9 @@ export const updateUserApi = async (_id, data, headers) => {
   console.log("_id: ", _id);
   try {
     const url = `/editUser/${_id}`;
+
     const link = host + url;
+
     const result = await axios.put(link, data, headers);
     console.log("result: ", result);
     return result;
