@@ -210,7 +210,6 @@ const Device = () => {
           <div className="searched">
             {/* array of items */}
             {Products.map((item) => {
-              console.log("item: ", item);
               return (
                 <div className="item">
                   <div className="item-like">

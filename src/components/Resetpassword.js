@@ -21,19 +21,6 @@ Modal.setAppElement("#root");
 const ResetPassword = () => {
   // ---------------states
 
-  //   const token = useSelector((state) => state.userReducer).token;
-  //   console.log("token: ", token);
-  //   const name = useSelector((state) => state.userReducer).name;
-  //   console.log("name: ", name);
-  //   const email = useSelector((state) => state.userReducer).email;
-  //   console.log("email: ", email);
-  //   const address = useSelector((state) => state.userReducer).address;
-  //   console.log("address: ", address);
-  //   const phone = useSelector((state) => state.userReducer).phoneNumber;
-  //   console.log("phone: ", phone);
-  //   const password = useSelector((state) => state.userReducer).password;
-  //   console.log("password: ", password);
-
   const [logUser, setLoguser] = useState({
     email: "",
     password: null,
