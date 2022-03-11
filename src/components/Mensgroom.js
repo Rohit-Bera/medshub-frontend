@@ -17,7 +17,7 @@ const Mensgroom = () => {
         <div className="brand-body">
           <div className="brand-child">
             <label>
-              <span className="font2">Beauty Products</span>
+              <span className="font2">Mens Grooming</span>
             </label>
             <div className="brand">
               <Link to="/productCategories/Men'sgrooming/beardoil">

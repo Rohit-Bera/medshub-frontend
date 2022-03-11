@@ -177,7 +177,7 @@ const Medicine = () =>{
             if(response){
                 setModalIsOpen(false);
             }
-            if(response.data.status === "200"){
+            if(response.status === 200){
                 toast.success("Medicne Deleted Successfully!")
             }
             else{
