@@ -73,13 +73,11 @@ export const addToCartProduct = async (prod) => {
   console.log("prod: ", prod);
   const { item, token } = prod;
   console.log("token: ", token);
-  const url = `/addToCart?productId=${item._id}`;
+  const url = `/addProdToCart?productId=${item._id}`;
   const headers = { headers: { Authorization: `Bearer ${token}` } };
   console.log("headers: ", headers);
 
   try {
-    // const host = "http://localhost:5500";
-
     const link = host + url;
     console.log("link: ", link);
 
@@ -98,7 +96,7 @@ export const addtoCartMedicine = async (med) => {
 
   const { item, token } = med;
 
-  const url = `/addToCart?medicineId=${item._id}`;
+  const url = `/addMedToCart?medicineId=${item._id}`;
 
   const headers = { headers: { Authorization: `Bearer ${token}` } };
 
@@ -319,6 +317,7 @@ export const postprodWishlistApi = async (_id, item, token) => {
   console.log("_id: ", _id);
 
   const url = `/addtoWishlistProduct?productId=${_id}`;
+  const host = "http://localhost:5500";
   const link = host + url;
 
   const headers = { headers: { Authorization: `Bearer ${token}` } };
