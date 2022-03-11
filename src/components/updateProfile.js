@@ -3,12 +3,12 @@ import { useSelector,useDispatch } from "react-redux";
 import {updateUserApi} from "../Data/Services/Oneforall";
 import { userData } from "../Data/Reducers/userData.reducer";
 import { Link } from "react-router-dom";
-import "../style/updateprofile.css";
 import Modal from "react-modal/lib/components/Modal";
 import { Triangle } from "react-loader-spinner";
 import { toast } from 'react-toastify';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Navbar from "./Navbar";
+import "../style/updateprofile.css";
 Modal.setAppElement("#root");
 
 const UpdateProfile = () =>{
