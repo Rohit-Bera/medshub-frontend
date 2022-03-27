@@ -222,7 +222,7 @@ const Momandbaby = () => {
                   </div>
                   <div className="item-disc">
                     <p>{item.productName}</p>
-                    <label>{item.productPrice}</label>
+                    <label>₹{item.productPrice}</label>
                   </div>
                   <div className="item-btn">
                     <Link to="/viewproduct">
