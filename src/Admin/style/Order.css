@@ -1,98 +1,96 @@
-.table-order{
-    text-align: center ;
-    padding: 10px;
-   margin-left: auto;
-   margin-right: auto ;
-   font-size: 20px;
-   border: 1px solid #ddd;
-   margin-top: 25px;   
-   border-collapse: collapse;
+.table-order {
+  text-align: center;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 20px;
+  margin-top: 25px;
+  border-collapse: collapse;
+  margin-bottom: 3rem;
 }
-.p-order-admin{
-    font-family: "Trirong", serif;
-    font-size: 30px;
-    margin-left: 50px;
+.p-order-admin {
+  font-family: "Trirong", serif;
+  font-size: 30px;
+  margin-left: 50px;
 }
-.input-admin-order{
-opacity: 0;
-width: 0;
-height: 0;
+.input-admin-order {
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
-.span-admin-order{
-position: absolute;
-cursor: pointer;
-top: 0;
-right: 0;
-left: 0;
-bottom: 0;
-background-color: gray;
-transition: 0.4s;
-border-radius: 34px;
+.span-admin-order {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: gray;
+  transition: 0.4s;
+  border-radius: 34px;
 }
-.switch{
-    position:relative;   
-    display: inline-block;
-     width: 60px;
-    height: 34px;   
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
 }
-.span-admin-order::before{
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    transition: 0.4s;
-    border-radius: 50%;
-
-
+.span-admin-order::before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
 }
-.input-admin-order:checked + .span-admin-order{
-    background-color: #2196f3;
+.input-admin-order:checked + .span-admin-order {
+  background-color: #2196f3;
 }
-.input-admin-order:checked + .span-admin-order::before{
-    transform: translateX(26px);
+.input-admin-order:checked + .span-admin-order::before {
+  transform: translateX(26px);
 }
-.span-admin-order.rounded{
-    border-radius: 34px;
+.span-admin-order.rounded {
+  border-radius: 34px;
 }
-.span-admin-order.rounded::before{
-    border-radius: 50%;
+.span-admin-order.rounded::before {
+  border-radius: 50%;
 }
-.border-tr-order{
-    border-bottom: 1px solid #ddd;
-    background-color: white;
-    border: 3px solid rgb(56,182,255);
-    color:black
+.border-tr-order {
+  border-bottom: 1px solid #ddd;
+  background-color: white;
+  border: 3px solid rgb(56, 182, 255);
+  color: black;
 }
-.table-title-order{
-    background-color: rgb(56,182,255);
+.table-title-order {
+  background-color: rgb(56, 182, 255);
 }
-.button-admin-order{
-    padding: 10px;
-    border: 3px solid rgb(56,182,255);
-    background-color: black;
-    color: white;
-    font-size: 20px;
+.button-admin-order {
+  padding: 10px;
+  border: 3px solid rgb(56, 182, 255);
+  background-color: black;
+  color: white;
+  font-size: 20px;
 }
-.main-order-flex{
-    display: flex;
-    justify-content: space-around;
+.main-order-flex {
+  display: flex;
+  justify-content: space-around;
 }
-.card-order-main{
-    height: 20vh;
-    width: 25vw;
-    border: 2px white solid;
-    box-shadow: 0px 0px 10px white;
-    margin-top: 30px;
-    text-align: center;
+.card-order-main {
+  height: 20vh;
+  width: 25vw;
+  border: 2px white solid;
+  box-shadow: 0px 0px 10px white;
+  margin-top: 30px;
+  text-align: center;
 }
-.card-order-main h3{
-    margin-top: 40px;
-    font-size: 30px;
+.card-order-main h3 {
+  margin-top: 40px;
+  font-size: 30px;
 }
-.filter-span{
-    padding: 10px;
-    margin-top: 5px;
+.filter-span {
+  padding: 10px;
+  margin-top: 5px;
 }
