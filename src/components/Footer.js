@@ -14,6 +14,7 @@ const Footer = () => {
   });
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const token = useSelector((state) => state.userReducer).token;
+  const name = useSelector((state) => state.userReducer).name;
 
   const customStyles = {
     content: {
@@ -132,12 +133,25 @@ const Footer = () => {
           </Link>
         </div>
         <div className="footer-column">
-          <Link to="/about">
-            <p>About us</p>
-          </Link>
-          <Link to="/help">
-            <p>Help</p>
-          </Link>
+          {token && name ? (
+            <Link to="/yourAccount/About">
+              <p>About</p>
+            </Link>
+          ) : (
+            <Link to="/about">
+              <p>About</p>
+            </Link>
+          )}
+
+          {token && name ? (
+            <Link to="/yourAccount/Help">
+              <p>Help</p>
+            </Link>
+          ) : (
+            <Link to="/help">
+              <p>Help</p>
+            </Link>
+          )}
         </div>
       </div>
       <Modal

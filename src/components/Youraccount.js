@@ -15,6 +15,8 @@ const Youraccount = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
+  const token = useSelector((state) => state.userReducer).token;
+  const name = useSelector((state) => state.userReducer).name;
 
   const customStyles = {
     content: {
@@ -66,16 +68,33 @@ const Youraccount = () => {
             </li>
           </Link>
 
-          <Link to="/yourAccount/About">
-            <li>
-              <i class="fas fa-info-circle margin-main-icon"></i>About
-            </li>
-          </Link>
-          <Link to="/yourAccount/Help">
-            <li>
-              <i class="far fa-question-circle margin-main-icon"></i>Help?
-            </li>
-          </Link>
+          {token && name ? (
+            <Link to="/yourAccount/About">
+              <li>
+                <i class="fas fa-info-circle margin-main-icon"></i>About
+              </li>
+            </Link>
+          ) : (
+            <Link to="/about">
+              <li>
+                <i class="fas fa-info-circle margin-main-icon"></i>About
+              </li>
+            </Link>
+          )}
+
+          {token && name ? (
+            <Link to="/yourAccount/Help">
+              <li>
+                <i class="far fa-question-circle margin-main-icon"></i>Help?
+              </li>
+            </Link>
+          ) : (
+            <Link to="/help">
+              <li>
+                <i class="far fa-question-circle margin-main-icon"></i>Help?
+              </li>
+            </Link>
+          )}
           <li>
             <button className="logout" onClick={() => setModalIsOpen(true)}>
               <i class="fas fa-power-off margin-main-icon"></i>logout

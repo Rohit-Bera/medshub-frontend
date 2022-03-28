@@ -436,18 +436,3 @@ const Home = () => {
 };
 
 export default Home;
-
-// <div className="sender">
-//                   {start ? (
-//                     <p>{start}</p>
-//                   ) : loader ? (
-//                     <ThreeDots color="white" height={30} width={30} />
-//                   ) : (
-//                     ""
-//                   )}
-//                 </div>
-// {
-//   /* <div className="receiver">
-//                   <p>hey im , rohit</p>
-//                 </div> */
-// }
