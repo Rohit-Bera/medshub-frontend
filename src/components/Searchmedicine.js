@@ -312,7 +312,15 @@ const Searchmedicine = () => {
                 );
               })
             ) : (
-              <div style={{ color: "white" }}>medicine not found</div>
+              <div
+                style={{
+                  color: "white",
+                  fontSize: "24px",
+                  textAlign: "center",
+                }}
+              >
+                no Medicine found!
+              </div>
             )}
           </div>
         </div>

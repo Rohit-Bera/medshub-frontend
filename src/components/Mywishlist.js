@@ -105,7 +105,7 @@ const Mywishlist = () => {
                   <div className="item">
                     <img src={item.product.productImage[0]} alt="product_img" />
                     <p>{item.product.productName}</p>
-                    <p>{item.product.productPrice}</p>
+                    <p>₹{item.product.productPrice}</p>
 
                     <button onClick={() => dispatchProd(item.product)}>
                       <Link to="/viewproduct">
@@ -123,7 +123,7 @@ const Mywishlist = () => {
                   <div className="item">
                     <img src={item.medicine[0]} alt="product_img" />
                     <p>{item.medicine.medicineName}</p>
-                    <p>{item.medicine.medicinePrice}</p>
+                    <p>₹{item.medicine.medicinePrice}</p>
 
                     <button onClick={() => dispatchMed(item.medicine)}>
                       <Link to="/medicines/viewmedcines">

@@ -9,7 +9,7 @@ const AboutViz = () => {
     <>
       <YourAccount />
       <div className="medshub-body">
-        <div className="about-medshub">
+        <div className="about-medshub-viz">
           <i class="fas fa-quote-right"></i>
           <h2>About us</h2>
           <p>
@@ -26,6 +26,24 @@ const AboutViz = () => {
             through this webapp. You can also upload your precsription and order
             medicines.
           </p>
+
+          <div className="profile-dev">
+            <div className="devloper">
+              {" "}
+              <i class="far fa-user-circle " />
+              <h3>Rohit Bera</h3>
+            </div>
+            <div className="devloper">
+              {" "}
+              <i class="far fa-user-circle " />
+              <h3>Manthan Thakkar</h3>
+            </div>
+            <div className="devloper">
+              {" "}
+              <i class="far fa-user-circle " />
+              <h3>Reshma Vidhani</h3>
+            </div>
+          </div>
         </div>
       </div>
     </>

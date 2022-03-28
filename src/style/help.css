@@ -7,6 +7,12 @@
   margin-top: 7%;
 }
 
+.main-help .help-container-viz {
+  margin-top: 7%;
+  margin-left: 8%;
+  /* margin-bottom: 10%; */
+}
+
 .main-help .help {
   background-color: white;
   color: black;

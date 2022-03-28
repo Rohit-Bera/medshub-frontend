@@ -312,6 +312,26 @@ export const updatePrescriptionApi = async (_id, data, headers) => {
   }
 };
 
+export const deletePrescriptionApi = async (id, token) => {
+  console.log("token: ", token);
+  console.log("_id: ", id);
+
+  try {
+    const url = `/deletePrescription/${id}`;
+    const link = host + url;
+
+    const headers = { headers: { Authorization: `Bearer ${token}` } };
+
+    const result = await axios.delete(link, headers);
+
+    return { result };
+  } catch (error) {
+    console.log("error: ", error);
+
+    return { error };
+  }
+};
+
 export const postprodWishlistApi = async (_id, item, token) => {
   console.log("token: ", token);
   console.log("_id: ", _id);
