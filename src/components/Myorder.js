@@ -37,7 +37,7 @@ const Myorder = () => {
     },
   };
   const [modalIsOpen, setModalIsOpen] = useState(true);
-  const [count, setCount] = useState();
+  const [count, setCount] = useState(0);
   const [myorders, setMyOrders] = useState([]);
   const [prodModal, setProdModal] = useState(false);
   const [medModal, setMedModal] = useState(false);
@@ -62,18 +62,13 @@ const Myorder = () => {
 
     if (response) {
       setModalIsOpen(false);
-      setMyOrders(response.data.myOrder);
-      setOrderLentgh(response.data.myOrder.length);
+      const delievered = response.data.myOrder.filter(
+        (i) => i.deliverystatus === true
+      );
+      setMyOrders(delievered);
+      console.log("delievered: ", delievered);
+      setOrderLentgh(delievered.length);
     }
-
-    response.data.myOrder.forEach((i) => {
-      console.log("i: ", i);
-      if (i.deliverystatus === false) {
-        setCount(1);
-      } else {
-        setCount(0);
-      }
-    });
   };
 
   const refresh = (e) => {
@@ -267,22 +262,6 @@ const Myorder = () => {
                 no orders placed yet. <br /> Order History is empty!
               </p>
             </div>
-          )}
-          {count !== 0 ? (
-            <div
-              style={{
-                height: "80vh",
-                display: "flex",
-                justifyContent: "space-around",
-                alignItems: "center",
-              }}
-            >
-              <p style={{ fontSize: "24px", textAlign: "center" }}>
-                Order is placed! <br /> But not Delievered yet.
-              </p>
-            </div>
-          ) : (
-            ""
           )}
         </div>
         <div className="account-details-nav">
