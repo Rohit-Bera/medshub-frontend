@@ -171,7 +171,7 @@ const Dabur = () => {
       "Content-Type": "application/json",
     };
 
-    return await fetch(`http://localhost:5500/paymentStripe`, {
+    return await fetch(`https://medshub-backend.herokuapp.com/paymentStripe`, {
       method: "Post",
       headers,
       body: JSON.stringify(body),

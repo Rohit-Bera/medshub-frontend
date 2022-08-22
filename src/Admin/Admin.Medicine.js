@@ -229,7 +229,6 @@ const Medicine = () => {
     });
     setImg({
       ...Img,
-
       medicineImage: item.medicineImage,
     });
   };

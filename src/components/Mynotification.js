@@ -135,7 +135,8 @@ const Mynotification = () => {
                           </div>
                           <div className="body" style={{ color: "black" }}>
                             Are You Sure <br />
-                            You Want to cancel order ?
+                            You Want to cancle Order ?
+
                           </div>
                           <div className="modalbutton">
                             <button

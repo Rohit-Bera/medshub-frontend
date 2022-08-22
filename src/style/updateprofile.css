@@ -1,0 +1,28 @@
+.update-title{
+    text-align: center;
+  color: rgb(56, 182, 255);
+  font-family: "Trirong", serif;
+  font-size: 30px;
+}
+.input-update {
+    height: 30px;
+    width: 250px;
+    border-radius: 7px;
+}
+
+.button-update {
+    width: 135px;
+    height: 35px;
+    border-radius: 7px;
+    background-color: rgb(56, 182, 255);
+    color: white;
+    border: none;
+}
+/* .form-update-user{
+    text-align: center;
+    background-color: white;
+    height: 70vh;
+    width: 30vw;
+    color: black;
+    padding: 10px;
+} */
