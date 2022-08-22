@@ -5,7 +5,6 @@ import { Link, useHistory } from "react-router-dom";
 import Navbar from "./Navbar";
 import Modal from "react-modal/lib/components/Modal";
 import {
-  searchProductbyBrand,
   addToCartProduct,
   postprodWishlistApi,
   searchProductbyCategory,
