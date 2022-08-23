@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Modal from "react-modal/lib/components/Modal";
 import { Triangle, Rings, Oval, ThreeDots } from "react-loader-spinner";
 import { postWebFeedback } from "../Data/Services/Oneforall";

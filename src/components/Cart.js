@@ -13,7 +13,6 @@ import { useHistory, Link } from "react-router-dom";
 import { medicineData } from "../Data/Reducers/medicine.reducer";
 import { productData } from "../Data/Reducers/product.reducer";
 import { Triangle, Rings, Oval } from "react-loader-spinner";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Modal from "react-modal/lib/components/Modal";
 import Youraccount from "./Youraccount";
 import StripCheckout from "react-stripe-checkout";

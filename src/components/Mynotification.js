@@ -6,7 +6,6 @@ import himalya from "../images/himalya.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { Triangle, Rings, Oval } from "react-loader-spinner";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Modal from "react-modal/lib/components/Modal";
 import { deleteOrderApi, getmyOrderApi } from "../Data/Services/Oneforall";
 import { medicineData } from "../Data/Reducers/medicine.reducer";
@@ -136,7 +135,6 @@ const Mynotification = () => {
                           <div className="body" style={{ color: "black" }}>
                             Are You Sure <br />
                             You Want to cancle Order ?
-
                           </div>
                           <div className="modalbutton">
                             <button

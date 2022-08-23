@@ -14,7 +14,6 @@ import "aos/dist/aos.css";
 import Modal from "react-modal/lib/components/Modal";
 import { Triangle } from "react-loader-spinner";
 import { toast } from "react-toastify";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 import { useHistory } from "react-router-dom";
 

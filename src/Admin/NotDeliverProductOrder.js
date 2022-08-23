@@ -13,7 +13,6 @@ import { toast } from "react-toastify";
 
 import { useHistory } from "react-router-dom";
 import { Triangle, Rings, Oval } from "react-loader-spinner";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 Modal.setAppElement("#root");
 
 const AdminOrder = ({ rounded = false }) => {

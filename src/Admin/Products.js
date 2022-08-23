@@ -13,7 +13,6 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import Modal from "react-modal/lib/components/Modal";
 import { Triangle, Rings, Oval } from "react-loader-spinner";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { toast } from "react-toastify";
 
 import { useHistory } from "react-router-dom";

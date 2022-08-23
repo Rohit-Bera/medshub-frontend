@@ -5,7 +5,6 @@ import YourAccount from "./Youraccount";
 import himalya from "../images/himalya.jpg";
 
 import { Triangle, Rings, Oval } from "react-loader-spinner";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Modal from "react-modal/lib/components/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { productData } from "../Data/Reducers/product.reducer";

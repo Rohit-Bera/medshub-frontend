@@ -6,7 +6,6 @@ import Navbar from "./Navbar";
 import "./style/Users.css";
 import Modal from "react-modal/lib/components/Modal";
 import { Triangle } from "react-loader-spinner";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 Modal.setAppElement("#root");
