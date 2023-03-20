@@ -171,11 +171,14 @@ const Dabur = () => {
       "Content-Type": "application/json",
     };
 
-    return await fetch(`https://medshub-backend.herokuapp.com/paymentStripe`, {
-      method: "Post",
-      headers,
-      body: JSON.stringify(body),
-    })
+    return await fetch(
+      `https://medshub-backend-server.onrender.com/paymentStripe`,
+      {
+        method: "Post",
+        headers,
+        body: JSON.stringify(body),
+      }
+    )
       .then((response) => {
         console.log("Response", response);
         const { status } = response;

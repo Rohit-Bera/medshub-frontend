@@ -2,7 +2,7 @@
 
 import axios from "axios";
 
-const host = "https://medshub-backend.herokuapp.com";
+const host = "https://medshub-backend-server.onrender.com";
 // const host = "http://localhost:5500";
 
 // signup service
